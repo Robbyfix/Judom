@@ -8,10 +8,7 @@ import de.gsso.sw_alpha.objects.ground.BlSteelVer;
 import de.gsso.sw_alpha.objects.ground.GrassRockHoz;
 import de.gsso.sw_alpha.objects.ground.TestGrnd;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.animation.Animation;
 
 public class HelloController {
 

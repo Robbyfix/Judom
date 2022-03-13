@@ -81,8 +81,6 @@ public class Player extends AnimationTimer {
 
     public void setPrevPos(boolean prevPos) {this.prevPos = prevPos;}
 
-    public ImageView getFigkollup() {return figkollup;}
-
     public void setAufBoden(boolean aufBoden) {this.aufBoden = aufBoden;}
 
     public void setJumpbegin(Instant jumpbegin) {this.jumpbegin = jumpbegin;}
@@ -239,8 +237,8 @@ public class Player extends AnimationTimer {
                     spielerfig.setX(spielerfig.getX()+8);
                 }
             }
-
             kollisionChecklr--;
+
             figkollup.setY(spielerfig.getY()-20);
             figkollup.setX(spielerfig.getX()+54);
 
