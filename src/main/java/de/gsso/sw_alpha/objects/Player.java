@@ -16,6 +16,8 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class Player extends AnimationTimer {
+    private Media sound = new Media(new File("src/main/resources/BGM/test.mp3").toURI().toString());
+    private MediaPlayer mediaPlayer = new MediaPlayer(sound);
     private int fpscount; //Zählt die Framerate
     private double geschwlimit = 5; //Max. Bewegungsgeschw.
     private Duration deltaTime = Duration.ZERO; //Zählung der Zeit
@@ -51,9 +53,13 @@ public class Player extends AnimationTimer {
         spielerfig.setX(1557);
         spielerfig.setY(515);
         this.kollisionCheck = this.canvas.getChildren().size() - 1;
-        Media sound = new Media(new File("E:/Dokumente/IntelliJIDEA/demoa/src/main/resources/BGM/test.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+        this.mediaPlayer.play();
+        this.mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.play();
+            }
+        });
     }
 
     public void setLinks(Richtung richtung) {
