@@ -27,6 +27,7 @@ public class Player extends AnimationTimer {
     private static final long INTERVAL = 10;
     private long lastCall = System.nanoTime();
     private Pane canvas; //Pane auf dem alles dargestellt wird
+    private Pane playerPane;
     private Richtung links = Richtung.NULL; //Richtungs-enum für die "Links"-Bewegung
     private Richtung rechts = Richtung.NULL; //Richtungs-enum für die "Rechts"-Bewegung
     private Richtung sprung = Richtung.NULL; //Richtungs-enum für den Sprung
@@ -47,19 +48,15 @@ public class Player extends AnimationTimer {
     private ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Links
     private ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Rechts
 
-    public Player(Pane canvas) {
+    public Player(Pane canvas, Pane playerPane) {
         this.canvas = canvas; //Pane canvas wird zum übergebenen canvas gesetzt
-        canvas.getChildren().addAll(spielerfig, figkollup, figkolldown, figkollleft, figkollright);  //Fügt dem pane die spielerfig hinzu
+        this.playerPane = playerPane;
+        canvas.getChildren().addAll(figkollup, figkolldown, figkollleft, figkollright);  //Fügt dem pane die spielerfig hinzu
+        playerPane.getChildren().add(spielerfig);
         spielerfig.setX(1557);
         spielerfig.setY(515);
         this.kollisionCheck = this.canvas.getChildren().size() - 1;
         this.mediaPlayer.play();
-        this.mediaPlayer.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                mediaPlayer.play();
-            }
-        });
     }
 
     public void setLinks(Richtung richtung) {
@@ -278,6 +275,7 @@ public class Player extends AnimationTimer {
                     System.out.println("Sprung");
                 }
             }
+            this.mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.play());
             lastCall = now;
         }//handle ende
     }
