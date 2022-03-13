@@ -40,8 +40,10 @@ public class Player extends AnimationTimer {
     private double prevYpos;
     private double prevXpos;
     private double xparabel;
-    private double startPos; //Start-Position, sollte man sterben/das Level betreten
-    private double goalPos;  //Ziel-Position des Raumes, um den Raum zu wechseln
+    private double startPosX; //Start-Position, sollte man sterben/das Level betreten
+    private double startPosY;
+    private double goalPosX;  //Ziel-Position des Raumes, um den Raum zu wechseln
+    private double goalPosY;
     private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig.png")));//Bild der spielerfig wird einem ImageView zugeordnet
     private ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox
     private ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox
@@ -84,6 +86,22 @@ public class Player extends AnimationTimer {
     public void setAufBoden(boolean aufBoden) {this.aufBoden = aufBoden;}
 
     public void setJumpbegin(Instant jumpbegin) {this.jumpbegin = jumpbegin;}
+
+    public void setGoalPosX(double goalPosX) {
+        this.goalPosX = goalPosX;
+    }
+
+    public void setGoalPosY(double goalPosY) {
+        this.goalPosY = goalPosY;
+    }
+
+    public void setStartPosX(double startPosX) {
+        this.startPosX = startPosX;
+    }
+
+    public void setStartPosY(double startPosY) {
+        this.startPosY = startPosY;
+    }
 
     @Override
     public void handle(long now) {
@@ -146,6 +164,10 @@ public class Player extends AnimationTimer {
                         prevYpos = spielerfig.getY();
                         //System.out.println("Kollision");
                     }
+                    else if(obj instanceof Spikes){
+                        spielerfig.setX(startPosX);
+                        spielerfig.setY(startPosY);
+                    }
                 }
                 kollisionCheck--;
             }
@@ -182,6 +204,10 @@ public class Player extends AnimationTimer {
                         prevPos = false;
                         xparabel = 0;
                         //System.out.println("Kollision");
+                    }
+                    else if(obj instanceof Spikes){
+                        spielerfig.setX(startPosX);
+                        spielerfig.setY(startPosY);
                     }
                 }
                 kollisionCheck--;
@@ -273,7 +299,7 @@ public class Player extends AnimationTimer {
                     System.out.println("Sprung");
                 }
             }
-            this.mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.play());
+            this.mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(new javafx.util.Duration(30)));
             lastCall = now;
         }//handle ende
     }
