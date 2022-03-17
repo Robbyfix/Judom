@@ -1,8 +1,6 @@
 package de.gsso.sw_alpha.objects;
 
-import de.gsso.sw_alpha.misc.Functions;
 import de.gsso.sw_alpha.misc.Richtung;
-import de.gsso.sw_alpha.objects.ground.Ground;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -20,8 +18,6 @@ public class Player extends AnimationTimer {
     private MediaPlayer mediaPlayer = new MediaPlayer(sound);
     private int fpscount; //Zählt die Framerate
     private double geschwlimit = 5; //Max. Bewegungsgeschw.
-    private Duration deltaTime = Duration.ZERO; //Zählung der Zeit
-    private Instant beginTime = Instant.now(); //Anfangszeit beim Aufrufen
     private Instant jumpbegin = Instant.now(); //Anfangszeit des Sprungs
     private Duration jumpduration = Duration.ZERO; //Zählung der Zeit des Sprungs
     private static final long INTERVAL = 10;
@@ -33,10 +29,9 @@ public class Player extends AnimationTimer {
     private Richtung sprung = Richtung.NULL; //Richtungs-enum für den Sprung
     private boolean aufBoden; //Gibt an, ob der Boden berührt wird oder nicht
     private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
-    private int kollisionChecklr; //Geht alle canvas Objekte als Integer durch für Links/Rechts
     private boolean prevPos;
     private Node obj; //Aktuelles Objekt im Canvas
-    private Node objlr; //Aktuelles Objekt im Canvas für Links/Rechts
+    private int i;
     private double prevYpos;
     private double prevXpos;
     private double xparabel;
@@ -45,8 +40,8 @@ public class Player extends AnimationTimer {
     private double goalPosX;  //Ziel-Position des Raumes, um den Raum zu wechseln
     private double goalPosY;
     private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig.png")));//Bild der spielerfig wird einem ImageView zugeordnet
-    private ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox
-    private ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox
+    private ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Oben
+    private ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Unten
     private ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Links
     private ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Rechts
 
@@ -58,20 +53,228 @@ public class Player extends AnimationTimer {
         spielerfig.setX(1557);
         spielerfig.setY(515);
         this.kollisionCheck = this.canvas.getChildren().size() - 1;
-        this.mediaPlayer.play();
+        //mediaPlayer.play();
+        //mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(new javafx.util.Duration(30)));
     }
 
-    public void setLinks(Richtung richtung) {
-        this.links = richtung;
-    }  //Setzt die Richtung von links
+    @Override
+    public void handle(long now) {
+        if (now > lastCall) {
 
-    public void setRechts(Richtung richtung) {
-        this.rechts = richtung;
-    }//Setzt die Richtung von rechts
+            //Springen
+            if (sprung == Richtung.SPRINGEN) {
+                if(checkCollision(figkollup,"ground")){
+                    sprung = Richtung.NULL;
+                    //System.out.println("Kollision");
+                }
+                springen();
+                //System.out.println(geschwlimit);
+            }
+            //Fallen
+            else if (!aufBoden) {
+                if(checkCollision(figkolldown, "ground")){
+                    spielerfig.setY(((ImageView)obj).getY() - 154);
+                    aufBoden = true;
+                    xparabel = 0;
+                    //System.out.println("Kollision");
+                }
+                fallen("down");
+                //System.out.println(geschwlimit);
+            }
 
-    public void setSprung(Richtung sprung) {
-        this.sprung = sprung;
-    }    //Setzt die Richtung von sprung
+            //Rechts-Bewegung
+            if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
+                laufen("rechts");
+                if (!checkCollision(figkolldown,"ground")) {
+                    fallen("up",0);
+                    aufBoden = false;
+                }
+            }
+
+            //Links-Bewegung
+            if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
+                laufen("links");
+                if (!checkCollision(figkolldown,"ground")) {
+                    fallen("up",0);
+                    aufBoden = false;
+                }
+            }
+
+            /*if (checkCollision(figkollright,"ground")) {
+                System.out.println("Kollision");
+                spielerfig.setX(((ImageView)obj).getX());
+            }
+
+            if (checkCollision(figkollleft,"ground")) {
+                System.out.println("Kollision");
+                spielerfig.setX(spielerfig.getX()+8);
+            }*/
+
+            setHitbox();
+
+            if(fpscount==60) {
+                DebugAusgabe();
+            }
+
+            kollisionCheck--;
+
+            i++;
+
+            fpscount++;
+
+            lastCall = now;
+        }
+    }
+
+    public void springen() {
+        if (xparabel >= geschwlimit) {
+            xparabel = geschwlimit;
+        }
+        spielerfig.setY(spielerfig.getY()-(0.5*1.2*Math.pow(xparabel,2)));
+        xparabel++;
+
+        jumpduration = Duration.between(jumpbegin, Instant.now());
+
+        if (jumpduration.getNano() < 200000000) {
+            geschwlimit = 4.5;
+        }
+
+        if (jumpduration.getNano() > 200000000 && jumpduration.getNano() < 300000000) {
+            geschwlimit = 4;
+        }
+
+        if (jumpduration.getNano() > 300000000 && jumpduration.getNano() < 400000000) {
+            geschwlimit = 3.5;
+        }
+
+        if (jumpduration.getNano() > 400000000 && jumpduration.getNano() < 500000000) {
+            geschwlimit = 3;
+        }
+
+        if (jumpduration.getNano() > 500000000 && jumpduration.getNano() < 600000000) {
+            geschwlimit = 2.5;
+        }
+
+        if (jumpduration.getNano() > 600000000 && jumpduration.getNano() < 650000000) {
+            geschwlimit = 2.5;
+        }
+
+        if (jumpduration.getNano() > 650000000 && jumpduration.getNano() < 700000000) {
+            geschwlimit = 2;
+        }
+
+        if (jumpduration.getNano() > 750000000) {
+            jumpduration = Duration.ZERO;
+            jumpbegin = null;
+            sprung = Richtung.NULL;
+            prevYpos = spielerfig.getY();
+        }
+        //System.out.println(jumpduration.getNano());
+        aufBoden = false;
+    }
+
+    public void fallen(String direction) {
+        if (geschwlimit > 5) {
+            geschwlimit = 5;
+        }
+        if (xparabel >= geschwlimit) {
+            xparabel = geschwlimit;
+        }
+        switch (direction) {
+            case "up":
+            spielerfig.setY(spielerfig.getY() - (0.5 * 1.2 * Math.pow(xparabel, 2)));
+            break;
+
+            case "down":
+            spielerfig.setY(spielerfig.getY() + (0.5 * 1.2 * Math.pow(xparabel, 2)));
+            break;
+        }
+        xparabel++;
+        geschwlimit += 0.1;
+    }
+
+    public void fallen(String direction, double x) {
+        switch (direction) {
+            case "up":
+                spielerfig.setY(spielerfig.getY() - (0.5 * 1.2 * Math.pow(x, 2)));
+                break;
+
+            case "down":
+                spielerfig.setY(spielerfig.getY() + (0.5 * 1.2 * Math.pow(x, 2)));
+                break;
+        }
+    }
+
+    public void laufen(String direction){
+        switch(direction) {
+            case "links":
+            spielerfig.setX(spielerfig.getX() - 8);
+            if (spielerfig.getX() <= 0) {
+                spielerfig.setX(canvas.getWidth());
+            }
+            break;
+            case "rechts":
+                spielerfig.setX(spielerfig.getX() + 8);
+                if (spielerfig.getX() > canvas.getWidth()) {
+                    spielerfig.setX(0);
+                }
+        }
+    }
+
+
+    public boolean checkCollision(ImageView fig, String type){
+        if (kollisionCheck <= 0) {
+            kollisionCheck = canvas.getChildren().size() - 1;
+        }
+        obj = canvas.getChildren().get(kollisionCheck);
+        if (fig.getBoundsInParent().intersects(obj.getBoundsInParent())) {
+            switch(type) {
+                case "ground":
+                    if (obj instanceof Ground) {
+                        return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void setHitbox(){
+        figkollup.setY(spielerfig.getY()-20);
+        figkollup.setX(spielerfig.getX()+54);
+
+        figkolldown.setY(spielerfig.getY()+154);
+        figkolldown.setX(spielerfig.getX()+54);
+
+        figkollleft.setY(spielerfig.getY()+25);
+        figkollleft.setX(spielerfig.getX()+34);
+
+        figkollright.setY(spielerfig.getY()+25);
+        figkollright.setX(spielerfig.getX()+108);
+    }
+
+    public void DebugAusgabe(){
+        System.out.println("FPS: " + fpscount);
+        if (links == Richtung.LINKS) {
+            System.out.println("Links");
+        }
+        if (rechts == Richtung.RECHTS) {
+            System.out.println("Rechts");
+        }
+        if (!aufBoden) {
+            System.out.println("Fallen");
+        }
+        if (sprung == Richtung.SPRINGEN) {
+            System.out.println("Sprung");
+        }
+        fpscount = 0;
+    }
+
+    public void setLinks(Richtung richtung) {this.links = richtung;}
+
+    public void setRechts(Richtung richtung) {this.rechts = richtung;}
+
+    public void setSprung(Richtung sprung) {this.sprung = sprung;}
 
     public ImageView getSpielerfig() {return spielerfig;}    //Gibt Spielerfig zurück
 
@@ -87,220 +290,11 @@ public class Player extends AnimationTimer {
 
     public void setJumpbegin(Instant jumpbegin) {this.jumpbegin = jumpbegin;}
 
-    public void setGoalPosX(double goalPosX) {
-        this.goalPosX = goalPosX;
-    }
+    public void setGoalPosX(double goalPosX) {this.goalPosX = goalPosX;}
 
-    public void setGoalPosY(double goalPosY) {
-        this.goalPosY = goalPosY;
-    }
+    public void setGoalPosY(double goalPosY) {this.goalPosY = goalPosY;}
 
-    public void setStartPosX(double startPosX) {
-        this.startPosX = startPosX;
-    }
+    public void setStartPosX(double startPosX) {this.startPosX = startPosX;}
 
-    public void setStartPosY(double startPosY) {
-        this.startPosY = startPosY;
-    }
-
-    @Override
-    public void handle(long now) {
-        if (now > lastCall) {
-            fpscount++;
-
-            //Springen
-            if (sprung == Richtung.SPRINGEN) {
-                if (xparabel >= geschwlimit) {
-                    xparabel = geschwlimit;
-                }
-                Functions.springen(xparabel, spielerfig);
-                xparabel++;
-                aufBoden = false;
-                jumpduration = Duration.between(jumpbegin, Instant.now());
-
-                if (jumpduration.getNano() < 200000000) {
-                    geschwlimit = 4.5;
-                }
-
-                if (jumpduration.getNano() > 200000000 && jumpduration.getNano() < 300000000) {
-                    geschwlimit = 4;
-                }
-
-                if (jumpduration.getNano() > 300000000 && jumpduration.getNano() < 400000000) {
-                    geschwlimit = 3.5;
-                }
-
-                if (jumpduration.getNano() > 400000000 && jumpduration.getNano() < 500000000) {
-                    geschwlimit = 3;
-                }
-
-                if (jumpduration.getNano() > 500000000 && jumpduration.getNano() < 600000000) {
-                    geschwlimit = 2.5;
-                }
-
-                if (jumpduration.getNano() > 600000000 && jumpduration.getNano() < 650000000) {
-                    geschwlimit = 2.5;
-                }
-
-                if (jumpduration.getNano() > 650000000 && jumpduration.getNano() < 700000000) {
-                    geschwlimit = 2;
-                }
-
-                if (jumpduration.getNano() > 750000000) {
-                    jumpduration = Duration.ZERO;
-                    jumpbegin = null;
-                    sprung = Richtung.NULL;
-                    prevYpos = spielerfig.getY();
-                }
-                System.out.println(jumpduration.getNano());
-                System.out.println(geschwlimit);
-                if (kollisionCheck <= 0) {
-                    kollisionCheck = canvas.getChildren().size() - 1;
-                }
-                obj = canvas.getChildren().get(kollisionCheck);
-                if (figkollup.getBoundsInParent().intersects(obj.getBoundsInParent())) {
-                    if (obj instanceof Ground) {
-                        sprung = Richtung.NULL;
-                        prevYpos = spielerfig.getY();
-                        //System.out.println("Kollision");
-                    }
-                    else if(obj instanceof Spikes){
-                        spielerfig.setX(startPosX);
-                        spielerfig.setY(startPosY);
-                    }
-                }
-                kollisionCheck--;
-            }
-                //Fallen
-            else if (!aufBoden) {
-                if (kollisionCheck <= 0) {
-                    kollisionCheck = canvas.getChildren().size() - 1;
-                }
-                obj = canvas.getChildren().get(kollisionCheck);
-                if (figkolldown.getBoundsInParent().intersects(obj.getBoundsInParent())) {
-                    if (obj instanceof Ground) {
-                        spielerfig.setY(Functions.getKollisionNode(canvas, kollisionCheck).getY() - 154);
-                        aufBoden = true;
-                        prevPos = false;
-                        xparabel = 0;
-                        //System.out.println("Kollision");
-                    }
-                }
-                kollisionCheck--;
-                if (geschwlimit > 5) {
-                    geschwlimit = 5;
-                }
-                if (xparabel >= geschwlimit) {
-                    xparabel = geschwlimit;
-                }
-                if (kollisionCheck <= 0) { //kollisionCheck eine Art i wie bei for-Schleifen
-                    kollisionCheck = canvas.getChildren().size() - 1;
-                }
-                obj = canvas.getChildren().get(kollisionCheck);
-                if (figkolldown.getBoundsInParent().intersects(obj.getBoundsInParent())) { //obj = private Node Datentyp in Player, figkolldown = ImageView
-                    if (obj instanceof Ground) { //spezifischer Typ-Check
-                        spielerfig.setY(Functions.getKollisionNode(canvas, kollisionCheck).getY() - 154);
-                        aufBoden = true;
-                        prevPos = false;
-                        xparabel = 0;
-                        //System.out.println("Kollision");
-                    }
-                    else if(obj instanceof Spikes){
-                        spielerfig.setX(startPosX);
-                        spielerfig.setY(startPosY);
-                    }
-                }
-                kollisionCheck--;
-                Functions.fallen(xparabel, false, spielerfig);
-                xparabel++;
-                geschwlimit += 0.1;
-                System.out.println(geschwlimit);
-            }
-
-            prevXpos = spielerfig.getX();
-
-            //Rechts-Bewegung
-            if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
-                spielerfig.setX(spielerfig.getX() + 8);
-                if (spielerfig.getX() > canvas.getWidth()) {
-                    spielerfig.setX(0);
-                }
-                if (!figkolldown.getBoundsInParent().intersects(obj.getBoundsInParent()) && sprung != Richtung.SPRINGEN) {
-                    if(obj instanceof Ground) {
-                        aufBoden = false;
-                        Functions.fallen(0, true, spielerfig);
-                    }
-                }
-            }
-
-            //Links-Bewegung
-            if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
-                spielerfig.setX(spielerfig.getX() - 8);
-                if (spielerfig.getX() <= 0) {
-                    spielerfig.setX(canvas.getWidth());
-                }
-                if (!figkolldown.getBoundsInParent().intersects(obj.getBoundsInParent()) && sprung != Richtung.SPRINGEN) {
-                    if(obj instanceof Ground) {
-                        aufBoden = false;
-                        Functions.fallen(0, true, spielerfig);
-                    }
-                }
-            }
-
-            if (kollisionChecklr <= 0) {
-                kollisionChecklr = canvas.getChildren().size() - 1;
-            }
-            objlr = canvas.getChildren().get(kollisionChecklr);
-            if (figkollright.getBoundsInParent().intersects(objlr.getBoundsInParent())) {
-                if(objlr instanceof Ground) {
-                    System.out.println("Kollision");
-                    spielerfig.setX(spielerfig.getX()-8);
-                }
-            }
-            if (figkollleft.getBoundsInParent().intersects(objlr.getBoundsInParent())) {
-                if(objlr instanceof Ground) {
-                    System.out.println("Kollision");
-                    spielerfig.setX(spielerfig.getX()+8);
-                }
-            }
-            kollisionChecklr--;
-
-            figkollup.setY(spielerfig.getY()-20);
-            figkollup.setX(spielerfig.getX()+54);
-
-            figkolldown.setY(spielerfig.getY()+154);
-            figkolldown.setX(spielerfig.getX()+54);
-
-            figkollleft.setY(spielerfig.getY()+25);
-            figkollleft.setX(spielerfig.getX()+34);
-
-            figkollright.setY(spielerfig.getY()+25);
-            figkollright.setX(spielerfig.getX()+108);
-
-            //Ausgabe verschiedener Werte im Sekundentakt
-            deltaTime = Duration.between(beginTime, Instant.now());
-            if (deltaTime.getSeconds() == 1) {
-                System.out.println("FPS: " + fpscount);
-                fpscount = 0;
-                beginTime = Instant.now();
-                if (links == Richtung.LINKS) {
-                    System.out.println("Links");
-                }
-
-                if (rechts == Richtung.RECHTS) {
-                    System.out.println("Rechts");
-                }
-
-                if (!aufBoden) {
-                    System.out.println("Fallen");
-                }
-
-                if (sprung == Richtung.SPRINGEN) {
-                    System.out.println("Sprung");
-                }
-            }
-            this.mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(new javafx.util.Duration(30)));
-            lastCall = now;
-        }//handle ende
-    }
+    public void setStartPosY(double startPosY) {this.startPosY = startPosY;}
 }

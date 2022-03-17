@@ -2,30 +2,22 @@ package de.gsso.sw_alpha;
 
 import de.gsso.sw_alpha.misc.keyevent.KeyPressEvent;
 import de.gsso.sw_alpha.misc.keyevent.KeyReleaseEvent;
+import de.gsso.sw_alpha.objects.Ground;
 import de.gsso.sw_alpha.objects.Player;
-import de.gsso.sw_alpha.objects.Spikes;
-import de.gsso.sw_alpha.objects.ground.BlSteelHor;
-import de.gsso.sw_alpha.objects.ground.BlSteelVer;
-import de.gsso.sw_alpha.objects.ground.GrassRockHoz;
-import de.gsso.sw_alpha.objects.ground.TestGrnd;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import org.w3c.dom.Node;
 
 public class HelloController {
 
     private Player spieler;
-    private GrassRockHoz grh1;
-    private GrassRockHoz grh2;
-    private GrassRockHoz grh3;
-    private GrassRockHoz grh4;
-    private BlSteelHor bsh1;
-    private BlSteelVer bsv1;
-    private TestGrnd tg1;
+    private Ground grh1;
+    private Ground grh2;
+    private Ground grh3;
+    private Ground grh4;
     private boolean first;
-    private Spikes spk1;
 
     @FXML
     private Pane canvas;
@@ -34,11 +26,19 @@ public class HelloController {
     private Pane player;
 
     @FXML
-    private Button startButton;
+    private Button start;
+
+    @FXML
+    private Pane QuickMenu;
+
+    @FXML
+    private Pane background;
 
     @FXML
     public void handleStartAction() {
         if(first==false) {
+            ImageView bg = new ImageView(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/Background/GrassLand_Background_Guide.png")));
+            background.getChildren().add(bg);
             if (spieler == null) {                            //Check, ob spieler nicht null ist
                 spieler = new Player(canvas, player);               //Neuer Spieler instanziiert
                 canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
@@ -48,15 +48,18 @@ public class HelloController {
             spieler.getSpielerfig().setY(0);
             spieler.setStartPosX(1600);
             spieler.setStartPosY(0);
-            grh1 = new GrassRockHoz(canvas, 1500, 800);
-            grh2 = new GrassRockHoz(canvas, 1800, 628);
-            grh3 = new GrassRockHoz(canvas, 1200, 628);
-            grh3 = new GrassRockHoz(canvas, 1200, 128);
-            bsh1 = new BlSteelHor(canvas, 1000, 600);
-            bsv1 = new BlSteelVer(canvas, 500, 800);
-            tg1 = new TestGrnd(canvas, 300, 800);
-            spk1 = new Spikes(canvas,1650,750);
+            grh1 = new Ground(canvas,"GrassRockHoz", 1600, 900);
+            grh2 = new Ground(canvas,"GrassRockHoz", 1200, 900);
+            grh3 = new Ground(canvas,"GrassRockHoz", 800, 900);
+            grh3 = new Ground(canvas,"GrassRockHoz", 800, 800);
+            grh3 = new Ground(canvas,"GrassRockHoz", 400, 900);
+            grh3 = new Ground(canvas,"GrassRockHoz", 0, 900);
             spieler.setAufBoden(false);
+            start.setLayoutY(1200);
+            bg.setX(-2);
+            bg.setY(-2);
+            canvas.setVisible(true);
+            player.setVisible(true);
             spieler.start();
             first = true;
         }

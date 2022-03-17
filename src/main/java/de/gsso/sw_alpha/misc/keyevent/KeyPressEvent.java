@@ -19,10 +19,6 @@ public class KeyPressEvent implements EventHandler<KeyEvent> {
     public void handle(KeyEvent event) {
         switch (event.getCode()) {
             case W:                                         //Check, ob Taste SPACE gedrückt ist
-                if (!player.getPrevPos()) {
-                    player.setPrevYpos(player.getSpielerfig().getY());
-                    player.setPrevPos(true);
-                }
                 if (player.getAufBoden()) {                 //Check, ob Unten gleich NULL ist
                     player.setSprung(Richtung.SPRINGEN);    //sprung wird SPRINGEN gesetzt
                     player.setJumpbegin(Instant.now());
