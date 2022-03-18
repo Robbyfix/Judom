@@ -85,7 +85,8 @@ public class Player extends AnimationTimer {
             //Rechts-Bewegung
             if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
                 laufen("rechts");
-                if (!checkCollision(figkolldown,"ground")) {
+                if (!checkCollision(figkolldown,"ground")&&i==15) {
+                    i=0;
                     fallen("up",0);
                     aufBoden = false;
                 }
@@ -94,7 +95,8 @@ public class Player extends AnimationTimer {
             //Links-Bewegung
             if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
                 laufen("links");
-                if (!checkCollision(figkolldown,"ground")) {
+                if (!checkCollision(figkolldown,"ground")&&i==15) {
+                    i=0;
                     fallen("up",0);
                     aufBoden = false;
                 }
