@@ -4,6 +4,7 @@ import de.gsso.sw_alpha.misc.keyevent.KeyPressEvent;
 import de.gsso.sw_alpha.misc.keyevent.KeyReleaseEvent;
 import de.gsso.sw_alpha.objects.Ground;
 import de.gsso.sw_alpha.objects.Player;
+import de.gsso.sw_alpha.objects.Room;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -18,6 +19,7 @@ public class HelloController {
     private Ground grh3;
     private Ground grh4;
     private boolean first;
+    private Room rm;
 
     @FXML
     private Pane canvas;
@@ -48,14 +50,8 @@ public class HelloController {
             spieler.getSpielerfig().setY(0);
             spieler.setStartPosX(1600);
             spieler.setStartPosY(0);
-            grh1 = new Ground(canvas,"GrassRockHoz", 1600, 900);
-            grh2 = new Ground(canvas,"GrassRockHoz", 1200, 900);
-            grh3 = new Ground(canvas,"GrassRockHoz", 800, 900);
-            grh3 = new Ground(canvas,"GrassRockHoz", 800, 800);
-            grh3 = new Ground(canvas,"GrassRockHoz", 400, 900);
-            grh3 = new Ground(canvas,"GrassRockHoz", 0, 900);
             spieler.setAufBoden(false);
-            start.setLayoutY(1200);
+            start.setOpacity(0);
             bg.setX(-2);
             bg.setY(-2);
             canvas.setVisible(true);
@@ -63,5 +59,7 @@ public class HelloController {
             spieler.start();
             first = true;
         }
+        rm = new Room(canvas);
+        rm.createRoom(0);
     }
 }
