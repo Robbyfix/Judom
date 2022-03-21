@@ -28,6 +28,7 @@ public class Player extends AnimationTimer {
     private Richtung rechts = Richtung.NULL; //Richtungs-enum für die "Rechts"-Bewegung
     private Richtung sprung = Richtung.NULL; //Richtungs-enum für den Sprung
     private boolean aufBoden; //Gibt an, ob der Boden berührt wird oder nicht
+    private boolean stehen;
     private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
     private boolean prevPos;
     private Node obj; //Aktuelles Objekt im Canvas
@@ -75,6 +76,7 @@ public class Player extends AnimationTimer {
                 if(checkCollision(figkolldown, "ground")){
                     spielerfig.setY(((ImageView)obj).getY() - 154);
                     aufBoden = true;
+                    stehen = true;
                     xparabel = 0;
                     //System.out.println("Kollision");
                 }
@@ -85,42 +87,45 @@ public class Player extends AnimationTimer {
             //Rechts-Bewegung
             if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
                 laufen("rechts");
-                if (!checkCollision(figkolldown,"ground")&&i==15) {
-                    i=0;
+                if (!checkCollision(figkolldown,"ground")) {
                     fallen("up",0);
-                    aufBoden = false;
+                    if(fpscount==15||fpscount==30||fpscount==45||fpscount==60) {
+                        aufBoden = false;
+                    }
                 }
             }
 
             //Links-Bewegung
             if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
                 laufen("links");
-                if (!checkCollision(figkolldown,"ground")&&i==15) {
-                    i=0;
+                if (!checkCollision(figkolldown,"ground")) {
                     fallen("up",0);
-                    aufBoden = false;
+                    if(fpscount==15||fpscount==30||fpscount==45||fpscount==60) {
+                        aufBoden = false;
+                    }
                 }
             }
 
-            /*if (checkCollision(figkollright,"ground")) {
+            if (checkCollision(figkollright,"ground")) {
                 System.out.println("Kollision");
-                spielerfig.setX(((ImageView)obj).getX());
+                //spielerfig.setX(((ImageView)obj).getX());
+                spielerfig.setX(((Ground)obj).getX());
             }
 
             if (checkCollision(figkollleft,"ground")) {
                 System.out.println("Kollision");
-                spielerfig.setX(spielerfig.getX()+8);
-            }*/
+                spielerfig.setX(((Ground)obj).getX()+((Ground)obj).getImage().getWidth());
+            }
 
             setHitbox();
+
+            setFigImgState();
 
             if(fpscount==60) {
                 DebugAusgabe();
             }
 
             kollisionCheck--;
-
-            i++;
 
             fpscount++;
 
@@ -210,13 +215,13 @@ public class Player extends AnimationTimer {
     public void laufen(String direction){
         switch(direction) {
             case "links":
-            spielerfig.setX(spielerfig.getX() - 8);
+            spielerfig.setX(spielerfig.getX() - 6);
             if (spielerfig.getX() <= 0) {
                 spielerfig.setX(canvas.getWidth());
             }
             break;
             case "rechts":
-                spielerfig.setX(spielerfig.getX() + 8);
+                spielerfig.setX(spielerfig.getX() + 6);
                 if (spielerfig.getX() > canvas.getWidth()) {
                     spielerfig.setX(0);
                 }
@@ -248,11 +253,18 @@ public class Player extends AnimationTimer {
         figkolldown.setY(spielerfig.getY()+154);
         figkolldown.setX(spielerfig.getX()+54);
 
-        figkollleft.setY(spielerfig.getY()+25);
+        figkollleft.setY(spielerfig.getY()+37);
         figkollleft.setX(spielerfig.getX()+34);
 
-        figkollright.setY(spielerfig.getY()+25);
+        figkollright.setY(spielerfig.getY()+37);
         figkollright.setX(spielerfig.getX()+108);
+    }
+
+    public void setFigImgState(){
+        if(rechts!=Richtung.RECHTS&&links!=Richtung.LINKS&&sprung!=Richtung.SPRINGEN&&aufBoden&&stehen){
+            spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig_standing.gif")));
+            stehen = false;
+        }
     }
 
     public void DebugAusgabe(){

@@ -14,4 +14,6 @@ public class Collision extends ImageView{
         this.setX(x);
         this.canvas.getChildren().add(this);
     }
+
+
 }

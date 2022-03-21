@@ -4,7 +4,6 @@ import de.gsso.sw_alpha.misc.keyevent.KeyPressEvent;
 import de.gsso.sw_alpha.misc.keyevent.KeyReleaseEvent;
 import de.gsso.sw_alpha.objects.Ground;
 import de.gsso.sw_alpha.objects.Player;
-import de.gsso.sw_alpha.objects.Room;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -14,12 +13,8 @@ import javafx.scene.layout.Pane;
 public class HelloController {
 
     private Player spieler;
-    private Ground grh1;
-    private Ground grh2;
-    private Ground grh3;
-    private Ground grh4;
     private boolean first;
-    private Room rm;
+    private Ground[] grounds;
 
     @FXML
     private Pane canvas;
@@ -28,7 +23,7 @@ public class HelloController {
     private Pane player;
 
     @FXML
-    private Button start;
+    private Button demo;
 
     @FXML
     private Pane QuickMenu;
@@ -37,7 +32,7 @@ public class HelloController {
     private Pane background;
 
     @FXML
-    public void handleStartAction() {
+    public void handleDemoLevel() {
         if(first==false) {
             ImageView bg = new ImageView(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/Background/GrassLand_Background_Guide.png")));
             background.getChildren().add(bg);
@@ -51,15 +46,20 @@ public class HelloController {
             spieler.setStartPosX(1600);
             spieler.setStartPosY(0);
             spieler.setAufBoden(false);
-            start.setOpacity(0);
+            demo.setOpacity(0);
             bg.setX(-2);
             bg.setY(-2);
             canvas.setVisible(true);
             player.setVisible(true);
             spieler.start();
+            grounds = new Ground[6];
+            grounds[0] = new Ground(canvas, "GrassRockHoz",1600,900);
+            grounds[1] = new Ground(canvas, "GrassRockHoz",1200,900);
+            grounds[2] = new Ground(canvas, "GrassRockHoz",800,900);
+            grounds[3] = new Ground(canvas, "GrassRockHoz",400,900);
+            grounds[4] = new Ground(canvas, "GrassRockHoz",0,900);
+            grounds[5] = new Ground(canvas, "GrassRockHoz",0,700);
             first = true;
         }
-        rm = new Room(canvas);
-        rm.createRoom(0);
     }
 }
