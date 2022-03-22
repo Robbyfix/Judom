@@ -77,7 +77,6 @@ public class Player extends AnimationTimer {
                     aufBoden = true;
                     stehen = true;
                     xparabel = 0;
-                    prevYpos = figkolldown.getY();
                     //System.out.println("Kollision");
                 }
                 fallen("down", spielerfig);
@@ -85,9 +84,8 @@ public class Player extends AnimationTimer {
             }
 
             if(aufBoden){
-                xparabel = 2;
                 figkolldown.setX(spielerfig.getX() + 64);
-                fallen("down", figkolldown);
+                fallen("down", figkolldown,2);
                 if(checkCollision(figkolldown,"ground")){
                     figkolldown.setY(spielerfig.getY() + 110);
                     prevYpos = figkolldown.getY();
@@ -100,17 +98,11 @@ public class Player extends AnimationTimer {
             //Rechts-Bewegung
             if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
                 laufen("rechts");
-                /*if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
-                    aufBoden = false;
-                }*/
             }
 
             //Links-Bewegung
             if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
                 laufen("links");
-                /*if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
-                    aufBoden = false;
-                }*/
             }
 
             //Rechte-Kollision
@@ -209,6 +201,18 @@ public class Player extends AnimationTimer {
         geschwlimit += 0.1;
     }
 
+    public void fallen(String direction, ImageView fig, double x) {
+        switch (direction) {
+            case "up":
+                fig.setY(fig.getY() - (0.5 * 1.2 * Math.pow(x, 2)));
+                break;
+
+            case "down":
+                fig.setY(fig.getY() + (0.5 * 1.2 * Math.pow(x, 2)));
+                break;
+        }
+    }
+
     public void laufen(String direction){
         switch(direction) {
             case "links":
@@ -248,7 +252,7 @@ public class Player extends AnimationTimer {
         figkollup.setX(spielerfig.getX()+54);
 
         if(!aufBoden) {
-            figkolldown.setY(spielerfig.getY() + 128);
+            figkolldown.setY(spielerfig.getY() + 174);
             figkolldown.setX(spielerfig.getX() + 64);
         }
 
