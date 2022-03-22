@@ -20,7 +20,6 @@ public class Player extends AnimationTimer {
     private double geschwlimit = 5; //Max. Bewegungsgeschw.
     private Instant jumpbegin = Instant.now(); //Anfangszeit des Sprungs
     private Duration jumpduration = Duration.ZERO; //Zählung der Zeit des Sprungs
-    private static final long INTERVAL = 10;
     private long lastCall = System.nanoTime();
     private Pane canvas; //Pane auf dem alles dargestellt wird
     private Pane playerPane;
@@ -32,7 +31,6 @@ public class Player extends AnimationTimer {
     private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
     private boolean prevPos;
     private Node obj; //Aktuelles Objekt im Canvas
-    private int i;
     private double prevYpos;
     private double prevXpos;
     private double xparabel;
@@ -71,6 +69,7 @@ public class Player extends AnimationTimer {
                 springen();
                 //System.out.println(geschwlimit);
             }
+
             //Fallen
             else if (!aufBoden) {
                 if(checkCollision(figkolldown, "ground")){
@@ -87,31 +86,27 @@ public class Player extends AnimationTimer {
             //Rechts-Bewegung
             if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
                 laufen("rechts");
-                if (!checkCollision(figkolldown,"ground")) {
-                    fallen("up",0);
-                    if(fpscount==15||fpscount==30||fpscount==45||fpscount==60) {
-                        aufBoden = false;
-                    }
+                if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
+                    aufBoden = false;
                 }
             }
 
             //Links-Bewegung
             if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
                 laufen("links");
-                if (!checkCollision(figkolldown,"ground")) {
-                    fallen("up",0);
-                    if(fpscount==15||fpscount==30||fpscount==45||fpscount==60) {
-                        aufBoden = false;
-                    }
+                if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
+                    aufBoden = false;
                 }
             }
 
+            //Rechte-Kollision
             if (checkCollision(figkollright,"ground")) {
                 System.out.println("Kollision");
                 //spielerfig.setX(((ImageView)obj).getX());
                 spielerfig.setX(((Ground)obj).getX());
             }
 
+            //Linke-Kollision
             if (checkCollision(figkollleft,"ground")) {
                 System.out.println("Kollision");
                 spielerfig.setX(((Ground)obj).getX()+((Ground)obj).getImage().getWidth());
@@ -250,8 +245,8 @@ public class Player extends AnimationTimer {
         figkollup.setY(spielerfig.getY()-20);
         figkollup.setX(spielerfig.getX()+54);
 
-        figkolldown.setY(spielerfig.getY()+154);
-        figkolldown.setX(spielerfig.getX()+54);
+        figkolldown.setY(spielerfig.getY()+144);
+        figkolldown.setX(spielerfig.getX()+64);
 
         figkollleft.setY(spielerfig.getY()+37);
         figkollleft.setX(spielerfig.getX()+34);
