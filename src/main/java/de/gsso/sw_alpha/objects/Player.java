@@ -73,30 +73,44 @@ public class Player extends AnimationTimer {
             //Fallen
             else if (!aufBoden) {
                 if(checkCollision(figkolldown, "ground")){
-                    spielerfig.setY(((ImageView)obj).getY() - 154);
+                    spielerfig.setY(((ImageView)obj).getY() - 164);
                     aufBoden = true;
                     stehen = true;
                     xparabel = 0;
+                    prevYpos = figkolldown.getY();
                     //System.out.println("Kollision");
                 }
-                fallen("down");
+                fallen("down", spielerfig);
                 //System.out.println(geschwlimit);
+            }
+
+            if(aufBoden){
+                xparabel = 2;
+                figkolldown.setX(spielerfig.getX() + 64);
+                fallen("down", figkolldown);
+                if(checkCollision(figkolldown,"ground")){
+                    figkolldown.setY(spielerfig.getY() + 110);
+                    prevYpos = figkolldown.getY();
+                }
+                else if(figkolldown.getY()>=prevYpos+20){
+                    aufBoden = false;
+                }
             }
 
             //Rechts-Bewegung
             if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
                 laufen("rechts");
-                if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
+                /*if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
                     aufBoden = false;
-                }
+                }*/
             }
 
             //Links-Bewegung
             if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
                 laufen("links");
-                if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
+                /*if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
                     aufBoden = false;
-                }
+                }*/
             }
 
             //Rechte-Kollision
@@ -175,7 +189,7 @@ public class Player extends AnimationTimer {
         aufBoden = false;
     }
 
-    public void fallen(String direction) {
+    public void fallen(String direction, ImageView fig) {
         if (geschwlimit > 5) {
             geschwlimit = 5;
         }
@@ -184,11 +198,11 @@ public class Player extends AnimationTimer {
         }
         switch (direction) {
             case "up":
-            spielerfig.setY(spielerfig.getY() - (0.5 * 1.2 * Math.pow(xparabel, 2)));
+            fig.setY(fig.getY() - (0.5 * 1.2 * Math.pow(xparabel, 2)));
             break;
 
             case "down":
-            spielerfig.setY(spielerfig.getY() + (0.5 * 1.2 * Math.pow(xparabel, 2)));
+            fig.setY(fig.getY() + (0.5 * 1.2 * Math.pow(xparabel, 2)));
             break;
         }
         xparabel++;
@@ -233,8 +247,10 @@ public class Player extends AnimationTimer {
         figkollup.setY(spielerfig.getY()-20);
         figkollup.setX(spielerfig.getX()+54);
 
-        figkolldown.setY(spielerfig.getY()+144);
-        figkolldown.setX(spielerfig.getX()+64);
+        if(!aufBoden) {
+            figkolldown.setY(spielerfig.getY() + 128);
+            figkolldown.setX(spielerfig.getX() + 64);
+        }
 
         figkollleft.setY(spielerfig.getY()+37);
         figkollleft.setX(spielerfig.getX()+34);
