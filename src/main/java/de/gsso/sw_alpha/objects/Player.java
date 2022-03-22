@@ -195,18 +195,6 @@ public class Player extends AnimationTimer {
         geschwlimit += 0.1;
     }
 
-    public void fallen(String direction, double x) {
-        switch (direction) {
-            case "up":
-                spielerfig.setY(spielerfig.getY() - (0.5 * 1.2 * Math.pow(x, 2)));
-                break;
-
-            case "down":
-                spielerfig.setY(spielerfig.getY() + (0.5 * 1.2 * Math.pow(x, 2)));
-                break;
-        }
-    }
-
     public void laufen(String direction){
         switch(direction) {
             case "links":
