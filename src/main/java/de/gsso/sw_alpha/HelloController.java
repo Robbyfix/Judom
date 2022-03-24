@@ -22,7 +22,7 @@ public class HelloController {
     private Pane canvas;
 
     @FXML
-    private Pane player;
+    private Pane playerPane;
 
     @FXML
     private Button demo;
@@ -39,7 +39,7 @@ public class HelloController {
             ImageView bg = new ImageView(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/Background/GrassLand_Background_Guide.png")));
             background.getChildren().add(bg);
             if (spieler == null) {                            //Check, ob spieler nicht null ist
-                spieler = new Player(canvas, player);               //Neuer Spieler instanziiert
+                spieler = new Player(canvas, playerPane);               //Neuer Spieler instanziiert
                 canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
                 canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
             }
@@ -52,7 +52,7 @@ public class HelloController {
             bg.setX(-2);
             bg.setY(-2);
             canvas.setVisible(true);
-            player.setVisible(true);
+            playerPane.setVisible(true);
             spieler.start();
             grounds = new Ground[6];
             grounds[0] = new Ground(canvas, "GrassRockHoz",1600,900);
