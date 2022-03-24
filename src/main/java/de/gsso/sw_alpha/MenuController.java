@@ -17,7 +17,7 @@ public class MenuController {
     private Parent root;
 
     @FXML
-    protected void handleStartGame(ActionEvent event) throws IOException {
+    public void handleStartGame(ActionEvent event) throws IOException {
         root = FXMLLoader.load(HelloApplication.class.getResource("Game.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -26,7 +26,7 @@ public class MenuController {
     }
 
     @FXML
-    protected void handleQuitGame(ActionEvent event) throws IOException{
+    public void handleQuitGame(ActionEvent event) throws IOException{
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }

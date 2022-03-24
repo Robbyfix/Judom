@@ -4,13 +4,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class Spikes extends ImageView {
+public class Spikes extends Collision {
     private final Pane canvas;
 
     public Spikes(Pane canvas, double x, double y) {
-        super(new Image("Img/Demo/spikes.png"));
+        super(new Image("Img/Ground/Spikes.png"),x,y);
         this.canvas = canvas;
-        this.setX(x);
-        this.setY(y);
+        this.canvas.getChildren().add(this);
     }
 }
