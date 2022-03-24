@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class Collision extends ImageView {
 
-    protected Collision(Image image, double x, double y){
+    private Collision(Image image, double x, double y){
         super(image);
         this.setX(x);
         this.setY(y);

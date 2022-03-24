@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 public class Decoration extends ImageView {
     private final Pane canvas;
 
-    protected Decoration(Pane canvas, String name, double x, double y){
+    public Decoration(Pane canvas, String name, double x, double y){
         super(new Image("Img/Decoration/"+name+".png"));
         this.canvas = canvas;
         this.setY(y);
