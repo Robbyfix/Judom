@@ -4,6 +4,7 @@ import de.gsso.sw_alpha.misc.keyevent.KeyPressEvent;
 import de.gsso.sw_alpha.misc.keyevent.KeyReleaseEvent;
 import de.gsso.sw_alpha.objects.Ground;
 import de.gsso.sw_alpha.objects.Player;
+import de.gsso.sw_alpha.objects.Spikes;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -15,6 +16,7 @@ public class HelloController {
     private Player spieler;
     private boolean first;
     private Ground[] grounds;
+    private Spikes[] spikes;
 
     @FXML
     private Pane canvas;
@@ -59,6 +61,9 @@ public class HelloController {
             grounds[3] = new Ground(canvas, "GrassRockHoz",400,900);
             grounds[4] = new Ground(canvas, "GrassRockHoz",0,900);
             grounds[5] = new Ground(canvas, "GrassRockHoz",0,700);
+            spikes = new Spikes[2];
+            spikes[0] = new Spikes(canvas,1200,800);
+            spikes[1] = new Spikes(canvas,1000,800);
             first = true;
         }
     }
