@@ -63,7 +63,7 @@ public class HelloController {
             grounds[5] = new Ground(canvas, "GrassRockHoz",0,700);
             spikes = new Spikes[2];
             spikes[0] = new Spikes(canvas,1200,800);
-            spikes[1] = new Spikes(canvas,1000,800);
+            spikes[1] = new Spikes(canvas,900,800);
             first = true;
         }
     }
