@@ -80,6 +80,10 @@ public class Player extends AnimationTimer {
                     prevYpos = figkolldown.getY();
                     //System.out.println("Kollision");
                 }
+                if(checkCollision(figkolldown, "spikes")){
+                    spielerfig.setX(startPosX);
+                    spielerfig.setY(startPosY);
+                }
                 fallen("down", spielerfig);
                 //System.out.println(geschwlimit);
             }
@@ -117,15 +121,19 @@ public class Player extends AnimationTimer {
             if (checkCollision(figkollright,"ground")) {
                 System.out.println("Kollision");
                 //spielerfig.setX(((ImageView)obj).getX());
-                spielerfig.setX(((Ground)obj).getX());
+                spielerfig.setX(((Collision)obj).getX()-165);
             }
 
             //Linke-Kollision
             if (checkCollision(figkollleft,"ground")) {
                 System.out.println("Kollision");
-                spielerfig.setX(((Ground)obj).getX()+((Ground)obj).getImage().getWidth());
+                spielerfig.setX(((Collision)obj).getX()+((Collision)obj).getImage().getWidth());
             }
 
+            if(spielerfig.getY()>1234){
+                spielerfig.setX(startPosX);
+                spielerfig.setY(startPosY);
+            }
             setHitbox();
 
             setFigImgState();
@@ -237,6 +245,10 @@ public class Player extends AnimationTimer {
                     if (obj instanceof Ground) {
                         return true;
                 }
+                case "spikes":
+                    if(obj instanceof Spikes){
+                        return true;
+                    }
             }
         }
 

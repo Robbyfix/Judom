@@ -10,4 +10,5 @@ public class Collision extends ImageView {
         this.setX(x);
         this.setY(y);
     }
+
 }
