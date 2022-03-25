@@ -66,10 +66,6 @@ public class Player extends AnimationTimer {
                     sprung = Richtung.NULL;
                     //System.out.println("Kollision");
                 }
-                if(checkCollision(figkollup,"spikes")){
-                    spielerfig.setY(startPosY);
-                    spielerfig.setX(startPosX);
-                }
                 springen();
                 //System.out.println(geschwlimit);
             }
@@ -84,23 +80,19 @@ public class Player extends AnimationTimer {
                     prevYpos = figkolldown.getY();
                     //System.out.println("Kollision");
                 }
-                if(checkCollision(figkolldown,"spikes")){
-                    spielerfig.setY(startPosY);
-                    spielerfig.setX(startPosX);
-                }
                 fallen("down", spielerfig);
                 //System.out.println(geschwlimit);
             }
 
             if(aufBoden){
-                xparabel = 1.5;
+                xparabel = 2;
                 figkolldown.setX(spielerfig.getX() + 64);
                 fallen("down", figkolldown);
                 if(checkCollision(figkolldown,"ground")){
-                    figkolldown.setY(spielerfig.getY() + 130);
+                    figkolldown.setY(spielerfig.getY() + 110);
                     prevYpos = figkolldown.getY();
                 }
-                else if(figkolldown.getY()>=prevYpos+30){
+                else if(figkolldown.getY()>=prevYpos+20){
                     aufBoden = false;
                 }
             }
@@ -108,31 +100,30 @@ public class Player extends AnimationTimer {
             //Rechts-Bewegung
             if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
                 laufen("rechts");
+                /*if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
+                    aufBoden = false;
+                }*/
             }
 
             //Links-Bewegung
             if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
                 laufen("links");
+                /*if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
+                    aufBoden = false;
+                }*/
             }
 
             //Rechte-Kollision
             if (checkCollision(figkollright,"ground")) {
                 System.out.println("Kollision");
-                spielerfig.setX(((Collision)obj).getX()-165);
-            }
-            if(checkCollision(figkolldown,"spikes")){
-                spielerfig.setY(startPosY);
-                spielerfig.setX(startPosX);
+                //spielerfig.setX(((ImageView)obj).getX());
+                spielerfig.setX(((Ground)obj).getX());
             }
 
             //Linke-Kollision
             if (checkCollision(figkollleft,"ground")) {
                 System.out.println("Kollision");
-                spielerfig.setX(((Collision)obj).getX()+((Collision)obj).getImage().getWidth());
-            }
-            if(checkCollision(figkolldown,"spikes")){
-                spielerfig.setY(startPosY);
-                spielerfig.setX(startPosX);
+                spielerfig.setX(((Ground)obj).getX()+((Ground)obj).getImage().getWidth());
             }
 
             setHitbox();
@@ -246,10 +237,6 @@ public class Player extends AnimationTimer {
                     if (obj instanceof Ground) {
                         return true;
                 }
-                case "spikes":
-                    if(obj instanceof Spikes){
-                        return true;
-                    }
             }
         }
 
@@ -261,7 +248,7 @@ public class Player extends AnimationTimer {
         figkollup.setX(spielerfig.getX()+54);
 
         if(!aufBoden) {
-            figkolldown.setY(spielerfig.getY() + 168);
+            figkolldown.setY(spielerfig.getY() + 128);
             figkolldown.setX(spielerfig.getX() + 64);
         }
 
@@ -269,7 +256,7 @@ public class Player extends AnimationTimer {
         figkollleft.setX(spielerfig.getX()+34);
 
         figkollright.setY(spielerfig.getY()+37);
-        figkollright.setX(spielerfig.getX()+125);
+        figkollright.setX(spielerfig.getX()+108);
     }
 
     public void setFigImgState(){
