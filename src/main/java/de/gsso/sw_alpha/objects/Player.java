@@ -89,14 +89,15 @@ public class Player extends AnimationTimer {
             }
 
             if(aufBoden){
-                xparabel = 2;
+                xparabel = 3;
                 figkolldown.setX(spielerfig.getX() + 64);
                 fallen("down", figkolldown);
                 if(checkCollision(figkolldown,"ground")){
                     figkolldown.setY(spielerfig.getY() + 110);
                     prevYpos = figkolldown.getY();
                 }
-                else if(figkolldown.getY()>=prevYpos+20){
+                else if(figkolldown.getY()>=prevYpos+55){
+                    fallen("up",spielerfig);
                     aufBoden = false;
                 }
             }
@@ -260,7 +261,7 @@ public class Player extends AnimationTimer {
         figkollup.setX(spielerfig.getX()+54);
 
         if(!aufBoden) {
-            figkolldown.setY(spielerfig.getY() + 128);
+            figkolldown.setY(spielerfig.getY() + 168);
             figkolldown.setX(spielerfig.getX() + 64);
         }
 
