@@ -18,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class HelloController {
 
@@ -43,6 +44,21 @@ public class HelloController {
 
     @FXML
     private Pane background;
+
+    @FXML
+    private Button MaMe;
+
+    @FXML
+    private Button Cont;
+
+    @FXML
+    private Button Settings;
+
+    @FXML
+    private Button Quit;
+
+    @FXML
+    private Button Ret;
 
     public HelloController(){
 
@@ -94,5 +110,26 @@ public class HelloController {
     public void handleContinueAction(){
         QuickMenu.setVisible(false);
         spieler.setqMenu(false);
+    }
+
+    public void handleSettingsAction(){
+        MaMe.setVisible(false);
+        Cont.setVisible(false);
+        Settings.setVisible(false);
+        Quit.setVisible(false);
+        Ret.setVisible(true);
+    }
+
+    public void handleSettingsReturnAction(){
+        MaMe.setVisible(true);
+        Cont.setVisible(true);
+        Settings.setVisible(true);
+        Quit.setVisible(true);
+        Ret.setVisible(false);
+    }
+
+    public void handleQuitAction(ActionEvent event){
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }
