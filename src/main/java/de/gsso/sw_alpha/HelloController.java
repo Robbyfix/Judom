@@ -90,4 +90,9 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void handleContinueAction(){
+        QuickMenu.setVisible(false);
+        spieler.setqMenu(false);
+    }
 }

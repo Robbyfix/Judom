@@ -1,11 +1,12 @@
 package de.gsso.sw_alpha.misc.keyevent;
 
-import de.gsso.sw_alpha.HelloController;
 import de.gsso.sw_alpha.misc.Richtung;
 import de.gsso.sw_alpha.objects.Player;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Paint;
 
 import java.time.Instant;
 

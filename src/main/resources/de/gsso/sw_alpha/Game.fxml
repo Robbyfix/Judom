@@ -11,9 +11,10 @@
       <Pane fx:id="background" prefHeight="1080.0" prefWidth="1920.0" />
       <Pane fx:id="canvas" prefHeight="1080.0" prefWidth="1920.0" visible="false" />
       <Pane fx:id="playerPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" visible="false" />
-      <Pane fx:id="QuickMenu" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #0000;" visible="false">
+      <Pane fx:id="QuickMenu" prefHeight="1080.0" prefWidth="1920.0" visible="false">
          <children>
             <Button contentDisplay="CENTER" layoutX="915.0" layoutY="772.0" mnemonicParsing="false" onAction="#handleMainMenuAction" prefHeight="25.0" prefWidth="98.0" text="Main Menu" />
+            <Button layoutX="900.0" layoutY="436.0" mnemonicParsing="false" onAction="#handleContinueAction" prefHeight="25.0" prefWidth="115.0" text="Continue" />
          </children></Pane>
       <Button fx:id="demo" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleDemoLevel" text="Demo" />
    </children>
