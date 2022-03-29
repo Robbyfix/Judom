@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -13,6 +14,11 @@
       <Pane fx:id="playerPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" visible="false" />
       <Pane fx:id="QuickMenu" prefHeight="1080.0" prefWidth="1920.0" visible="false">
          <children>
+            <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Img/Background/QMenuBG.png" />
+               </image>
+            </ImageView>
             <Button fx:id="MaMe" contentDisplay="CENTER" layoutX="887.0" layoutY="888.0" mnemonicParsing="false" onAction="#handleMainMenuAction" prefHeight="45.0" prefWidth="163.0" text="Main Menu" />
             <Button fx:id="Cont" layoutX="884.0" layoutY="203.0" mnemonicParsing="false" onAction="#handleContinueAction" prefHeight="45.0" prefWidth="163.0" text="Continue" />
             <Button fx:id="Settings" layoutX="888.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleOpenSettingsAction" prefHeight="51.0" prefWidth="163.0" text="Settings" />
