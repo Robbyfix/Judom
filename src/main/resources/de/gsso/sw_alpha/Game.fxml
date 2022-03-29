@@ -15,9 +15,9 @@
          <children>
             <Button fx:id="MaMe" contentDisplay="CENTER" layoutX="887.0" layoutY="888.0" mnemonicParsing="false" onAction="#handleMainMenuAction" prefHeight="45.0" prefWidth="163.0" text="Main Menu" />
             <Button fx:id="Cont" layoutX="884.0" layoutY="203.0" mnemonicParsing="false" onAction="#handleContinueAction" prefHeight="45.0" prefWidth="163.0" text="Continue" />
-            <Button fx:id="Settings" layoutX="888.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleSettingsAction" prefHeight="51.0" prefWidth="163.0" text="Settings" />
+            <Button fx:id="Settings" layoutX="888.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleOpenSettingsAction" prefHeight="51.0" prefWidth="163.0" text="Settings" />
             <Button fx:id="Quit" layoutX="-8.0" layoutY="-10.0" mnemonicParsing="false" onAction="#handleQuitAction" prefHeight="61.0" prefWidth="91.0" text="Quit" />
-            <Button fx:id="Ret" layoutX="881.0" layoutY="835.0" mnemonicParsing="false" onAction="#handleSettingsReturnAction" prefHeight="45.0" prefWidth="72.0" text="Return" visible="false" />
+            <Button fx:id="Ret" layoutX="881.0" layoutY="835.0" mnemonicParsing="false" onAction="#handleCloseSettingsAction" prefHeight="45.0" prefWidth="72.0" text="Return" visible="false" />
          </children></Pane>
       <Button fx:id="demo" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleDemoLevel" text="Demo" />
    </children>

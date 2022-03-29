@@ -18,7 +18,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Set;
 
 public class HelloController {
 
@@ -112,7 +111,7 @@ public class HelloController {
         spieler.setqMenu(false);
     }
 
-    public void handleSettingsAction(){
+    public void handleOpenSettingsAction(){
         MaMe.setVisible(false);
         Cont.setVisible(false);
         Settings.setVisible(false);
@@ -120,7 +119,7 @@ public class HelloController {
         Ret.setVisible(true);
     }
 
-    public void handleSettingsReturnAction(){
+    public void handleCloseSettingsAction(){
         MaMe.setVisible(true);
         Cont.setVisible(true);
         Settings.setVisible(true);
