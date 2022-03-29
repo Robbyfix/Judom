@@ -123,14 +123,13 @@ public class Player extends AnimationTimer {
 
             //Rechte-Kollision
             if (checkCollision(figkollright,"ground")) {
-                System.out.println("Kollision");
-                //spielerfig.setX(((ImageView)obj).getX());
+                //System.out.println("Kollision");
                 spielerfig.setX(((Collision)obj).getX()-165);
             }
 
             //Linke-Kollision
             if (checkCollision(figkollleft,"ground")) {
-                System.out.println("Kollision");
+                //System.out.println("Kollision");
                 spielerfig.setX(((Collision)obj).getX()+((Collision)obj).getImage().getWidth());
             }
 
@@ -138,6 +137,7 @@ public class Player extends AnimationTimer {
                 spielerfig.setX(startPosX);
                 spielerfig.setY(startPosY);
             }
+
             setHitbox();
 
             setFigImgState();
