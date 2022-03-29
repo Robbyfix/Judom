@@ -16,21 +16,27 @@ import java.time.Instant;
 public class Player extends AnimationTimer {
     private Media sound = new Media(new File("src/main/resources/BGM/test.mp3").toURI().toString());
     private MediaPlayer mediaPlayer = new MediaPlayer(sound);
-    private int fpscount; //Zählt die Framerate
-    private double geschwlimit = 5; //Max. Bewegungsgeschw.
     private Instant jumpbegin = Instant.now(); //Anfangszeit des Sprungs
     private Duration jumpduration = Duration.ZERO; //Zählung der Zeit des Sprungs
-    private long lastCall = System.nanoTime();
     private Pane canvas; //Pane auf dem alles dargestellt wird
     private Pane playerPane;
+    private Pane quickMenu;
     private Richtung links = Richtung.NULL; //Richtungs-enum für die "Links"-Bewegung
     private Richtung rechts = Richtung.NULL; //Richtungs-enum für die "Rechts"-Bewegung
     private Richtung sprung = Richtung.NULL; //Richtungs-enum für den Sprung
+    private Node obj; //Aktuelles Objekt im Canvas
+    private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig.png")));//Bild der spielerfig wird einem ImageView zugeordnet
+    private ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Oben
+    private ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Unten
+    private ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Links
+    private ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Rechts
     private boolean aufBoden; //Gibt an, ob der Boden berührt wird oder nicht
     private boolean stehen;
-    private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
     private boolean prevPos;
-    private Node obj; //Aktuelles Objekt im Canvas
+    private boolean qMenu;
+    private int fpscount; //Zählt die Framerate
+    private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
+    private long lastCall = System.nanoTime();
     private double prevYpos;
     private double prevXpos;
     private double xparabel;
@@ -38,15 +44,12 @@ public class Player extends AnimationTimer {
     private double startPosY;
     private double goalPosX;  //Ziel-Position des Raumes, um den Raum zu wechseln
     private double goalPosY;
-    private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig.png")));//Bild der spielerfig wird einem ImageView zugeordnet
-    private ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Oben
-    private ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Unten
-    private ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Links
-    private ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Rechts
+    private double geschwlimit = 5; //Max. Bewegungsgeschw.
 
-    public Player(Pane canvas, Pane playerPane) {
+    public Player(Pane canvas, Pane playerPane, Pane quickMenu) {
         this.canvas = canvas; //Pane canvas wird zum übergebenen canvas gesetzt
         this.playerPane = playerPane;
+        this.quickMenu = quickMenu;
         canvas.getChildren().addAll(figkollup, figkolldown, figkollleft, figkollright);  //Fügt dem pane die spielerfig hinzu
         playerPane.getChildren().add(spielerfig);
         spielerfig.setX(1557);
@@ -304,11 +307,11 @@ public class Player extends AnimationTimer {
 
     public ImageView getSpielerfig() {return spielerfig;}    //Gibt Spielerfig zurück
 
-    public boolean getAufBoden() {return aufBoden;}
+    public boolean isAufBoden() {
+        return aufBoden;
+    }
 
     public void setPrevYpos(double prevYpos) {this.prevYpos = prevYpos;}
-
-    public boolean getPrevPos() {return prevPos;}
 
     public void setPrevPos(boolean prevPos) {this.prevPos = prevPos;}
 
@@ -323,4 +326,16 @@ public class Player extends AnimationTimer {
     public void setStartPosX(double startPosX) {this.startPosX = startPosX;}
 
     public void setStartPosY(double startPosY) {this.startPosY = startPosY;}
+
+    public boolean isQuickMenu() {
+        return qMenu;
+    }
+
+    public Pane getQuickMenu() {
+        return quickMenu;
+    }
+
+    public void setqMenu(boolean qMenu) {
+        this.qMenu = qMenu;
+    }
 }

@@ -5,11 +5,19 @@ import de.gsso.sw_alpha.misc.keyevent.KeyReleaseEvent;
 import de.gsso.sw_alpha.objects.Ground;
 import de.gsso.sw_alpha.objects.Player;
 import de.gsso.sw_alpha.objects.Spikes;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class HelloController {
 
@@ -17,6 +25,9 @@ public class HelloController {
     private boolean first;
     private Ground[] grounds;
     private Spikes[] spikes;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
     private Pane canvas;
@@ -33,13 +44,17 @@ public class HelloController {
     @FXML
     private Pane background;
 
+    public HelloController(){
+
+    }
+
     @FXML
     public void handleDemoLevel() {
         if(first==false) {
             ImageView bg = new ImageView(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/Background/GrassLand_Background_Guide.png")));
             background.getChildren().add(bg);
             if (spieler == null) {                            //Check, ob spieler nicht null ist
-                spieler = new Player(canvas, playerPane);               //Neuer Spieler instanziiert
+                spieler = new Player(canvas, playerPane, QuickMenu);               //Neuer Spieler instanziiert
                 canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
                 canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
             }
@@ -66,5 +81,13 @@ public class HelloController {
             spikes[1] = new Spikes(canvas,900,800);
             first = true;
         }
+    }
+
+    public void handleMainMenuAction(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(HelloApplication.class.getResource("Menu.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
