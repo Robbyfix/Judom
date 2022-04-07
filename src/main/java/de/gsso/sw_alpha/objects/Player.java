@@ -55,6 +55,7 @@ public class Player extends AnimationTimer {
         spielerfig.setX(1557);
         spielerfig.setY(515);
         this.kollisionCheck = this.canvas.getChildren().size() - 1;
+        //mediaPlayer.setVolume(50);
         //mediaPlayer.play();
         //mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(new javafx.util.Duration(30)));
     }
@@ -67,10 +68,9 @@ public class Player extends AnimationTimer {
             if (sprung == Richtung.SPRINGEN) {
                 if(checkCollision(figkollup,"ground")){
                     sprung = Richtung.NULL;
-                    //System.out.println("Kollision");
                 }
+                figkolldown.setY(spielerfig.getY() + 168);
                 springen();
-                //System.out.println(geschwlimit);
             }
 
             //Fallen
@@ -81,14 +81,17 @@ public class Player extends AnimationTimer {
                     stehen = true;
                     xparabel = 0;
                     prevYpos = figkolldown.getY();
-                    //System.out.println("Kollision");
+                    figkolldown.setY(spielerfig.getY() + 168);
                 }
                 if(checkCollision(figkolldown, "spikes")){
                     spielerfig.setX(startPosX);
                     spielerfig.setY(startPosY);
                 }
                 fallen("down", spielerfig);
-                //System.out.println(geschwlimit);
+                fallen("down",figkolldown,5);
+                if(fpscount%8==0){
+                    figkolldown.setY(spielerfig.getY() + 168);
+                }
             }
 
             if(aufBoden){
@@ -108,28 +111,20 @@ public class Player extends AnimationTimer {
             //Rechts-Bewegung
             if (rechts == Richtung.RECHTS&&links!=Richtung.LINKS) {
                 laufen("rechts");
-                /*if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
-                    aufBoden = false;
-                }*/
             }
 
             //Links-Bewegung
             if (links == Richtung.LINKS&&rechts!=Richtung.RECHTS) {
                 laufen("links");
-                /*if (!checkCollision(figkolldown,"ground")&&(fpscount==15||fpscount==30||fpscount==45||fpscount==60)) {
-                    aufBoden = false;
-                }*/
             }
 
             //Rechte-Kollision
             if (checkCollision(figkollright,"ground")) {
-                //System.out.println("Kollision");
                 spielerfig.setX(((Collision)obj).getX()-165);
             }
 
             //Linke-Kollision
             if (checkCollision(figkollleft,"ground")) {
-                //System.out.println("Kollision");
                 spielerfig.setX(((Collision)obj).getX()+((Collision)obj).getImage().getWidth());
             }
 
@@ -197,7 +192,6 @@ public class Player extends AnimationTimer {
             sprung = Richtung.NULL;
             prevYpos = spielerfig.getY();
         }
-        //System.out.println(jumpduration.getNano());
         aufBoden = false;
     }
 
@@ -219,6 +213,18 @@ public class Player extends AnimationTimer {
         }
         xparabel++;
         geschwlimit += 0.1;
+    }
+
+    public void fallen(String direction, ImageView fig, double x) {
+        switch (direction) {
+            case "up":
+                fig.setY(fig.getY() - (0.5 * 1.2 * Math.pow(x, 2)));
+                break;
+
+            case "down":
+                fig.setY(fig.getY() + (0.5 * 1.2 * Math.pow(x, 2)));
+                break;
+        }
     }
 
     public void laufen(String direction){
@@ -264,7 +270,6 @@ public class Player extends AnimationTimer {
         figkollup.setX(spielerfig.getX()+54);
 
         if(!aufBoden) {
-            figkolldown.setY(spielerfig.getY() + 168);
             figkolldown.setX(spielerfig.getX() + 64);
         }
 
@@ -296,6 +301,7 @@ public class Player extends AnimationTimer {
         if (sprung == Richtung.SPRINGEN) {
             System.out.println("Sprung");
         }
+        System.out.println(mediaPlayer.getVolume());
         fpscount = 0;
     }
 
@@ -333,6 +339,10 @@ public class Player extends AnimationTimer {
 
     public Pane getQuickMenu() {
         return quickMenu;
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
     }
 
     public void setqMenu(boolean qMenu) {

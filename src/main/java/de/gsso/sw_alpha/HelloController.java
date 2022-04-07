@@ -12,6 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -30,7 +32,7 @@ public class HelloController {
     private Parent root;
 
     @FXML
-    private Pane canvas;
+    private Pane canvas = new Pane();
 
     @FXML
     private Pane playerPane;
@@ -59,8 +61,17 @@ public class HelloController {
     @FXML
     private Button Ret;
 
-    public HelloController(){
+    @FXML
+    private Slider sliderVol;
 
+    @FXML
+    private TextField VolValue = new TextField("0");
+
+    public HelloController(){
+        //Num1.setVisible(false);
+        //Num2.setVisible(false);
+        //Num3.setVisible(false);
+        //canvas.getChildren().addAll(Num1,Num2,Num3);
     }
 
     @FXML
@@ -117,6 +128,64 @@ public class HelloController {
         Settings.setVisible(false);
         Quit.setVisible(false);
         Ret.setVisible(true);
+        sliderVol.setVisible(true);
+        VolValue.setVisible(true);
+        //Num1.setVisible(true);
+        //Num2.setVisible(true);
+        //Num3.setVisible(true);
+    }
+
+    public void handleRefreshSlider(){
+        spieler.getMediaPlayer().setVolume(sliderVol.getValue());
+        String s = VolValue.getText();
+        char[] c = s.toCharArray();
+        if(c.length==3){
+            switch (c[0]){
+                //case '0': Num1.setImage(new Image("UI/zero.png"));
+                //break;
+            }
+            //Num1.setY(51);
+            //Num1.setX(394);
+            //Num2.setY(51);
+            //Num2.setX(434);
+            //Num3.setY(51);
+            //Num3.setX(474);
+        }
+        else if(c.length==2){
+
+        }
+        else if(c.length==1){
+            switch (c[0]){
+                //case '0': Num1.setImage(new Image("UI/zero.png"));
+                //break;
+            }
+            //Num1.setY(51);
+            //Num1.setX(394);
+        }
+
+        if(Double.parseDouble(VolValue.getText())<0){
+            sliderVol.setValue(0);
+            VolValue.setText("0");
+        }
+
+        if(Double.parseDouble(VolValue.getText())>100){
+            sliderVol.setValue(100);
+            VolValue.setText("100");
+        }
+
+        if(!VolValue.getText().isEmpty()) {
+            sliderVol.setValue(Double.parseDouble(VolValue.getText()));
+        }
+
+        else{
+            VolValue.setText("0");
+            sliderVol.setValue(0);
+        }
+    }
+
+    public void handleRefreshVolValue(){
+        spieler.getMediaPlayer().setVolume(sliderVol.getValue());
+        VolValue.setText(""+ (int) sliderVol.getValue());
     }
 
     public void handleCloseSettingsAction(){
@@ -125,6 +194,11 @@ public class HelloController {
         Settings.setVisible(true);
         Quit.setVisible(true);
         Ret.setVisible(false);
+        sliderVol.setVisible(false);
+        VolValue.setVisible(false);
+        //Num1.setVisible(false);
+        //Num2.setVisible(false);
+        //Num3.setVisible(false);
     }
 
     public void handleQuitAction(ActionEvent event){
