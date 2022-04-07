@@ -65,13 +65,16 @@ public class HelloController {
     private Slider sliderVol;
 
     @FXML
-    private TextField VolValue = new TextField("0");
+    private ImageView Num1;
+
+    @FXML
+    private ImageView Num2;
+
+    @FXML
+    private ImageView Num3;
 
     public HelloController(){
-        //Num1.setVisible(false);
-        //Num2.setVisible(false);
-        //Num3.setVisible(false);
-        //canvas.getChildren().addAll(Num1,Num2,Num3);
+
     }
 
     @FXML
@@ -128,64 +131,163 @@ public class HelloController {
         Settings.setVisible(false);
         Quit.setVisible(false);
         Ret.setVisible(true);
+        sliderVol.setValue(spieler.getMediaPlayer().getVolume());
         sliderVol.setVisible(true);
-        VolValue.setVisible(true);
-        //Num1.setVisible(true);
-        //Num2.setVisible(true);
-        //Num3.setVisible(true);
+        Num1.setVisible(true);
+        Num2.setVisible(true);
+        Num3.setVisible(true);
     }
 
-    public void handleRefreshSlider(){
-        spieler.getMediaPlayer().setVolume(sliderVol.getValue());
-        String s = VolValue.getText();
-        char[] c = s.toCharArray();
-        if(c.length==3){
-            switch (c[0]){
-                //case '0': Num1.setImage(new Image("UI/zero.png"));
-                //break;
+    public void handleRefreshSettings(){
+        if(sliderVol.getValue()<10){
+            Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/void.png")));
+            Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/void.png")));
+            Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/void.png")));
+            for(int i=0;i<10;i++){
+                if((int) sliderVol.getValue()==i){
+                    switch(i){
+                        case 0: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/zero.png")));
+                            break;
+
+                        case 1: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
+                            break;
+
+                        case 2: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
+                            break;
+
+                        case 3: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
+                            break;
+
+                        case 4: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
+                            break;
+
+                        case 5: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
+                            break;
+
+                        case 6: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
+                            break;
+
+                        case 7: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
+                            break;
+
+                        case 8: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
+                            break;
+
+                        case 9: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
+                            break;
+                    }
+                }
             }
-            //Num1.setY(51);
-            //Num1.setX(394);
-            //Num2.setY(51);
-            //Num2.setX(434);
-            //Num3.setY(51);
-            //Num3.setX(474);
+            Num1.setY(200);
+            Num1.setX(1480);
         }
-        else if(c.length==2){
+        if(sliderVol.getValue()>10&&sliderVol.getValue()<100){
+            Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/void.png")));
+            Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/void.png")));
+            Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/void.png")));
+            for(int i = 0;i<10;i++){
+                for(int j=0;j<10;j++) {
+                    if((int) (sliderVol.getValue()/10)==i) {
+                        switch (i) {
+                            case 1:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
+                                break;
 
-        }
-        else if(c.length==1){
-            switch (c[0]){
-                //case '0': Num1.setImage(new Image("UI/zero.png"));
-                //break;
+                            case 2:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
+                                break;
+
+                            case 3:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
+                                break;
+
+                            case 4:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
+                                break;
+
+                            case 5:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
+                                break;
+
+                            case 6:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
+                                break;
+
+                            case 7:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
+                                break;
+
+                            case 8:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
+                                break;
+
+                            case 9:
+                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
+                                break;
+                        }
+                    }
+                    if ((int) sliderVol.getValue()-(i*10)==j) {
+                        switch (j) {
+                            case 0:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/zero.png")));
+                                break;
+
+                            case 1:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
+                                break;
+
+                            case 2:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
+                                break;
+
+                            case 3:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
+                                break;
+
+                            case 4:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
+                                break;
+
+                            case 5:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
+                                break;
+
+                            case 6:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
+                                break;
+
+                            case 7:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
+                                break;
+
+                            case 8:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
+                                break;
+
+                            case 9:
+                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
+                                break;
+                        }
+                    }
+                }
             }
-            //Num1.setY(51);
-            //Num1.setX(394);
+            Num1.setX(1504);
+            Num1.setY(200);
+            Num2.setX(1456);
+            Num2.setY(200);
         }
-
-        if(Double.parseDouble(VolValue.getText())<0){
-            sliderVol.setValue(0);
-            VolValue.setText("0");
+        if(sliderVol.getValue()==100){
+            Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/zero.png")));
+            Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/zero.png")));
+            Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
+            Num1.setX(1540);
+            Num1.setY(200);
+            Num2.setX(1492);
+            Num2.setY(200);
+            Num3.setX(1444);
+            Num3.setY(200);
         }
-
-        if(Double.parseDouble(VolValue.getText())>100){
-            sliderVol.setValue(100);
-            VolValue.setText("100");
-        }
-
-        if(!VolValue.getText().isEmpty()) {
-            sliderVol.setValue(Double.parseDouble(VolValue.getText()));
-        }
-
-        else{
-            VolValue.setText("0");
-            sliderVol.setValue(0);
-        }
-    }
-
-    public void handleRefreshVolValue(){
         spieler.getMediaPlayer().setVolume(sliderVol.getValue());
-        VolValue.setText(""+ (int) sliderVol.getValue());
     }
 
     public void handleCloseSettingsAction(){
@@ -195,10 +297,9 @@ public class HelloController {
         Quit.setVisible(true);
         Ret.setVisible(false);
         sliderVol.setVisible(false);
-        VolValue.setVisible(false);
-        //Num1.setVisible(false);
-        //Num2.setVisible(false);
-        //Num3.setVisible(false);
+        Num1.setVisible(false);
+        Num2.setVisible(false);
+        Num3.setVisible(false);
     }
 
     public void handleQuitAction(ActionEvent event){
