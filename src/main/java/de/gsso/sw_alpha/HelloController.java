@@ -145,36 +145,17 @@ public class HelloController {
             Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/void.png")));
             for(int i=0;i<10;i++){
                 if((int) sliderVol.getValue()==i){
-                    switch(i){
-                        case 0: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/zero.png")));
-                            break;
-
-                        case 1: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
-                            break;
-
-                        case 2: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
-                            break;
-
-                        case 3: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
-                            break;
-
-                        case 4: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
-                            break;
-
-                        case 5: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
-                            break;
-
-                        case 6: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
-                            break;
-
-                        case 7: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
-                            break;
-
-                        case 8: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
-                            break;
-
-                        case 9: Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
-                            break;
+                    switch (i) {
+                        case 0 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/zero.png")));
+                        case 1 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
+                        case 2 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
+                        case 3 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
+                        case 4 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
+                        case 5 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
+                        case 6 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
+                        case 7 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
+                        case 8 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
+                        case 9 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
                     }
                 }
             }
@@ -189,84 +170,29 @@ public class HelloController {
                 for(int j=0;j<10;j++) {
                     if((int) (sliderVol.getValue()/10)==i) {
                         switch (i) {
-                            case 1:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
-                                break;
-
-                            case 2:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
-                                break;
-
-                            case 3:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
-                                break;
-
-                            case 4:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
-                                break;
-
-                            case 5:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
-                                break;
-
-                            case 6:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
-                                break;
-
-                            case 7:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
-                                break;
-
-                            case 8:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
-                                break;
-
-                            case 9:
-                                Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
-                                break;
+                            case 1 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
+                            case 2 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
+                            case 3 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
+                            case 4 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
+                            case 5 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
+                            case 6 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
+                            case 7 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
+                            case 8 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
+                            case 9 -> Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
                         }
                     }
                     if ((int) sliderVol.getValue()-(i*10)==j) {
                         switch (j) {
-                            case 0:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/zero.png")));
-                                break;
-
-                            case 1:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
-                                break;
-
-                            case 2:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
-                                break;
-
-                            case 3:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
-                                break;
-
-                            case 4:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
-                                break;
-
-                            case 5:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
-                                break;
-
-                            case 6:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
-                                break;
-
-                            case 7:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
-                                break;
-
-                            case 8:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
-                                break;
-
-                            case 9:
-                                Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
-                                break;
+                            case 0 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/zero.png")));
+                            case 1 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/one.png")));
+                            case 2 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/two.png")));
+                            case 3 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/three.png")));
+                            case 4 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/four.png")));
+                            case 5 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/five.png")));
+                            case 6 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/six.png")));
+                            case 7 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/seven.png")));
+                            case 8 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/eight.png")));
+                            case 9 -> Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("UI/nine.png")));
                         }
                     }
                 }

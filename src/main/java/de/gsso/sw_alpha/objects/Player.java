@@ -88,8 +88,8 @@ public class Player extends AnimationTimer {
                     spielerfig.setY(startPosY);
                 }
                 fallen("down", spielerfig);
-                fallen("down",figkolldown,5);
-                if(fpscount%8==0){
+                fallen("down",figkolldown,7);
+                if(fpscount%3==0){
                     figkolldown.setY(spielerfig.getY() + 168);
                 }
             }
