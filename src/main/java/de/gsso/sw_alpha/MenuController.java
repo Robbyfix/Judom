@@ -53,7 +53,7 @@ public class MenuController {
         stage.show();
     }
 
-    public void handleOpenSettingsAction(){
+    public void handleOpenSettings(){
         start.setVisible(false);
         quit.setVisible(false);
         settings.setVisible(false);
@@ -87,7 +87,7 @@ public class MenuController {
         Player.mediaPlayer.setVolume(sliderVol.getValue());
     }
 
-    public void handleCloseSettingsAction(){
+    public void handleCloseSettings(){
         start.setVisible(true);
         quit.setVisible(true);
         settings.setVisible(true);

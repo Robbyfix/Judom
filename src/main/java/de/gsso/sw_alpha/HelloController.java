@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -112,7 +111,7 @@ public class HelloController {
         }
     }
 
-    public void handleMainMenuAction(ActionEvent event) throws IOException {
+    public void handleMainMenu(ActionEvent event) throws IOException {
         root = FXMLLoader.load(HelloApplication.class.getResource("Menu.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -120,12 +119,12 @@ public class HelloController {
         stage.show();
     }
 
-    public void handleContinueAction(){
+    public void handleContinue(){
         QuickMenu.setVisible(false);
         spieler.setqMenu(false);
     }
 
-    public void handleOpenSettingsAction(){
+    public void handleOpenSettings(){
         MaMe.setVisible(false);
         Cont.setVisible(false);
         Settings.setVisible(false);
@@ -160,7 +159,7 @@ public class HelloController {
         spieler.getMediaPlayer().setVolume(sliderVol.getValue());
     }
 
-    public void handleCloseSettingsAction(){
+    public void handleCloseSettings(){
         MaMe.setVisible(true);
         Cont.setVisible(true);
         Settings.setVisible(true);
@@ -255,7 +254,7 @@ public class HelloController {
         }
     }
 
-    public void handleQuitAction(ActionEvent event){
+    public void handleQuit(ActionEvent event){
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
