@@ -1,5 +1,6 @@
 package de.gsso.sw_alpha;
 
+import de.gsso.sw_alpha.objects.Player;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ public class HelloApplication extends Application {
         stage.setTitle("SW_Beta");
         stage.setScene(scene);
         stage.show();
+        Player.mediaPlayer.setVolume(50);
     }
 
     public static void main(String[] args) {

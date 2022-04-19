@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -10,8 +11,11 @@
    <children>
       <Button fx:id="start" layoutX="940.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleStartGame" text="Start" />
       <Button fx:id="quit" layoutX="941.0" layoutY="761.0" mnemonicParsing="false" onAction="#handleQuitGame" text="Quit" />
-      <Button fx:id="settings" layoutX="934.0" layoutY="588.0" mnemonicParsing="false" onAction="#handleOpenSettingsAction" text="Settings" />
-      <Button fx:id="Ret" layoutX="937.0" layoutY="863.0" mnemonicParsing="false" onAction="#handleCloseSettingsAction" text="Return" visible="false" />
-      <Slider fx:id="sliderVol" layoutX="1056.0" layoutY="161.0" minorTickCount="1" prefHeight="32.0" prefWidth="310.0" showTickLabels="true" showTickMarks="true" />
+      <Button fx:id="settings" layoutX="934.0" layoutY="588.0" mnemonicParsing="false" onAction="#handleOpenSettings" text="Settings" />
+      <Button fx:id="Ret" layoutX="937.0" layoutY="863.0" mnemonicParsing="false" onAction="#handleCloseSettings" text="Return" visible="false" />
+      <Slider fx:id="sliderVol" layoutX="1060.0" layoutY="200.0" minorTickCount="1" onMouseDragged="#handleRefreshSettings" prefHeight="51.0" prefWidth="360.0" visible="false" />
+      <ImageView fx:id="Num1" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="Num2" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="Num3" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    </children>
 </Pane>

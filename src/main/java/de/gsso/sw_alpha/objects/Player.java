@@ -14,8 +14,8 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class Player extends AnimationTimer {
-    private Media sound = new Media(new File("src/main/resources/BGM/test.mp3").toURI().toString());
-    private MediaPlayer mediaPlayer = new MediaPlayer(sound);
+    public static Media sound = new Media(new File("src/main/resources/BGM/test.mp3").toURI().toString());
+    public static MediaPlayer mediaPlayer = new MediaPlayer(sound);
     private Instant jumpbegin = Instant.now(); //Anfangszeit des Sprungs
     private Duration jumpduration = Duration.ZERO; //Zählung der Zeit des Sprungs
     private Pane canvas; //Pane auf dem alles dargestellt wird
@@ -26,10 +26,10 @@ public class Player extends AnimationTimer {
     private Richtung sprung = Richtung.NULL; //Richtungs-enum für den Sprung
     private Node obj; //Aktuelles Objekt im Canvas
     private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig.png")));//Bild der spielerfig wird einem ImageView zugeordnet
-    private ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Oben
-    private ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Unten
-    private ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Links
-    private ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Rechts
+    private final ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Oben
+    private final ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Unten
+    private final ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Links
+    private final ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Rechts
     private boolean aufBoden; //Gibt an, ob der Boden berührt wird oder nicht
     private boolean stehen;
     private boolean prevPos;
@@ -86,6 +86,7 @@ public class Player extends AnimationTimer {
                 if(checkCollision(figkolldown, "spikes")){
                     spielerfig.setX(startPosX);
                     spielerfig.setY(startPosY);
+                    figkolldown.setY(spielerfig.getY() + 168);
                 }
                 fallen("down", spielerfig);
                 fallen("down",figkolldown,7);
@@ -97,6 +98,7 @@ public class Player extends AnimationTimer {
             if(aufBoden){
                 xparabel = 3;
                 figkolldown.setX(spielerfig.getX() + 64);
+                prevXpos = spielerfig.getY();
                 fallen("down", figkolldown);
                 if(checkCollision(figkolldown,"ground")){
                     figkolldown.setY(spielerfig.getY() + 110);

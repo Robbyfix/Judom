@@ -37,12 +37,14 @@ public class KeyPressEvent implements EventHandler<KeyEvent> {
                 case ESCAPE:
                     player.getQuickMenu().setVisible(true);
                     player.setqMenu(true);
+                    player.stop();
             }
         }
         else{
             if(event.getCode().equals(KeyCode.ESCAPE)){
                 player.getQuickMenu().setVisible(false);
                 player.setqMenu(false);
+                player.start();
             }
         }
     }
