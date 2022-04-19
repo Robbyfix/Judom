@@ -16,41 +16,48 @@ import java.time.Instant;
 public class Player extends AnimationTimer {
     public static Media sound = new Media(new File("src/main/resources/BGM/test.mp3").toURI().toString());
     public static MediaPlayer mediaPlayer = new MediaPlayer(sound);
-    private Instant jumpbegin = Instant.now(); //Anfangszeit des Sprungs
-    private Duration jumpduration = Duration.ZERO; //Zählung der Zeit des Sprungs
-    private Pane canvas; //Pane auf dem alles dargestellt wird
+    private Instant jumpbegin = Instant.now();
+    private Duration jumpduration = Duration.ZERO;
+    private Pane canvas;
     private Pane playerPane;
     private Pane quickMenu;
-    private Richtung links = Richtung.NULL; //Richtungs-enum für die "Links"-Bewegung
-    private Richtung rechts = Richtung.NULL; //Richtungs-enum für die "Rechts"-Bewegung
-    private Richtung sprung = Richtung.NULL; //Richtungs-enum für den Sprung
+    private Richtung links = Richtung.NULL;
+    private Richtung rechts = Richtung.NULL;
+    private Richtung sprung = Richtung.NULL;
     private Node obj; //Aktuelles Objekt im Canvas
-    private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig.png")));//Bild der spielerfig wird einem ImageView zugeordnet
-    private final ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Oben
-    private final ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png"))); //Vertikale Hitbox-Unten
-    private final ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Links
-    private final ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png"))); //Horizontale Hitbox-Rechts
-    private boolean aufBoden; //Gibt an, ob der Boden berührt wird oder nicht
-    private boolean stehen;
+    private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig.png")));
+    private final ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png")));
+    private final ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png")));
+    private final ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png")));
+    private final ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png")));
+    private boolean aufBoden;
+    private boolean animStehenLinks;
+    private boolean animStehenRechts;
+    private boolean animLinksLauf;
+    private boolean animRechtsLauf;
+    private boolean animSprungLinks;
+    private boolean animSprungRechts;
+    private boolean animFallenLinks;
+    private boolean animFallenRechts;
     private boolean prevPos;
     private boolean qMenu;
-    private int fpscount; //Zählt die Framerate
+    private int fpscount;
     private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
     private long lastCall = System.nanoTime();
     private double prevYpos;
     private double prevXpos;
     private double xparabel;
-    private double startPosX; //Start-Position, sollte man sterben/das Level betreten
+    private double startPosX;
     private double startPosY;
-    private double goalPosX;  //Ziel-Position des Raumes, um den Raum zu wechseln
+    private double goalPosX;
     private double goalPosY;
     private double geschwlimit = 5; //Max. Bewegungsgeschw.
 
     public Player(Pane canvas, Pane playerPane, Pane quickMenu) {
-        this.canvas = canvas; //Pane canvas wird zum übergebenen canvas gesetzt
+        this.canvas = canvas;
         this.playerPane = playerPane;
         this.quickMenu = quickMenu;
-        canvas.getChildren().addAll(figkollup, figkolldown, figkollleft, figkollright);  //Fügt dem pane die spielerfig hinzu
+        canvas.getChildren().addAll(figkollup, figkolldown, figkollleft, figkollright);
         playerPane.getChildren().add(spielerfig);
         spielerfig.setX(1557);
         spielerfig.setY(515);
@@ -77,8 +84,16 @@ public class Player extends AnimationTimer {
             else if (!aufBoden) {
                 if(checkCollision(figkolldown, "ground")){
                     spielerfig.setY(((ImageView)obj).getY() - 164);
+                    if(animFallenLinks){
+                        spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingLeft.gif")));
+                        animStehenLinks = true;
+                    }
+                    else if(animFallenRechts){
+                        spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
+                        animStehenRechts = true;
+                    }
                     aufBoden = true;
-                    stehen = true;
+                    animStehenLinks = true;
                     xparabel = 0;
                     prevYpos = figkolldown.getY();
                     figkolldown.setY(spielerfig.getY() + 168);
@@ -97,7 +112,12 @@ public class Player extends AnimationTimer {
 
             if(aufBoden){
                 xparabel = 3;
-                figkolldown.setX(spielerfig.getX() + 64);
+                if(animLinksLauf||animStehenLinks||animSprungLinks||animFallenLinks) {
+                    figkolldown.setX(spielerfig.getX());
+                }
+                else{
+                    figkolldown.setX(spielerfig.getX() + 64);
+                }
                 prevXpos = spielerfig.getY();
                 fallen("down", figkolldown);
                 if(checkCollision(figkolldown,"ground")){
@@ -135,9 +155,12 @@ public class Player extends AnimationTimer {
                 spielerfig.setY(startPosY);
             }
 
-            setHitbox();
-
-            setFigImgState();
+            if(animLinksLauf||animStehenLinks||animSprungLinks||animFallenLinks){
+                setHitbox(true);
+            }
+            else {
+                setHitbox(false);
+            }
 
             if(fpscount==60) {
                 DebugAusgabe();
@@ -267,25 +290,34 @@ public class Player extends AnimationTimer {
         return false;
     }
 
-    public void setHitbox(){
-        figkollup.setY(spielerfig.getY()-20);
-        figkollup.setX(spielerfig.getX()+54);
+    public void setHitbox(boolean Links){
+        if(!Links) {
+            figkollup.setY(spielerfig.getY() - 20);
+            figkollup.setX(spielerfig.getX() + 54);
 
-        if(!aufBoden) {
-            figkolldown.setX(spielerfig.getX() + 64);
+            if (!aufBoden) {
+                figkolldown.setX(spielerfig.getX() + 64);
+            }
+
+            figkollleft.setY(spielerfig.getY() + 37);
+            figkollleft.setX(spielerfig.getX() + 34);
+
+            figkollright.setY(spielerfig.getY() + 37);
+            figkollright.setX(spielerfig.getX() + 108);
         }
+        else{
+            figkollup.setY(spielerfig.getY() - 20);
+            figkollup.setX(spielerfig.getX());
 
-        figkollleft.setY(spielerfig.getY()+37);
-        figkollleft.setX(spielerfig.getX()+34);
+            if (!aufBoden) {
+                figkolldown.setX(spielerfig.getX());
+            }
 
-        figkollright.setY(spielerfig.getY()+37);
-        figkollright.setX(spielerfig.getX()+108);
-    }
+            figkollleft.setY(spielerfig.getY() + 37);
+            figkollleft.setX(spielerfig.getX());
 
-    public void setFigImgState(){
-        if(rechts!=Richtung.RECHTS&&links!=Richtung.LINKS&&sprung!=Richtung.SPRINGEN&&aufBoden&&stehen){
-            spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig_standing.gif")));
-            stehen = false;
+            figkollright.setY(spielerfig.getY() + 37);
+            figkollright.setX(spielerfig.getX());
         }
     }
 
@@ -313,11 +345,47 @@ public class Player extends AnimationTimer {
 
     public void setSprung(Richtung sprung) {this.sprung = sprung;}
 
-    public ImageView getSpielerfig() {return spielerfig;}    //Gibt Spielerfig zurück
+    public ImageView getSpielerfig() {return spielerfig;}
 
-    public boolean isAufBoden() {
-        return aufBoden;
-    }
+    public boolean isAufBoden() {return aufBoden;}
+
+    public Richtung getLinks() {return links;}
+
+    public Richtung getRechts() {return rechts;}
+
+    public Richtung getSprung() {return sprung;}
+
+    public void setAnimLinksLauf(boolean animLinksLauf){this.animLinksLauf = animLinksLauf;}
+
+    public boolean isAnimLinksLauf() {return animLinksLauf;}
+
+    public void setAnimRechtsLauf(boolean animRechtsLauf){this.animRechtsLauf = animRechtsLauf;}
+
+    public boolean isAnimRechtsLauf() {return animRechtsLauf;}
+
+    public void setAnimStehenLinks(boolean animStehenLinks) {this.animStehenLinks = animStehenLinks;}
+
+    public boolean isAnimStehenLinks() {return animStehenLinks;}
+
+    public void setAnimStehenRechts(boolean animStehenRechts) {this.animStehenRechts = animStehenRechts;}
+
+    public boolean isAnimStehenRechts() {return animStehenRechts;}
+
+    public void setAnimSprungLinks(boolean animSprungLinks) {this.animSprungLinks = animSprungLinks;}
+
+    public boolean isAnimSprungLinks() {return animSprungLinks;}
+
+    public void setAnimSprungRechts(boolean animSprungRechts) {this.animSprungRechts = animSprungRechts;}
+
+    public boolean isAnimSprungRechts() {return animSprungRechts;}
+
+    public void setAnimFallenRechts(boolean animFallenRechts) {this.animFallenRechts = animFallenRechts;}
+
+    public boolean isAnimFallenRechts() {return animFallenRechts;}
+
+    public void setAnimFallenLinks(boolean animFallenLinks) {this.animFallenLinks = animFallenLinks;}
+
+    public boolean isAnimFallenLinks() {return animFallenLinks;}
 
     public void setPrevYpos(double prevYpos) {this.prevYpos = prevYpos;}
 
@@ -335,19 +403,11 @@ public class Player extends AnimationTimer {
 
     public void setStartPosY(double startPosY) {this.startPosY = startPosY;}
 
-    public boolean isQuickMenu() {
-        return qMenu;
-    }
+    public boolean isQuickMenu() {return qMenu;}
 
-    public Pane getQuickMenu() {
-        return quickMenu;
-    }
+    public Pane getQuickMenu() {return quickMenu;}
 
-    public MediaPlayer getMediaPlayer() {
-        return mediaPlayer;
-    }
+    public MediaPlayer getMediaPlayer() {return mediaPlayer;}
 
-    public void setqMenu(boolean qMenu) {
-        this.qMenu = qMenu;
-    }
+    public void setqMenu(boolean qMenu) {this.qMenu = qMenu;}
 }
