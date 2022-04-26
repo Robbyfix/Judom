@@ -5,6 +5,7 @@ import de.gsso.sw_alpha.misc.keyevent.KeyReleaseEvent;
 import de.gsso.sw_alpha.objects.Ground;
 import de.gsso.sw_alpha.objects.Player;
 import de.gsso.sw_alpha.objects.Spikes;
+//import de.gsso.sw_alpha.resources.Img.Ground;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ public class HelloController {
     private Player spieler;
     private boolean first;
     private Ground[] grounds;
+    private Ground[] obstacles;
     private Spikes[] spikes;
     private Stage stage;
     private Scene scene;
@@ -97,16 +99,25 @@ public class HelloController {
             canvas.setVisible(true);
             playerPane.setVisible(true);
             spieler.start();
-            grounds = new Ground[6];
+            grounds = new Ground[4];
             grounds[0] = new Ground(canvas, "GrassRockHoz",1600,900);
-            grounds[1] = new Ground(canvas, "GrassRockHoz",1200,900);
-            grounds[2] = new Ground(canvas, "GrassRockHoz",800,900);
-            grounds[3] = new Ground(canvas, "GrassRockHoz",400,900);
-            grounds[4] = new Ground(canvas, "GrassRockHoz",0,900);
-            grounds[5] = new Ground(canvas, "GrassRockHoz",0,700);
-            spikes = new Spikes[2];
-            spikes[0] = new Spikes(canvas,1200,800);
-            spikes[1] = new Spikes(canvas,900,800);
+            grounds[1] = new Ground(canvas, "Lvl1_obst1",1300,700);
+            grounds[2] = new Ground(canvas, "Lvl1_obst1",1100,500);
+            grounds[3] = new Ground(canvas, "Lvl1_obst1",800,300);
+            grounds[1] = new Ground(canvas, "Lvl1_obst1",600,500);
+            grounds[1] = new Ground(canvas, "Lvl1_obst1",400,700);
+
+
+
+
+
+            //grounds[5] = new Ground(canvas, "GrassRockHoz",0,700);
+            //spikes = new Spikes[2];
+            //spikes[0] = new Spikes(canvas,1200,800);
+            //spikes[1] = new Spikes(canvas,900,800);
+
+
+
             first = true;
         }
     }
