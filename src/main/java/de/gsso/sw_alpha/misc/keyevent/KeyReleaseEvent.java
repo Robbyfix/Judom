@@ -20,33 +20,39 @@ public class KeyReleaseEvent implements EventHandler<KeyEvent> {
         switch (event.getCode()) {
             case W:
                 player.setSprung(Richtung.NULL);
-                if(player.isAnimSprungLinks()){
-                    player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallLeft.gif")));
-                    player.setAnimFallenLinks(true);
+                if(player.isAnimSprungR()){
+                    player.getSpielerfig().setImage(new Image(KeyReleaseEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallRight.gif")));
+                    player.setAnimSprungR(false);
+                    player.setAnimFallenR(true);
                 }
-                else if(player.isAnimSprungRechts()){
-                    player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallRight.gif")));
-                    player.setAnimFallenRechts(true);
+                else if(player.isAnimSprungL()){
+                    player.getSpielerfig().setImage(new Image(KeyReleaseEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallLeft.gif")));
+                    player.setAnimSprungL(false);
+                    player.setAnimFallenL(true);
                 }
-                player.setAnimSprungRechts(false);
-                player.setAnimSprungLinks(false);
                 break;
             case A:
                 player.setLinks(Richtung.NULL);
-                player.setAnimLinksLauf(false);
-                player.setAnimRechtsLauf(false);
-                if(player.isAufBoden()){
-                    player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingLeft.gif")));
-                    player.setAnimStehenLinks(true);
+                player.setAnimLaufenL(false);
+                if(player.isAufBoden()) {
+                    player.setAnimStehenL(true);
+                    player.getSpielerfig().setImage(new Image(KeyReleaseEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingLeft.gif")));
+                }
+                else{
+                    player.setAnimFallenL(true);
+                    player.getSpielerfig().setImage(new Image(KeyReleaseEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallLeft.gif")));
                 }
                 break;
             case D:
                 player.setRechts(Richtung.NULL);
-                player.setAnimRechtsLauf(false);
-                player.setAnimLinksLauf(false);
-                if(player.isAufBoden()){
-                    player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
-                    player.setAnimStehenRechts(true);
+                player.setAnimLaufenR(false);
+                if(player.isAufBoden()) {
+                    player.setAnimStehenR(true);
+                    player.getSpielerfig().setImage(new Image(KeyReleaseEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
+                }
+                else{
+                    player.setAnimFallenR(true);
+                    player.getSpielerfig().setImage(new Image(KeyReleaseEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallRight.gif")));
                 }
                 break;
         }

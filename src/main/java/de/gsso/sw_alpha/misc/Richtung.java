@@ -2,5 +2,5 @@ package de.gsso.sw_alpha.misc;
 
 public enum Richtung {
 
-LINKS, RECHTS, UNTEN, NULL, SPRINGEN,
+LINKS, RECHTS, UNTEN, NULL, SPRINGEN, FALLEN
 }

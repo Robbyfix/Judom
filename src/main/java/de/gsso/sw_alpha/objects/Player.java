@@ -25,20 +25,20 @@ public class Player extends AnimationTimer {
     private Richtung rechts = Richtung.NULL;
     private Richtung sprung = Richtung.NULL;
     private Node obj; //Aktuelles Objekt im Canvas
-    private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/Fig.png")));
+    private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
     private final ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png")));
     private final ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png")));
     private final ImageView figkollleft = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png")));
     private final ImageView figkollright = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollhoz.png")));
+    private boolean animStehenR = true;
+    private boolean animStehenL;
+    private boolean animLaufenR;
+    private boolean animLaufenL;
+    private boolean animSprungR;
+    private boolean animSprungL;
+    private boolean animFallenR;
+    private boolean animFallenL;
     private boolean aufBoden;
-    private boolean animStehenLinks;
-    private boolean animStehenRechts;
-    private boolean animLinksLauf;
-    private boolean animRechtsLauf;
-    private boolean animSprungLinks;
-    private boolean animSprungRechts;
-    private boolean animFallenLinks;
-    private boolean animFallenRechts;
     private boolean prevPos;
     private boolean qMenu;
     private int fpscount;
@@ -84,16 +84,17 @@ public class Player extends AnimationTimer {
             else if (!aufBoden) {
                 if(checkCollision(figkolldown, "ground")){
                     spielerfig.setY(((ImageView)obj).getY() - 164);
-                    if(animFallenLinks){
-                        spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingLeft.gif")));
-                        animStehenLinks = true;
-                    }
-                    else if(animFallenRechts){
-                        spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
-                        animStehenRechts = true;
-                    }
                     aufBoden = true;
-                    animStehenLinks = true;
+                    if(animFallenL){
+                        spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingLeft.gif")));
+                        animFallenL = false;
+                        animStehenL = true;
+                    }
+                    else if(animFallenR){
+                        spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
+                        animFallenR = false;
+                        animStehenR = true;
+                    }
                     xparabel = 0;
                     prevYpos = figkolldown.getY();
                     figkolldown.setY(spielerfig.getY() + 168);
@@ -112,7 +113,7 @@ public class Player extends AnimationTimer {
 
             if(aufBoden){
                 xparabel = 3;
-                if(animLinksLauf||animStehenLinks||animSprungLinks||animFallenLinks) {
+                if(animStehenL||animFallenL||animLaufenL||animSprungL) {
                     figkolldown.setX(spielerfig.getX());
                 }
                 else{
@@ -155,7 +156,7 @@ public class Player extends AnimationTimer {
                 spielerfig.setY(startPosY);
             }
 
-            if(animLinksLauf||animStehenLinks||animSprungLinks||animFallenLinks){
+            if(animStehenL||animFallenL||animLaufenL||animSprungL){
                 setHitbox(true);
             }
             else {
@@ -345,47 +346,47 @@ public class Player extends AnimationTimer {
 
     public void setSprung(Richtung sprung) {this.sprung = sprung;}
 
-    public ImageView getSpielerfig() {return spielerfig;}
-
     public boolean isAufBoden() {return aufBoden;}
+
+    public boolean isAnimFallenL() {return animFallenL;}
+
+    public boolean isAnimFallenR() {return animFallenR;}
+
+    public boolean isAnimLaufenL() {return animLaufenL;}
+
+    public boolean isAnimLaufenR() {return animLaufenR;}
+
+    public boolean isAnimSprungL() {return animSprungL;}
+
+    public boolean isAnimSprungR() {return animSprungR;}
+
+    public boolean isAnimStehenL() {return animStehenL;}
+
+    public boolean isAnimStehenR() {return animStehenR;}
+
+    public void setAnimFallenL(boolean animFallenL) {this.animFallenL = animFallenL;}
+
+    public void setAnimFallenR(boolean animFallenR) {this.animFallenR = animFallenR;}
+
+    public void setAnimLaufenL(boolean animLaufenL) {this.animLaufenL = animLaufenL;}
+
+    public void setAnimLaufenR(boolean animLaufenR) {this.animLaufenR = animLaufenR;}
+
+    public void setAnimSprungL(boolean animSprungL) {this.animSprungL = animSprungL;}
+
+    public void setAnimSprungR(boolean animSprungR) {this.animSprungR = animSprungR;}
+
+    public void setAnimStehenL(boolean animStehenL) {this.animStehenL = animStehenL;}
+
+    public void setAnimStehenR(boolean animStehenR) {this.animStehenR = animStehenR;}
+
+    public ImageView getSpielerfig() {return spielerfig;}
 
     public Richtung getLinks() {return links;}
 
     public Richtung getRechts() {return rechts;}
 
     public Richtung getSprung() {return sprung;}
-
-    public void setAnimLinksLauf(boolean animLinksLauf){this.animLinksLauf = animLinksLauf;}
-
-    public boolean isAnimLinksLauf() {return animLinksLauf;}
-
-    public void setAnimRechtsLauf(boolean animRechtsLauf){this.animRechtsLauf = animRechtsLauf;}
-
-    public boolean isAnimRechtsLauf() {return animRechtsLauf;}
-
-    public void setAnimStehenLinks(boolean animStehenLinks) {this.animStehenLinks = animStehenLinks;}
-
-    public boolean isAnimStehenLinks() {return animStehenLinks;}
-
-    public void setAnimStehenRechts(boolean animStehenRechts) {this.animStehenRechts = animStehenRechts;}
-
-    public boolean isAnimStehenRechts() {return animStehenRechts;}
-
-    public void setAnimSprungLinks(boolean animSprungLinks) {this.animSprungLinks = animSprungLinks;}
-
-    public boolean isAnimSprungLinks() {return animSprungLinks;}
-
-    public void setAnimSprungRechts(boolean animSprungRechts) {this.animSprungRechts = animSprungRechts;}
-
-    public boolean isAnimSprungRechts() {return animSprungRechts;}
-
-    public void setAnimFallenRechts(boolean animFallenRechts) {this.animFallenRechts = animFallenRechts;}
-
-    public boolean isAnimFallenRechts() {return animFallenRechts;}
-
-    public void setAnimFallenLinks(boolean animFallenLinks) {this.animFallenLinks = animFallenLinks;}
-
-    public boolean isAnimFallenLinks() {return animFallenLinks;}
 
     public void setPrevYpos(double prevYpos) {this.prevYpos = prevYpos;}
 

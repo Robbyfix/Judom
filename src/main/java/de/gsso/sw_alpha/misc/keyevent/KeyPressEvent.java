@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Paint;
 
+import java.security.Key;
 import java.time.Instant;
 
 public class KeyPressEvent implements EventHandler<KeyEvent> {
@@ -25,63 +26,65 @@ public class KeyPressEvent implements EventHandler<KeyEvent> {
             switch (event.getCode()) {
                 case W:
                     if (player.isAufBoden()) {
-                        if(player.isAnimStehenLinks()||player.isAnimLinksLauf()){
-                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpLeft.gif")));
-                            player.setAnimSprungLinks(true);
-                        }
-                        else if(player.isAnimStehenRechts()||player.isAnimRechtsLauf()){
-                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpRight.gif")));
-                            player.setAnimSprungRechts(true);
-                        }
-                        player.setAnimStehenLinks(false);
-                        player.setAnimStehenRechts(false);
-                        player.setAnimLinksLauf(false);
-                        player.setAnimRechtsLauf(false);
                         player.setSprung(Richtung.SPRINGEN);
+                        if (player.isAnimStehenL() || player.isAnimLaufenL()) {
+                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpLeft.gif")));
+                            player.setAnimStehenL(false);
+                            player.setAnimLaufenL(false);
+                            player.setAnimSprungL(true);
+                        } else if (player.isAnimStehenR() || player.isAnimLaufenR()) {
+                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpRight.gif")));
+                            player.setAnimStehenR(false);
+                            player.setAnimStehenL(false);
+                            player.setAnimSprungR(true);
+                        }
                         player.setJumpbegin(Instant.now());
                     }
                     break;
                 case A:
                     player.setLinks(Richtung.LINKS);
-                    player.setAnimStehenLinks(false);
-                    player.setAnimStehenRechts(false);
-                    player.setAnimFallenRechts(false);
-                    player.setAnimFallenLinks(false);
-                    player.setAnimLinksLauf(false);
-                    player.setAnimRechtsLauf(false);
-                    if(!player.isAnimLinksLauf()){
-                        if(player.isAufBoden()) {
-                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigWalkLeft.gif")));
-                        }
-                        else if(player.getSprung()==Richtung.SPRINGEN){
-                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpLeft.gif")));
-                        }
-                        else if(!player.isAufBoden()&&player.getSprung()!=Richtung.SPRINGEN){
-                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallLeft.gif")));
-                        }
-                        player.setAnimLinksLauf(true);
+                    if(player.isAnimStehenR()||player.isAnimStehenL()){
+                        player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigWalkLeft.gif")));
+                        player.setAnimStehenR(false);
+                        player.setAnimStehenL(false);
+                        player.setAnimLaufenL(true);
                     }
-
+                    else if(!player.isAufBoden()){
+                        if(player.getSprung()!=Richtung.SPRINGEN){
+                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallLeft.gif")));
+                            player.setAnimFallenL(true);
+                            player.setAnimSprungL(false);
+                        }
+                        else {
+                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpLeft.gif")));
+                            player.setAnimSprungL(true);
+                            player.setAnimFallenL(false);
+                        }
+                        player.setAnimStehenL(false);
+                        player.setAnimLaufenL(false);
+                    }
                     break;
                 case D:
                     player.setRechts(Richtung.RECHTS);
-                    player.setAnimStehenRechts(false);
-                    player.setAnimStehenLinks(false);
-                    player.setAnimFallenRechts(false);
-                    player.setAnimFallenLinks(false);
-                    player.setAnimLinksLauf(false);
-                    player.setAnimRechtsLauf(false);
-                    if(!player.isAnimRechtsLauf()){
-                        if(player.isAufBoden()) {
-                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigWalkRight.gif")));
-                        }
-                        else if(player.getSprung()==Richtung.SPRINGEN){
-                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpRight.gif")));
-                        }
-                        else if(!player.isAufBoden()&&player.getSprung()!=Richtung.SPRINGEN){
+                    if(player.isAnimStehenR()||player.isAnimStehenL()){
+                        player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigWalkRight.gif")));
+                        player.setAnimStehenR(false);
+                        player.setAnimStehenL(false);
+                        player.setAnimLaufenR(true);
+                    }
+                    else if(!player.isAufBoden()){
+                        if(player.getSprung()!=Richtung.SPRINGEN){
                             player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigFallRight.gif")));
+                            player.setAnimFallenR(true);
+                            player.setAnimSprungR(false);
                         }
-                        player.setAnimRechtsLauf(true);
+                        else {
+                            player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpRight.gif")));
+                            player.setAnimSprungR(true);
+                            player.setAnimFallenR(false);
+                        }
+                        player.setAnimStehenR(false);
+                        player.setAnimLaufenR(false);
                     }
                     break;
                 case ESCAPE:
