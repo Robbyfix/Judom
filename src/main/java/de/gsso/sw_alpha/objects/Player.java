@@ -103,6 +103,15 @@ public class Player extends AnimationTimer {
                     spielerfig.setX(startPosX);
                     spielerfig.setY(startPosY);
                     figkolldown.setY(spielerfig.getY() + 168);
+                    animStehenR = true;
+                    animStehenL = false;
+                    animSprungR = false;
+                    animSprungL = false;
+                    animLaufenR = false;
+                    animLaufenL = false;
+                    animFallenR = false;
+                    animFallenL = false;
+                    spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
                 }
                 fallen("down", spielerfig);
                 fallen("down",figkolldown,7);
@@ -154,6 +163,15 @@ public class Player extends AnimationTimer {
             if(spielerfig.getY()>1234){
                 spielerfig.setX(startPosX);
                 spielerfig.setY(startPosY);
+                animStehenR = true;
+                animStehenL = false;
+                animSprungR = false;
+                animSprungL = false;
+                animLaufenR = false;
+                animLaufenL = false;
+                animFallenR = false;
+                animFallenL = false;
+                spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
             }
 
             if(animStehenL||animFallenL||animLaufenL||animSprungL){
