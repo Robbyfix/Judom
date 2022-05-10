@@ -26,9 +26,6 @@
                   <Image url="@../../../Img/UI/x.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="DNum1" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-            <ImageView fx:id="DNum2" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-            <ImageView fx:id="DNum3" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
          </children></Pane>
       <Pane fx:id="QuickMenu" prefHeight="1080.0" prefWidth="1920.0" visible="false">
          <children>
@@ -48,6 +45,6 @@
             <ImageView fx:id="Num3" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
          </children>
       </Pane>
-      <Button fx:id="demo" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleDemoLevel" text="Demo" />
+      <Button fx:id="lvl1" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleDemoLevel" text="Demo" />
    </children>
 </Pane>

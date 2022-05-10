@@ -38,7 +38,7 @@ public class HelloController {
     private Pane playerPane;
 
     @FXML
-    private Button demo;
+    private Button lvl1;
 
     @FXML
     private Pane QuickMenu;
@@ -89,15 +89,16 @@ public class HelloController {
             }
             spieler.getSpielerfig().setX(900);
             spieler.getSpielerfig().setY(0);
-            spieler.setStartPosX(1600);
+            spieler.setStartPosX(960);
             spieler.setStartPosY(0);
             spieler.setAufBoden(false);
-            demo.setOpacity(0);
+            lvl1.setOpacity(0);
             bg.setX(-2);
             bg.setY(-2);
             canvas.setVisible(true);
             playerPane.setVisible(true);
             spieler.start();
+
             grounds = new Ground[4];
             grounds[0] = new Ground(canvas, "GrassRockHoz",1600,900);
             grounds[1] = new Ground(canvas, "Lvl1_obst1",1300,700);
@@ -105,18 +106,6 @@ public class HelloController {
             grounds[3] = new Ground(canvas, "Lvl1_obst1",800,300);
             grounds[1] = new Ground(canvas, "Lvl1_obst1",600,500);
             grounds[1] = new Ground(canvas, "Lvl1_obst1",400,700);
-
-
-
-
-
-            //grounds[5] = new Ground(canvas, "GrassRockHoz",0,700);
-            //spikes = new Spikes[2];
-            //spikes[0] = new Spikes(canvas,1200,800);
-            //spikes[1] = new Spikes(canvas,900,800);
-
-
-
             first = true;
         }
     }
@@ -132,6 +121,7 @@ public class HelloController {
     public void handleContinue(){
         QuickMenu.setVisible(false);
         spieler.setqMenu(false);
+        spieler.start();
     }
 
     public void handleOpenSettings(){
@@ -140,11 +130,16 @@ public class HelloController {
         Settings.setVisible(false);
         Quit.setVisible(false);
         Ret.setVisible(true);
+
         sliderVol.setValue(spieler.getMediaPlayer().getVolume());
         sliderVol.setVisible(true);
+
         Num1.setVisible(true);
+
         Num2.setVisible(true);
+
         Num3.setVisible(true);
+
         if(sliderVol.getValue()<10) {
             einstellig();
         }
@@ -176,38 +171,58 @@ public class HelloController {
         Quit.setVisible(true);
         Ret.setVisible(false);
         sliderVol.setVisible(false);
+
         Num1.setVisible(false);
+
         Num2.setVisible(false);
+
         Num3.setVisible(false);
     }
 
     public void einstellig(){
-        Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
-        Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
-        Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
+        Num1.setVisible(true);
+
+        Num2.setVisible(false);
+
+        Num3.setVisible(false);
+
         setNums(false);
+
         Num1.setY(200);
         Num1.setX(1480);
     }
 
     public void zweistellig(){
-        Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
-        Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
-        Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
+        Num1.setVisible(true);
+
+        Num2.setVisible(true);
+
+        Num3.setVisible(false);
+
         setNums(true);
+
         Num1.setX(1504);
         Num1.setY(200);
+
         Num2.setX(1456);
         Num2.setY(200);
     }
     public void dreistellig(){
         Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
+        Num1.setVisible(true);
+
         Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
+        Num2.setVisible(true);
+
         Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
+        Num3.setVisible(true);
+
         Num1.setX(1540);
         Num1.setY(200);
+
         Num2.setX(1492);
         Num2.setY(200);
+
         Num3.setX(1444);
         Num3.setY(200);
     }

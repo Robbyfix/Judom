@@ -58,11 +58,16 @@ public class MenuController {
         quit.setVisible(false);
         settings.setVisible(false);
         Ret.setVisible(true);
+
         sliderVol.setValue(Player.mediaPlayer.getVolume());
         sliderVol.setVisible(true);
+
         Num1.setVisible(true);
+
         Num2.setVisible(true);
+
         Num3.setVisible(true);
+
         if(sliderVol.getValue()<10) {
             einstellig();
         }
@@ -93,38 +98,55 @@ public class MenuController {
         settings.setVisible(true);
         Ret.setVisible(false);
         sliderVol.setVisible(false);
+
         Num1.setVisible(false);
+
         Num2.setVisible(false);
+
         Num3.setVisible(false);
     }
 
     public void einstellig(){
         Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
+
         Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
+
         Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
+
         setNums(false);
+
         Num1.setY(200);
         Num1.setX(1480);
     }
 
     public void zweistellig(){
         Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
+
         Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
+
         Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/void.png")));
+
         setNums(true);
+
         Num1.setX(1504);
         Num1.setY(200);
+
         Num2.setX(1456);
         Num2.setY(200);
     }
     public void dreistellig(){
         Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
+
         Num2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
+
         Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
+
         Num1.setX(1540);
         Num1.setY(200);
+
         Num2.setX(1492);
         Num2.setY(200);
+
         Num3.setX(1444);
         Num3.setY(200);
     }
