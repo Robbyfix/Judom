@@ -5,13 +5,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class Decoration extends ImageView {
-    private final Pane canvas;
+    private final Pane playerPane;
 
-    public Decoration(Pane canvas, String name, double x, double y){
+    public Decoration(Pane playerPane, String name, double x, double y){
         super(new Image("Img/Decoration/"+name+".png"));
-        this.canvas = canvas;
+        this.playerPane = playerPane;
         this.setY(y);
         this.setX(x);
-        this.canvas.getChildren().add(this);
+        this.playerPane.getChildren().add(this);
     }
 }

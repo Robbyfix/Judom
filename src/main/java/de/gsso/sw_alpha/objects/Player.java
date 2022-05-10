@@ -43,6 +43,7 @@ public class Player extends AnimationTimer {
     private boolean qMenu;
     private int fpscount;
     private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
+    private int deaths;
     private long lastCall = System.nanoTime();
     private double prevYpos;
     private double prevXpos;
@@ -73,7 +74,7 @@ public class Player extends AnimationTimer {
 
             //Springen
             if (sprung == Richtung.SPRINGEN) {
-                if(checkCollision(figkollup,"ground")){
+                if(checkCollision(figkollup)){
                     sprung = Richtung.NULL;
                 }
                 figkolldown.setY(spielerfig.getY() + 168);
@@ -82,7 +83,7 @@ public class Player extends AnimationTimer {
 
             //Fallen
             else if (!aufBoden) {
-                if(checkCollision(figkolldown, "ground")){
+                if(checkCollision(figkolldown)){
                     spielerfig.setY(((ImageView)obj).getY() - 164);
                     aufBoden = true;
                     if(animFallenL){
@@ -98,20 +99,6 @@ public class Player extends AnimationTimer {
                     xparabel = 0;
                     prevYpos = figkolldown.getY();
                     figkolldown.setY(spielerfig.getY() + 168);
-                }
-                if(checkCollision(figkolldown, "spikes")){
-                    spielerfig.setX(startPosX);
-                    spielerfig.setY(startPosY);
-                    figkolldown.setY(spielerfig.getY() + 168);
-                    animStehenR = true;
-                    animStehenL = false;
-                    animSprungR = false;
-                    animSprungL = false;
-                    animLaufenR = false;
-                    animLaufenL = false;
-                    animFallenR = false;
-                    animFallenL = false;
-                    spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
                 }
                 fallen("down", spielerfig);
                 fallen("down",figkolldown,7);
@@ -130,7 +117,7 @@ public class Player extends AnimationTimer {
                 }
                 prevXpos = spielerfig.getY();
                 fallen("down", figkolldown);
-                if(checkCollision(figkolldown,"ground")){
+                if(checkCollision(figkolldown)){
                     figkolldown.setY(spielerfig.getY() + 110);
                     prevYpos = figkolldown.getY();
                 }
@@ -151,13 +138,13 @@ public class Player extends AnimationTimer {
             }
 
             //Rechte-Kollision
-            if (checkCollision(figkollright,"ground")) {
-                spielerfig.setX(((Collision)obj).getX()-165);
+            if (checkCollision(figkollright)) {
+                spielerfig.setX(((Ground)obj).getX()-165);
             }
 
             //Linke-Kollision
-            if (checkCollision(figkollleft,"ground")) {
-                spielerfig.setX(((Collision)obj).getX()+((Collision)obj).getImage().getWidth());
+            if (checkCollision(figkollleft)) {
+                spielerfig.setX(((Ground)obj).getX()+((Ground)obj).getImage().getWidth());
             }
 
             if(spielerfig.getY()>1234){
@@ -174,7 +161,7 @@ public class Player extends AnimationTimer {
                 spielerfig.setImage(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
             }
 
-            if(animStehenL||animFallenL||animLaufenL||animSprungL){
+            if((animStehenL||animFallenL||animLaufenL||animSprungL)&&!animLaufenR){
                 setHitbox(true);
             }
             else {
@@ -240,8 +227,8 @@ public class Player extends AnimationTimer {
     }
 
     public void fallen(String direction, ImageView fig) {
-        if (geschwlimit > 5) {
-            geschwlimit = 5;
+        if (geschwlimit > 4.5) {
+            geschwlimit = 4.5;
         }
         if (xparabel >= geschwlimit) {
             xparabel = geschwlimit;
@@ -288,24 +275,16 @@ public class Player extends AnimationTimer {
     }
 
 
-    public boolean checkCollision(ImageView fig, String type){
+    public boolean checkCollision(ImageView fig){
         if (kollisionCheck <= 0) {
             kollisionCheck = canvas.getChildren().size() - 1;
         }
         obj = canvas.getChildren().get(kollisionCheck);
         if (fig.getBoundsInParent().intersects(obj.getBoundsInParent())) {
-            switch(type) {
-                case "ground":
-                    if (obj instanceof Ground) {
-                        return true;
-                }
-                case "spikes":
-                    if(obj instanceof Spikes){
-                        return true;
-                    }
+            if (obj instanceof Ground) {
+                return true;
             }
         }
-
         return false;
     }
 
@@ -405,6 +384,10 @@ public class Player extends AnimationTimer {
     public Richtung getRechts() {return rechts;}
 
     public Richtung getSprung() {return sprung;}
+
+    public int getDeaths() {return deaths;}
+
+    public Pane getCanvas() {return canvas;}
 
     public void setPrevYpos(double prevYpos) {this.prevYpos = prevYpos;}
 

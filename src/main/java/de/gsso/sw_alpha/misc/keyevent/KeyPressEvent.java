@@ -1,8 +1,10 @@
 package de.gsso.sw_alpha.misc.keyevent;
 
 import de.gsso.sw_alpha.misc.Richtung;
+import de.gsso.sw_alpha.objects.Ground;
 import de.gsso.sw_alpha.objects.Player;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -91,6 +93,14 @@ public class KeyPressEvent implements EventHandler<KeyEvent> {
                     player.getQuickMenu().setVisible(true);
                     player.setqMenu(true);
                     player.stop();
+                    break;
+                case O:
+                    player.getCanvas().setLayoutX((player.getCanvas().getLayoutX()-4));
+                    for(int i = 0; i<player.getCanvas().getChildren().size();i++){
+                        Node obj = player.getCanvas().getChildren().get(i);
+                        ((Ground) obj).setX(((Ground)obj).getX()-4);
+                        player.getCanvas().getChildren().set(i,obj);
+                    }
             }
         }
         else{
