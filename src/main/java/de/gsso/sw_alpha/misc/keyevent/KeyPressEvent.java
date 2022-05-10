@@ -94,13 +94,8 @@ public class KeyPressEvent implements EventHandler<KeyEvent> {
                     player.setqMenu(true);
                     player.stop();
                     break;
-                case O:
-                    player.getCanvas().setLayoutX((player.getCanvas().getLayoutX()-4));
-                    for(int i = 0; i<player.getCanvas().getChildren().size();i++){
-                        Node obj = player.getCanvas().getChildren().get(i);
-                        ((Ground) obj).setX(((Ground)obj).getX()-4);
-                        player.getCanvas().getChildren().set(i,obj);
-                    }
+                //case O: //Debug
+
             }
         }
         else{
