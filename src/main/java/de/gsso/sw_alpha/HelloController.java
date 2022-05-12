@@ -38,13 +38,13 @@ public class HelloController {
     private Pane playerPane;
 
     @FXML
-    private Button lvl1;
-
-    @FXML
     private Pane QuickMenu;
 
     @FXML
     private Pane background;
+
+    @FXML
+    private Button lvl1;
 
     @FXML
     private Button MaMe;
