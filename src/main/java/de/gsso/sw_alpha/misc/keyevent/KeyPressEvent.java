@@ -34,10 +34,10 @@ public class KeyPressEvent implements EventHandler<KeyEvent> {
                             player.setAnimStehenL(false);
                             player.setAnimLaufenL(false);
                             player.setAnimSprungL(true);
-                        } else if (player.isAnimStehenR() || player.isAnimLaufenR()) {
+                        } else{
                             player.getSpielerfig().setImage(new Image(KeyPressEvent.class.getClassLoader().getResourceAsStream("Img/Player/FigJumpRight.gif")));
                             player.setAnimStehenR(false);
-                            player.setAnimStehenL(false);
+                            player.setAnimLaufenR(false);
                             player.setAnimSprungR(true);
                         }
                         player.setJumpbegin(Instant.now());
