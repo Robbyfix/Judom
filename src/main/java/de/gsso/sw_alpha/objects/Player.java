@@ -144,17 +144,20 @@ public class Player extends AnimationTimer {
             //Rechte-Kollision
             if (checkCollision(figkollright)) {
                 //spielerfig.setX(((Ground)obj).getX()-165);
-                spielerfig.setX(spielerfig.getX()-6);
+                //spielerfig.setX(spielerfig.getX()-6);
+                canvas.setLayoutX(canvas.getLayoutX()+12);
+                hitboxMov -= 12;
             }
 
             //Linke-Kollision
             if (checkCollision(figkollleft)) {
-                //spielerfig.setX(((Ground)obj).getX()+((Ground)obj).getImage().getWidth());
-                spielerfig.setX(spielerfig.getX()+6);
+                //spielerfig.setX(spielerfig.getX()+(((Ground)obj).getImage().getWidth()/2));
+                //spielerfig.setX(spielerfig.getX()+6);
+                canvas.setLayoutX(canvas.getLayoutX()-12);
+                hitboxMov += 12;
             }
 
             if(spielerfig.getY()>1234){
-                spielerfig.setX(startPosX);
                 spielerfig.setY(startPosY);
                 canvas.setLayoutX(0);
                 hitboxMov = 0;
@@ -331,7 +334,7 @@ public class Player extends AnimationTimer {
             }
 
             figkollleft.setY(spielerfig.getY() + 37);
-            figkollleft.setX(spielerfig.getX() +hitboxMov);
+            figkollleft.setX(spielerfig.getX()-40+hitboxMov);
 
             figkollright.setY(spielerfig.getY() + 37);
             figkollright.setX(spielerfig.getX() +108+hitboxMov);
