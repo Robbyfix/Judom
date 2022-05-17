@@ -145,16 +145,16 @@ public class Player extends AnimationTimer {
             if (checkCollision(figkollright)) {
                 //spielerfig.setX(((Ground)obj).getX()-165);
                 //spielerfig.setX(spielerfig.getX()-6);
-                canvas.setLayoutX(canvas.getLayoutX()+12);
-                hitboxMov -= 12;
+                canvas.setLayoutX(canvas.getLayoutX()+48);
+                hitboxMov -= 48;
             }
 
             //Linke-Kollision
             if (checkCollision(figkollleft)) {
                 //spielerfig.setX(spielerfig.getX()+(((Ground)obj).getImage().getWidth()/2));
                 //spielerfig.setX(spielerfig.getX()+6);
-                canvas.setLayoutX(canvas.getLayoutX()-12);
-                hitboxMov += 12;
+                canvas.setLayoutX(canvas.getLayoutX()-48);
+                hitboxMov += 48;
             }
 
             if(spielerfig.getY()>1234){
