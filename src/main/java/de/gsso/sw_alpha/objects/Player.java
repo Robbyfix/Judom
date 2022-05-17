@@ -16,7 +16,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class Player extends AnimationTimer {
-    public static Media sound = new Media(new File("src/main/resources/BGM/test.mp3").toURI().toString());
+    public static Media sound = new Media(new File("src/main/resources/BGM/demo.mp3").toURI().toString());
     public static MediaPlayer mediaPlayer = new MediaPlayer(sound);
     private Instant jumpbegin = Instant.now();
     private Duration jumpduration = Duration.ZERO;
@@ -45,7 +45,6 @@ public class Player extends AnimationTimer {
     private boolean animFallenR;
     private boolean animFallenL;
     private boolean aufBoden;
-    private boolean prevPos;
     private boolean qMenu;
     private int fpscount;
     private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
@@ -64,14 +63,14 @@ public class Player extends AnimationTimer {
         this.canvas = canvas;
         this.playerPane = playerPane;
         this.quickMenu = quickMenu;
-        canvas.getChildren().addAll(figkollup, figkolldown, figkollleft, figkollright);
-        playerPane.getChildren().addAll(spielerfig, DNum1, DNum2, DNum3, DNum4);
+        this.canvas.getChildren().addAll(figkollup, figkolldown, figkollleft, figkollright);
+        this.playerPane.getChildren().addAll(spielerfig, DNum1, DNum2, DNum3, DNum4);
         spielerfig.setX(1557);
         spielerfig.setY(515);
         this.kollisionCheck = this.canvas.getChildren().size() - 1;
-        //mediaPlayer.setVolume(50);
-        //mediaPlayer.play();
-        //mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(new javafx.util.Duration(30)));
+        mediaPlayer.setVolume(50);
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(new javafx.util.Duration(30)));
     }
 
     @Override
@@ -460,13 +459,7 @@ public class Player extends AnimationTimer {
 
     public boolean isAufBoden() {return aufBoden;}
 
-    public boolean isAnimFallenL() {return animFallenL;}
-
-    public boolean isAnimFallenR() {return animFallenR;}
-
     public boolean isAnimLaufenL() {return animLaufenL;}
-
-    public boolean isAnimLaufenR() {return animLaufenR;}
 
     public boolean isAnimSprungL() {return animSprungL;}
 
@@ -494,19 +487,7 @@ public class Player extends AnimationTimer {
 
     public ImageView getSpielerfig() {return spielerfig;}
 
-    public Richtung getLinks() {return links;}
-
-    public Richtung getRechts() {return rechts;}
-
     public Richtung getSprung() {return sprung;}
-
-    public int getDeaths() {return deaths;}
-
-    public Pane getCanvas() {return canvas;}
-
-    public void setPrevYpos(double prevYpos) {this.prevYpos = prevYpos;}
-
-    public void setPrevPos(boolean prevPos) {this.prevPos = prevPos;}
 
     public void setAufBoden(boolean aufBoden) {this.aufBoden = aufBoden;}
 
