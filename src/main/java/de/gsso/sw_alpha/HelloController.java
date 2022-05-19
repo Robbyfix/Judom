@@ -110,6 +110,7 @@ public class HelloController {
             grounds[1] = new Ground(canvas, "8x8", 1600,800);
             grounds[2] = new Ground(canvas, "5x5", 1100,800);
             grounds[3] = new Ground(canvas, "5x5", 1600, 200);
+            grounds[4] = new Ground(canvas, "3x10", 1910,500);
 
             first = true;
         }
