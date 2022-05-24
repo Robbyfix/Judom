@@ -67,7 +67,6 @@ public class Player extends AnimationTimer {
         spielerfig.setX(1557);
         spielerfig.setY(515);
         this.kollisionCheck = this.canvas.getChildren().size() - 1;
-        mediaPlayer.setVolume(50);
         mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(new javafx.util.Duration(30)));
     }
