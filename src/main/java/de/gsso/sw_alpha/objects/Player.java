@@ -3,7 +3,6 @@ package de.gsso.sw_alpha.objects;
 import de.gsso.sw_alpha.HelloController;
 import de.gsso.sw_alpha.misc.Richtung;
 import javafx.animation.AnimationTimer;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,7 +45,7 @@ public class Player extends AnimationTimer {
     private boolean animFallenL;
     private boolean aufBoden;
     private boolean qMenu;
-    private int fpscount;
+    private int count;
     private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
     private int deaths;
     private int hitboxMov;
@@ -107,7 +106,7 @@ public class Player extends AnimationTimer {
                 }
                 fallen("down", spielerfig);
                 fallen("down",figkolldown,7);
-                if(fpscount%3==0){
+                if(count %3==0){
                     figkolldown.setY(spielerfig.getY() + 168);
                 }
             }
@@ -203,13 +202,13 @@ public class Player extends AnimationTimer {
                 DNum4.setX(356);
                 DNum4.setY(41);
             }
-            if(fpscount==60) {
+            if(count ==60) {
                 DebugAusgabe();
             }
 
             kollisionCheck--;
 
-            fpscount++;
+            count++;
 
             lastCall = now;
         }
@@ -342,7 +341,7 @@ public class Player extends AnimationTimer {
     }
 
     public void DebugAusgabe(){
-        System.out.println("FPS: " + fpscount);
+        System.out.println("FPS: " + count);
         if (links == Richtung.LINKS) {
             System.out.println("Links");
         }
@@ -357,7 +356,7 @@ public class Player extends AnimationTimer {
         }
         System.out.println(canvas.getLayoutX());
         //System.out.println(mediaPlayer.getVolume());
-        fpscount = 0;
+        count = 0;
     }
 
     public void einstellig(){
