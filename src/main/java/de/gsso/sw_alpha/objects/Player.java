@@ -52,10 +52,8 @@ public class Player extends AnimationTimer {
     private long lastCall = System.nanoTime();
     private double prevYpos;
     private double xparabel;
-    private double startPosX;
     private double startPosY;
     private double goalPosX;
-    private double goalPosY;
     private double geschwlimit = 5; //Max. Bewegungsgeschw.
 
     public Player(Pane canvas, Pane playerPane, Pane quickMenu) {
@@ -201,7 +199,7 @@ public class Player extends AnimationTimer {
                 DNum4.setX(356);
                 DNum4.setY(41);
             }
-            if(count ==60) {
+            if(count==60) {
                 DebugAusgabe();
             }
 
@@ -495,10 +493,6 @@ public class Player extends AnimationTimer {
     public void setJumpbegin(Instant jumpbegin) {this.jumpbegin = jumpbegin;}
 
     public void setGoalPosX(double goalPosX) {this.goalPosX = goalPosX;}
-
-    public void setGoalPosY(double goalPosY) {this.goalPosY = goalPosY;}
-
-    public void setStartPosX(double startPosX) {this.startPosX = startPosX;}
 
     public void setStartPosY(double startPosY) {this.startPosY = startPosY;}
 
