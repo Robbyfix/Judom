@@ -99,19 +99,21 @@ public class HelloController {
             playerPane.setVisible(true);
             spieler.start();
 
-            grounds = new Ground[9];
+            grounds = new Ground[6];
             //grounds[0] = new Ground(canvas, "GrassRockHoz",1600,900);
             //grounds[1] = new Ground(canvas, "Lvl1_obst1",1300,700);
             //grounds[2] = new Ground(canvas, "Lvl1_obst1",1100,500);
             //grounds[3] = new Ground(canvas, "Lvl1_obst1",800,300);
             //grounds[4] = new Ground(canvas, "Lvl1_obst1",600,500);
             //grounds[5] = new Ground(canvas, "Lvl1_obst1",400,700);
-            grounds[0] = new Ground(canvas, "3x10", 500,500);
-            grounds[1] = new Ground(canvas, "8x8", 1600,800);
-            grounds[2] = new Ground(canvas, "5x5", 1100,800);
-            grounds[3] = new Ground(canvas, "5x5", 1600, 200);
-            grounds[4] = new Ground(canvas, "3x10", 1910,500);
 
+            grounds[0] = new Ground(canvas, "5x8", 1600,800);
+            grounds[1] = new Ground(canvas, "5x12", 1100,550);
+            grounds[2] = new Ground(canvas, "3x10", 500,600);
+            grounds[3] = new Ground(canvas, "3x10", 100, 770);
+            grounds[4] = new Ground(canvas, "8x9", -600, 550);
+            grounds[5] = new Ground(canvas, "5x12", -1200, 350);
+            grounds[6] = new Ground(canvas, "8x9", -1500, 100);
             first = true;
         }
     }
