@@ -89,7 +89,6 @@ public class HelloController {
             }
             spieler.getSpielerfig().setX(900);
             spieler.getSpielerfig().setY(0);
-            spieler.setStartPosX(960);
             spieler.setStartPosY(0);
             spieler.setAufBoden(false);
             lvl1.setOpacity(0);
