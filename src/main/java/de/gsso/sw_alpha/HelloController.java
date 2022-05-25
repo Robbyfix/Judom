@@ -24,7 +24,6 @@ import java.io.IOException;
 public class HelloController {
 
     private Player spieler;
-    private boolean first;
     private Ground[] grounds;
     private Decoration[] decorations;
     private Stage stage;
@@ -73,49 +72,42 @@ public class HelloController {
     @FXML
     private ImageView Num3;
 
-    public HelloController(){
-
-    }
-
     @FXML
     public void handleDemoLevel() {
-        if(!first) {
-            ImageView bg = new ImageView(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/Background/GrassLand_Background_Guide.png")));
-            background.getChildren().add(bg);
-            if (spieler == null) {                            //Check, ob spieler nicht null ist
-                spieler = new Player(canvas, playerPane, QuickMenu);               //Neuer Spieler instanziiert
-                canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
-                canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
-            }
-            spieler.getSpielerfig().setX(900); //Spawnposition
-            spieler.getSpielerfig().setY(0);
-            spieler.setStartPosY(0);
-            spieler.setAufBoden(false);
-            lvl1.setOpacity(0);
-            bg.setX(-2);
-            bg.setY(-2);
-            canvas.setVisible(true);
-            playerPane.setVisible(true);
-            spieler.start();
-
-            grounds = new Ground[8];
-            //grounds[0] = new Ground(canvas, "GrassRockHoz",1600,900);
-            //grounds[1] = new Ground(canvas, "Lvl1_obst1",1300,700);
-            //grounds[2] = new Ground(canvas, "Lvl1_obst1",1100,500);
-            //grounds[3] = new Ground(canvas, "Lvl1_obst1",800,300);
-            //grounds[4] = new Ground(canvas, "Lvl1_obst1",600,500);
-            //grounds[5] = new Ground(canvas, "Lvl1_obst1",400,700);
-
-            grounds[0] = new Ground(canvas, "5x8", 800,800);
-            grounds[1] = new Ground(canvas, "5x12", 300,550);
-            grounds[2] = new Ground(canvas, "3x10", -300,600);
-            grounds[3] = new Ground(canvas, "3x10", -700, 770);
-            grounds[4] = new Ground(canvas, "8x9", -1400, 550);
-            grounds[5] = new Ground(canvas, "5x12", -2000, 350);
-            grounds[6] = new Ground(canvas, "8x12", -3000, 250);
-            grounds[7] = new Ground(canvas, "5x12", -3800, 500);
-            first = true;
+        ImageView bg = new ImageView(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/Background/GrassLand_Background_Guide.png")));
+        background.getChildren().add(bg);
+        if (spieler == null) {                            //Check, ob spieler nicht null ist
+            spieler = new Player(canvas, playerPane, QuickMenu);               //Neuer Spieler instanziiert
+            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
         }
+        spieler.getSpielerfig().setX(900); //Spawnposition
+        spieler.getSpielerfig().setY(0);
+        spieler.setStartPosY(0);
+        spieler.setAufBoden(false);
+        lvl1.setOpacity(0);
+        bg.setX(-2);
+        bg.setY(-2);
+        canvas.setVisible(true);
+        playerPane.setVisible(true);
+        spieler.start();
+
+        grounds = new Ground[8];
+        //grounds[0] = new Ground(canvas, "GrassRockHoz",1600,900);
+        //grounds[1] = new Ground(canvas, "Lvl1_obst1",1300,700);
+        //grounds[2] = new Ground(canvas, "Lvl1_obst1",1100,500);
+        //grounds[3] = new Ground(canvas, "Lvl1_obst1",800,300);
+        //grounds[4] = new Ground(canvas, "Lvl1_obst1",600,500);
+        //grounds[5] = new Ground(canvas, "Lvl1_obst1",400,700);
+
+        grounds[0] = new Ground(canvas, "5x8", 800,800);
+        grounds[1] = new Ground(canvas, "5x12", 300,550);
+        grounds[2] = new Ground(canvas, "3x10", -300,600);
+        grounds[3] = new Ground(canvas, "3x10", -700, 770);
+        grounds[4] = new Ground(canvas, "8x9", -1400, 550);
+        grounds[5] = new Ground(canvas, "5x12", -2000, 350);
+        grounds[6] = new Ground(canvas, "8x12", -3000, 250);
+        grounds[7] = new Ground(canvas, "5x12", -3800, 500);
     }
 
     public void handleMainMenu(ActionEvent event) throws IOException {

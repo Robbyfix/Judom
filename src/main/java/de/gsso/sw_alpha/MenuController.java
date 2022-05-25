@@ -197,7 +197,7 @@ public class MenuController {
         }
     }
 
-    public void handleQuitGame(ActionEvent event) throws IOException{
+    public void handleQuitGame(ActionEvent event){
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
