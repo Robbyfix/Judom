@@ -497,8 +497,6 @@ public class Player extends AnimationTimer {
 
     public void setStartPosY(double startPosY) {this.startPosY = startPosY;}
 
-    public void setStartPosX(double startPosX) {this.startPosX = startPosX;}
-
     public boolean isQuickMenu() {return qMenu;}
 
     public Pane getQuickMenu() {return quickMenu;}
