@@ -53,6 +53,7 @@ public class Player extends AnimationTimer {
     private double prevYpos;
     private double xparabel;
     private double startPosY;
+    private double startPosX;
     private double goalPosX;
     private double geschwlimit = 5; //Max. Bewegungsgeschw.
 
@@ -496,6 +497,8 @@ public class Player extends AnimationTimer {
 
     public void setStartPosY(double startPosY) {this.startPosY = startPosY;}
 
+    public void setStartPosX(double startPosX) {this.startPosX = startPosX;}
+
     public boolean isQuickMenu() {return qMenu;}
 
     public Pane getQuickMenu() {return quickMenu;}
@@ -503,4 +506,5 @@ public class Player extends AnimationTimer {
     public MediaPlayer getMediaPlayer() {return mediaPlayer;}
 
     public void setqMenu(boolean qMenu) {this.qMenu = qMenu;}
+
 }

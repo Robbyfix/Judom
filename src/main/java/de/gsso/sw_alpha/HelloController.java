@@ -87,7 +87,7 @@ public class HelloController {
                 canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
                 canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
             }
-            spieler.getSpielerfig().setX(900);
+            spieler.getSpielerfig().setX(900); //Spawnposition
             spieler.getSpielerfig().setY(0);
             spieler.setStartPosY(0);
             spieler.setAufBoden(false);
@@ -98,7 +98,7 @@ public class HelloController {
             playerPane.setVisible(true);
             spieler.start();
 
-            grounds = new Ground[6];
+            grounds = new Ground[8];
             //grounds[0] = new Ground(canvas, "GrassRockHoz",1600,900);
             //grounds[1] = new Ground(canvas, "Lvl1_obst1",1300,700);
             //grounds[2] = new Ground(canvas, "Lvl1_obst1",1100,500);
@@ -106,13 +106,14 @@ public class HelloController {
             //grounds[4] = new Ground(canvas, "Lvl1_obst1",600,500);
             //grounds[5] = new Ground(canvas, "Lvl1_obst1",400,700);
 
-            grounds[0] = new Ground(canvas, "5x8", 1600,800);
-            grounds[1] = new Ground(canvas, "5x12", 1100,550);
-            grounds[2] = new Ground(canvas, "3x10", 500,600);
-            grounds[3] = new Ground(canvas, "3x10", 100, 770);
-            grounds[4] = new Ground(canvas, "8x9", -600, 550);
-            grounds[5] = new Ground(canvas, "5x12", -1200, 350);
-            grounds[6] = new Ground(canvas, "8x9", -1500, 100);
+            grounds[0] = new Ground(canvas, "5x8", 800,800);
+            grounds[1] = new Ground(canvas, "5x12", 300,550);
+            grounds[2] = new Ground(canvas, "3x10", -300,600);
+            grounds[3] = new Ground(canvas, "3x10", -700, 770);
+            grounds[4] = new Ground(canvas, "8x9", -1400, 550);
+            grounds[5] = new Ground(canvas, "5x12", -2000, 350);
+            grounds[6] = new Ground(canvas, "8x12", -3000, 250);
+            grounds[7] = new Ground(canvas, "5x12", -3800, 500);
             first = true;
         }
     }
