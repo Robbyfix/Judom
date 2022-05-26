@@ -112,7 +112,7 @@ public class Player extends AnimationTimer {
             if(aufBoden){
                 xparabel = 3;
                 if(animStehenL||animFallenL||animLaufenL||animSprungL) {
-                    figkolldown.setX(spielerfig.getX() +hitboxMov);
+                    figkolldown.setX(spielerfig.getX() +40+hitboxMov);
                 }
                 else{
                     figkolldown.setX(spielerfig.getX() + 64 +hitboxMov);
@@ -140,16 +140,12 @@ public class Player extends AnimationTimer {
 
             //Rechte-Kollision
             if (checkCollision(figkollright)) {
-                //spielerfig.setX(((Ground)obj).getX()-165);
-                //spielerfig.setX(spielerfig.getX()-6);
                 canvas.setLayoutX(canvas.getLayoutX()+48);
                 hitboxMov -= 48;
             }
 
             //Linke-Kollision
             if (checkCollision(figkollleft)) {
-                //spielerfig.setX(spielerfig.getX()+(((Ground)obj).getImage().getWidth()/2));
-                //spielerfig.setX(spielerfig.getX()+6);
                 canvas.setLayoutX(canvas.getLayoutX()-48);
                 hitboxMov += 48;
             }
@@ -295,7 +291,7 @@ public class Player extends AnimationTimer {
 
 
     public boolean checkCollision(ImageView fig){
-        if (kollisionCheck <= 0) {
+        if (kollisionCheck < 4) {
             kollisionCheck = canvas.getChildren().size() - 1;
         }
         obj = canvas.getChildren().get(kollisionCheck);
@@ -310,24 +306,24 @@ public class Player extends AnimationTimer {
     public void setHitbox(boolean Links){
         if(!Links) {
             figkollup.setY(spielerfig.getY() - 20);
-            figkollup.setX(spielerfig.getX() + 54 +hitboxMov);
+            figkollup.setX(spielerfig.getX() + 64 +hitboxMov);
 
             if (!aufBoden) {
                 figkolldown.setX(spielerfig.getX() + 64 +hitboxMov);
             }
 
             figkollleft.setY(spielerfig.getY() + 37);
-            figkollleft.setX(spielerfig.getX() + 34 +hitboxMov);
+            figkollleft.setX(spielerfig.getX() +hitboxMov);
 
             figkollright.setY(spielerfig.getY() + 37);
-            figkollright.setX(spielerfig.getX() + 108 +hitboxMov);
+            figkollright.setX(spielerfig.getX() + 128 +hitboxMov);
         }
         else{
             figkollup.setY(spielerfig.getY() - 20);
-            figkollup.setX(spielerfig.getX() +hitboxMov);
+            figkollup.setX(spielerfig.getX() +40 +hitboxMov);
 
             if (!aufBoden) {
-                figkolldown.setX(spielerfig.getX() +hitboxMov);
+                figkolldown.setX(spielerfig.getX() +40+hitboxMov);
             }
 
             figkollleft.setY(spielerfig.getY() + 37);
@@ -339,7 +335,6 @@ public class Player extends AnimationTimer {
     }
 
     public void DebugAusgabe(){
-        System.out.println("FPS: " + count);
         if (links == Richtung.LINKS) {
             System.out.println("Links");
         }
@@ -406,47 +401,43 @@ public class Player extends AnimationTimer {
     }
 
     public void setNums(boolean twoNums){
-        for(int i = 0;i<10;i++){
-            if(twoNums) {
-                for (int j = 0; j < 10; j++) {
-                    switch ((deaths / 10)) {
-                        case 1 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
-                        case 2 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/two.png")));
-                        case 3 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/three.png")));
-                        case 4 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/four.png")));
-                        case 5 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/five.png")));
-                        case 6 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/six.png")));
-                        case 7 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/seven.png")));
-                        case 8 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/eight.png")));
-                        case 9 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/nine.png")));
-                    }
-                    switch (deaths - (i * 10)) {
-                        case 0 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
-                        case 1 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
-                        case 2 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/two.png")));
-                        case 3 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/three.png")));
-                        case 4 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/four.png")));
-                        case 5 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/five.png")));
-                        case 6 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/six.png")));
-                        case 7 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/seven.png")));
-                        case 8 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/eight.png")));
-                        case 9 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/nine.png")));
-                    }
-                }
+        if(twoNums) {
+            switch ((deaths / 10)) {
+                case 1 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
+                case 2 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/two.png")));
+                case 3 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/three.png")));
+                case 4 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/four.png")));
+                case 5 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/five.png")));
+                case 6 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/six.png")));
+                case 7 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/seven.png")));
+                case 8 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/eight.png")));
+                case 9 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/nine.png")));
             }
-            else{
-                switch (deaths) {
-                    case 0 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
-                    case 1 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
-                    case 2 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/two.png")));
-                    case 3 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/three.png")));
-                    case 4 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/four.png")));
-                    case 5 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/five.png")));
-                    case 6 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/six.png")));
-                    case 7 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/seven.png")));
-                    case 8 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/eight.png")));
-                    case 9 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/nine.png")));
-                }
+            switch (deaths - ((deaths/10) * 10)) {
+                case 0 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
+                case 1 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
+                case 2 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/two.png")));
+                case 3 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/three.png")));
+                case 4 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/four.png")));
+                case 5 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/five.png")));
+                case 6 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/six.png")));
+                case 7 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/seven.png")));
+                case 8 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/eight.png")));
+                case 9 -> DNum2.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/nine.png")));
+            }
+        }
+        else{
+            switch (deaths) {
+                case 0 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
+                case 1 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
+                case 2 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/two.png")));
+                case 3 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/three.png")));
+                case 4 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/four.png")));
+                case 5 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/five.png")));
+                case 6 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/six.png")));
+                case 7 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/seven.png")));
+                case 8 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/eight.png")));
+                case 9 -> DNum1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/nine.png")));
             }
         }
     }
