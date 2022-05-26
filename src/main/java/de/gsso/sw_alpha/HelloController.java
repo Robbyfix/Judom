@@ -188,8 +188,8 @@ public class HelloController {
 
         setNums(false);
 
-        Num1.setY(200);
-        Num1.setX(1480);
+        Num1.setY(500);
+        Num1.setX(1280);
     }
 
     public void zweistellig(){
@@ -201,11 +201,11 @@ public class HelloController {
 
         setNums(true);
 
-        Num1.setX(1504);
-        Num1.setY(200);
+        Num1.setX(1304);
+        Num1.setY(500);
 
-        Num2.setX(1456);
-        Num2.setY(200);
+        Num2.setX(1256);
+        Num2.setY(500);
     }
     public void dreistellig(){
         Num1.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/zero.png")));
@@ -217,14 +217,14 @@ public class HelloController {
         Num3.setImage(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/UI/one.png")));
         Num3.setVisible(true);
 
-        Num1.setX(1540);
-        Num1.setY(200);
+        Num1.setX(1340);
+        Num1.setY(500);
 
-        Num2.setX(1492);
-        Num2.setY(200);
+        Num2.setX(1292);
+        Num2.setY(500);
 
-        Num3.setX(1444);
-        Num3.setY(200);
+        Num3.setX(1244);
+        Num3.setY(500);
     }
 
     public void setNums(boolean twoNums){

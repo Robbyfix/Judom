@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.gsso.sw_alpha.HelloController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.gsso.sw_alpha.HelloController">
    <children>
       <Pane fx:id="background" prefHeight="1080.0" prefWidth="1920.0" />
       <Pane fx:id="canvas" prefHeight="1080.0" prefWidth="1920.0" visible="false" />
@@ -34,17 +30,17 @@
                   <Image url="@../../../Img/Background/QMenuBG.png" />
                </image>
             </ImageView>
-            <Button fx:id="MaMe" contentDisplay="CENTER" layoutX="887.0" layoutY="888.0" mnemonicParsing="false" onAction="#handleMainMenu" prefHeight="45.0" prefWidth="163.0" text="Main Menu" />
-            <Button fx:id="Cont" layoutX="884.0" layoutY="203.0" mnemonicParsing="false" onAction="#handleContinue" prefHeight="45.0" prefWidth="163.0" text="Continue" />
-            <Button fx:id="Settings" layoutX="888.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleOpenSettings" prefHeight="51.0" prefWidth="163.0" text="Settings" />
-            <Button fx:id="Quit" layoutX="-8.0" layoutY="-10.0" mnemonicParsing="false" onAction="#handleQuit" prefHeight="61.0" prefWidth="91.0" text="Quit" />
-            <Button fx:id="Ret" layoutX="881.0" layoutY="835.0" mnemonicParsing="false" onAction="#handleCloseSettings" prefHeight="45.0" prefWidth="72.0" text="Return" visible="false" />
-            <Slider fx:id="sliderVol" layoutX="1060.0" layoutY="201.0" minorTickCount="1" onMouseDragged="#handleRefreshSettings" prefHeight="51.0" prefWidth="384.0" visible="false" />
+            <Button fx:id="MaMe" contentDisplay="CENTER" layoutX="887.0" layoutY="888.0" mnemonicParsing="false" onAction="#handleMainMenu" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/MaMe.jpg);" />
+            <Button fx:id="Cont" layoutX="884.0" layoutY="203.0" mnemonicParsing="false" onAction="#handleContinue" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/Cont.jpg);" />
+            <Button fx:id="Settings" layoutX="888.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleOpenSettings" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/settings.jpg);" />
+            <Button fx:id="Quit" layoutX="-8.0" layoutY="-10.0" mnemonicParsing="false" onAction="#handleQuit" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/quit.jpg);" />
+            <Button fx:id="Ret" layoutX="881.0" layoutY="835.0" mnemonicParsing="false" onAction="#handleCloseSettings" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/Ret.jpg);" visible="false" />
+            <Slider fx:id="sliderVol" layoutX="780.0" layoutY="500.0" minorTickCount="1" onMouseDragged="#handleRefreshSettings" prefHeight="51.0" prefWidth="384.0" visible="false" />
             <ImageView fx:id="Num1" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="Num2" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="Num3" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
          </children>
       </Pane>
-      <Button fx:id="lvl1" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleDemoLevel" text="Demo" />
+      <Button fx:id="lvl1" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleDemoLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl1.jpg);" />
    </children>
 </Pane>
