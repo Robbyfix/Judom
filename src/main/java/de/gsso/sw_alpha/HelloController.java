@@ -40,9 +40,6 @@ public class HelloController {
     private Pane QuickMenu;
 
     @FXML
-    private Pane background;
-
-    @FXML
     private Button lvl1;
 
     @FXML
@@ -74,8 +71,6 @@ public class HelloController {
 
     @FXML
     public void handleDemoLevel() {
-        ImageView bg = new ImageView(new Image(HelloController.class.getClassLoader().getResourceAsStream("Img/Background/GrassLand_Background_Guide.png")));
-        background.getChildren().add(bg);
         if (spieler == null) {                            //Check, ob spieler nicht null ist
             spieler = new Player(canvas, playerPane, QuickMenu);               //Neuer Spieler instanziiert
             canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
@@ -86,8 +81,6 @@ public class HelloController {
         spieler.setStartPosY(0);
         spieler.setAufBoden(false);
         lvl1.setOpacity(0);
-        bg.setX(-2);
-        bg.setY(-2);
         canvas.setVisible(true);
         playerPane.setVisible(true);
         spieler.start();
