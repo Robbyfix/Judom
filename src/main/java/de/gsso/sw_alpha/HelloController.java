@@ -104,7 +104,12 @@ public class HelloController {
         grounds[4] = new Ground(canvas, "8x9", -1400, 550);
         grounds[5] = new Ground(canvas, "5x12", -2000, 350);
         grounds[6] = new Ground(canvas, "8x12", -3000, 250);
-        grounds[7] = new Ground(canvas, "5x12", -3800, 500);
+        grounds[7] = new Ground(canvas, "5x12", -3850, 550);
+
+        decorations = new Decoration[1];
+        decorations[0] = new Decoration(decorationPane, "Lonetrunk", 1050,755);
+        decorations[1] = new Decoration(decorationPane, "Bush", 850, 755);
+
     }
 
     public void handleMainMenu(ActionEvent event) throws IOException {
