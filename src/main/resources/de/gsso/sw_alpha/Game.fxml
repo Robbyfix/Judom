@@ -42,6 +42,6 @@
             <ImageView fx:id="Num3" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
          </children>
       </Pane>
-      <Button fx:id="lvl1" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleDemoLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl1.jpg);" />
+      <Button fx:id="lvl1" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleFirstLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl1.jpg);" />
    </children>
 </Pane>

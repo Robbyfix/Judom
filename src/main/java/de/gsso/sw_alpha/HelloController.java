@@ -73,7 +73,7 @@ public class HelloController {
     private ImageView Num3;
 
     @FXML
-    public void handleDemoLevel() {
+    public void handleFirstLevel() {
         if (spieler == null) {                            //Check, ob spieler nicht null ist
             spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);               //Neuer Spieler instanziiert
             canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
@@ -82,6 +82,7 @@ public class HelloController {
         spieler.getSpielerfig().setX(900); //Spawnposition
         spieler.getSpielerfig().setY(0);
         spieler.setStartPosY(0);
+        spieler.setGoalPosX(4711);
         spieler.setAufBoden(false);
         lvl1.setOpacity(0);
         canvas.setVisible(true);
