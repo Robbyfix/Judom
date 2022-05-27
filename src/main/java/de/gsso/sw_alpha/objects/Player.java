@@ -15,13 +15,14 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class Player extends AnimationTimer {
-    public static Media sound = new Media(new File("src/main/resources/BGM/demo.mp3").toURI().toString());
+    public static Media sound = new Media(new File("src/main/resources/BGM/theme.mp3").toURI().toString());
     public static MediaPlayer mediaPlayer = new MediaPlayer(sound);
     private Instant jumpbegin = Instant.now();
     private Duration jumpduration = Duration.ZERO;
     private Pane canvas;
     private Pane playerPane;
     private Pane quickMenu;
+    private Pane decorationPane;
     private Richtung links = Richtung.NULL;
     private Richtung rechts = Richtung.NULL;
     private Richtung sprung = Richtung.NULL;
@@ -57,10 +58,11 @@ public class Player extends AnimationTimer {
     private double goalPosX;
     private double geschwlimit = 5; //Max. Bewegungsgeschw.
 
-    public Player(Pane canvas, Pane playerPane, Pane quickMenu) {
+    public Player(Pane canvas, Pane playerPane, Pane quickMenu, Pane decorationPane) {
         this.canvas = canvas;
         this.playerPane = playerPane;
         this.quickMenu = quickMenu;
+        this.decorationPane = decorationPane;
         this.canvas.getChildren().addAll(figkollup, figkolldown, figkollleft, figkollright);
         this.playerPane.getChildren().addAll(spielerfig, DNum1, DNum2, DNum3, DNum4);
         spielerfig.setX(1557);
@@ -141,18 +143,21 @@ public class Player extends AnimationTimer {
             //Rechte-Kollision
             if (checkCollision(figkollright)) {
                 canvas.setLayoutX(canvas.getLayoutX()+48);
+                decorationPane.setLayoutX(decorationPane.getLayoutX()+48);
                 hitboxMov -= 48;
             }
 
             //Linke-Kollision
             if (checkCollision(figkollleft)) {
                 canvas.setLayoutX(canvas.getLayoutX()-48);
+                decorationPane.setLayoutX(decorationPane.getLayoutX()-48);
                 hitboxMov += 48;
             }
 
             if(spielerfig.getY()>1234){
                 spielerfig.setY(startPosY);
                 canvas.setLayoutX(0);
+                decorationPane.setLayoutX(0);
                 hitboxMov = 0;
                 animStehenR = true;
                 animStehenL = false;
@@ -280,11 +285,13 @@ public class Player extends AnimationTimer {
         switch (direction) {
             case "links" -> {
                 hitboxMov -= 6;
-                canvas.setLayoutX((canvas.getLayoutX() + 6));
+                canvas.setLayoutX(canvas.getLayoutX() + 6);
+                decorationPane.setLayoutX(decorationPane.getLayoutX()+6);
             }
             case "rechts" -> {
                 hitboxMov += 6;
-                canvas.setLayoutX((canvas.getLayoutX() - 6));
+                canvas.setLayoutX(canvas.getLayoutX() - 6);
+                decorationPane.setLayoutX(decorationPane.getLayoutX()-6);
             }
         }
     }
@@ -348,7 +355,7 @@ public class Player extends AnimationTimer {
             System.out.println("Sprung");
         }
         System.out.println(canvas.getLayoutX());
-        //System.out.println(mediaPlayer.getVolume());
+        System.out.println(mediaPlayer.getVolume());
         count = 0;
     }
 

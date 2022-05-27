@@ -40,6 +40,9 @@ public class HelloController {
     private Pane QuickMenu;
 
     @FXML
+    private Pane decorationPane;
+
+    @FXML
     private Button lvl1;
 
     @FXML
@@ -72,7 +75,7 @@ public class HelloController {
     @FXML
     public void handleDemoLevel() {
         if (spieler == null) {                            //Check, ob spieler nicht null ist
-            spieler = new Player(canvas, playerPane, QuickMenu);               //Neuer Spieler instanziiert
+            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);               //Neuer Spieler instanziiert
             canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
             canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
         }
