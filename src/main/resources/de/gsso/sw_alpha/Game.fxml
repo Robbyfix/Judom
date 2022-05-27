@@ -31,17 +31,23 @@
                   <Image url="@../../../Img/Background/QMenuBG.png" />
                </image>
             </ImageView>
-            <Button fx:id="MaMe" contentDisplay="CENTER" layoutX="887.0" layoutY="888.0" mnemonicParsing="false" onAction="#handleMainMenu" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/MaMe.jpg);" />
+            <Button fx:id="MaMe" contentDisplay="CENTER" layoutX="887.0" layoutY="800.0" mnemonicParsing="false" onAction="#handleMainMenu" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/MaMe.jpg);" />
             <Button fx:id="Cont" layoutX="884.0" layoutY="203.0" mnemonicParsing="false" onAction="#handleContinue" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/Cont.jpg);" />
-            <Button fx:id="Settings" layoutX="888.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleOpenSettings" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/settings.jpg);" />
+            <Button fx:id="Settings" layoutX="888.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleOpenSettings" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/settings.jpg);" />
             <Button fx:id="Quit" mnemonicParsing="false" onAction="#handleQuit" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/quit.jpg);" />
             <Button fx:id="Ret" layoutX="881.0" layoutY="835.0" mnemonicParsing="false" onAction="#handleCloseSettings" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/Ret.jpg);" visible="false" />
             <Slider fx:id="sliderVol" layoutX="780.0" layoutY="500.0" minorTickCount="1" onMouseDragged="#handleRefreshSettings" prefHeight="51.0" prefWidth="384.0" visible="false" />
             <ImageView fx:id="Num1" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="Num2" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="Num3" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+            <Button fx:id="lvl" layoutX="900.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleChangeLevel" prefHeight="45.0" prefWidth="103.0" style="-fx-background-image: url(Img/UI/lvl.jpg);" />
          </children>
       </Pane>
-      <Button fx:id="lvl1" layoutX="940.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleFirstLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl1.jpg);" />
+      <Button fx:id="lvl1" layoutX="260.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleFirstLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl1.jpg);" />
+      <Button fx:id="lvl2" layoutX="520.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleSecondLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl2.jpg);" />
+      <Button fx:id="lvl3" layoutX="780.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleThirdLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl3.jpg);" />
+      <Button fx:id="lvl4" layoutX="1060.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleFourthLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl4.jpg);" />
+      <Button fx:id="lvl5" layoutX="1300.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleFifthLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl5.jpg);" />
+      <Button fx:id="lvl6" layoutX="1560.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleSixthLevel" prefHeight="48.0" prefWidth="128.0" style="-fx-background-image: url(Img/UI/lvl6.jpg);" />
    </children>
 </Pane>
