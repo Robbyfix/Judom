@@ -21,5 +21,10 @@
             <Image url="@../../../Img/Player/FigStandingRight.gif" />
          </image>
       </ImageView>
+      <ImageView fitHeight="144.0" fitWidth="720.0" layoutX="590.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Img/UI/title.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

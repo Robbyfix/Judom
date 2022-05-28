@@ -26,7 +26,7 @@ public class Player extends AnimationTimer {
     private Richtung links = Richtung.NULL;
     private Richtung rechts = Richtung.NULL;
     private Richtung sprung = Richtung.NULL;
-    private Node obj; //Aktuelles Objekt im Canvas
+    private Node obj;
     private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
     private final ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png")));
     private final ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png")));
@@ -47,16 +47,14 @@ public class Player extends AnimationTimer {
     private boolean aufBoden;
     private boolean qMenu;
     private int count;
-    private int kollisionCheck; //Geht alle canvas Objekte als Integer durch
+    private int kollisionCheck;
     private int deaths;
     private int hitboxMov;
     private long lastCall = System.nanoTime();
     private double prevYpos;
     private double xparabel;
     private double startPosY;
-    private double startPosX;
-    private double goalPosX;
-    private double geschwlimit = 5; //Max. Bewegungsgeschw.
+    private double geschwlimit = 5;
 
     public Player(Pane canvas, Pane playerPane, Pane quickMenu, Pane decorationPane) {
         this.canvas = canvas;
@@ -65,9 +63,8 @@ public class Player extends AnimationTimer {
         this.decorationPane = decorationPane;
         this.canvas.getChildren().addAll(figkollup, figkolldown, figkollleft, figkollright);
         this.playerPane.getChildren().addAll(spielerfig, DNum1, DNum2, DNum3, DNum4);
-        spielerfig.setX(1557);
-        spielerfig.setY(515);
         this.kollisionCheck = this.canvas.getChildren().size() - 1;
+        this.spielerfig.setX(900);
         mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(new javafx.util.Duration(30)));
     }
@@ -490,8 +487,6 @@ public class Player extends AnimationTimer {
     public void setAufBoden(boolean aufBoden) {this.aufBoden = aufBoden;}
 
     public void setJumpbegin(Instant jumpbegin) {this.jumpbegin = jumpbegin;}
-
-    public void setGoalPosX(double goalPosX) {this.goalPosX = goalPosX;}
 
     public void setStartPosY(double startPosY) {this.startPosY = startPosY;}
 

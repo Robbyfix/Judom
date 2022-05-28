@@ -11,8 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MenuController {
@@ -20,6 +23,8 @@ public class MenuController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    public static Media sound = new Media(new File("src/main/resources/BGM/menutheme.mp3").toURI().toString());
+    public static MediaPlayer mediaPlayer = new MediaPlayer(sound);
 
     @FXML
     private Button start;
@@ -90,6 +95,7 @@ public class MenuController {
             dreistellig();
         }
         Player.mediaPlayer.setVolume(sliderVol.getValue());
+        MenuController.mediaPlayer.setVolume(sliderVol.getValue());
     }
 
     public void handleCloseSettings(){

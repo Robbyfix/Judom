@@ -43,7 +43,25 @@ public class HelloController {
     private Pane decorationPane;
 
     @FXML
+    private Button lvl;
+
+    @FXML
     private Button lvl1;
+
+    @FXML
+    private Button lvl2;
+
+    @FXML
+    private Button lvl3;
+
+    @FXML
+    private Button lvl4;
+
+    @FXML
+    private Button lvl5;
+
+    @FXML
+    private Button lvl6;
 
     @FXML
     private Button MaMe;
@@ -72,25 +90,27 @@ public class HelloController {
     @FXML
     private ImageView Num3;
 
-    @FXML
     public void handleFirstLevel() {
-        if (spieler == null) {                            //Check, ob spieler nicht null ist
-            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);               //Neuer Spieler instanziiert
+        MenuController.mediaPlayer.stop();
+        if (spieler == null) {
+            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
             canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
             canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
         }
-        spieler.getSpielerfig().setX(900); //Spawnposition
+        spieler.setAufBoden(false);
         spieler.getSpielerfig().setY(0);
         spieler.setStartPosY(0);
-        spieler.setGoalPosX(4711);
-        spieler.setAufBoden(false);
         lvl1.setOpacity(0);
+        lvl2.setOpacity(0);
+        lvl3.setOpacity(0);
+        lvl4.setOpacity(0);
+        lvl5.setOpacity(0);
+        lvl6.setOpacity(0);
         canvas.setVisible(true);
         playerPane.setVisible(true);
         spieler.start();
 
         grounds = new Ground[8];
-
         grounds[0] = new Ground(canvas, "5x8", 800, 800);
         grounds[1] = new Ground(canvas, "5x12", 300, 550);
         grounds[2] = new Ground(canvas, "3x10", -300, 600);
@@ -100,54 +120,134 @@ public class HelloController {
         grounds[6] = new Ground(canvas, "8x12", -3000, 250);
         grounds[7] = new Ground(canvas, "5x12", -3850, 550);
 
-        decorations = new Decoration[42];
-        decorations[0] = new Decoration(decorationPane, "TrunkLeft", 1000,755);
-        decorations[1] = new Decoration(decorationPane, "TrunkCenter", 1048,755);
-        decorations[2] = new Decoration(decorationPane, "TrunkRight", 1096,755);
-        decorations[3] = new Decoration(decorationPane, "Bush", 850, 755);
-        decorations[4] = new Decoration(decorationPane, "Tree", 300, 310);
-        decorations[5] = new Decoration(decorationPane, "FlowerWhite", 490, 505);
-        decorations[6] = new Decoration(decorationPane, "Stone2", -190,552);
-        decorations[7] = new Decoration(decorationPane, "Stone1", -255,552);
-        decorations[8] = new Decoration(decorationPane, "Lonetrunk", -600,722);
-        decorations[9] = new Decoration(decorationPane, "FlowerRed", -660,722);
-        decorations[10] = new Decoration(decorationPane, "ChoppedTree", -1350,502);
-        decorations[11] = new Decoration(decorationPane, "TrunkLeft", -1250,502);
-        decorations[12] = new Decoration(decorationPane, "TrunkCenter", -1202,502);
-        decorations[13] = new Decoration(decorationPane, "TrunkCenter2", -1154,502);
-        decorations[14] = new Decoration(decorationPane, "TrunkRight", -1106,502);
-        decorations[15] = new Decoration(decorationPane, "Bush", -935,502);
-        decorations[16] = new Decoration(decorationPane, "Stone3", -1950,302);
-        decorations[17] = new Decoration(decorationPane, "Stone2", -1800,302);
-        decorations[18] = new Decoration(decorationPane, "Grass2", -1840,303);
+        decorations = new Decoration[2];
+        decorations[0] = new Decoration(decorationPane, "Lonetrunk", 1050,755);
+        decorations[1] = new Decoration(decorationPane, "Bush", 850, 755);
+    }
 
-        decorations[19] = new Decoration(decorationPane, "Tree", -3000,11);
-        decorations[20] = new Decoration(decorationPane, "Grass3", -2950,203);
-        decorations[21] = new Decoration(decorationPane, "Grass2", -2900,203);
-        decorations[22] = new Decoration(decorationPane, "Grass3", -2850,203);
-        decorations[23] = new Decoration(decorationPane, "Grass2", -2800,203);
-        decorations[24] = new Decoration(decorationPane, "Grass3", -2750,203);
-        decorations[25] = new Decoration(decorationPane, "Grass3", -2700,203);
-        decorations[30] = new Decoration(decorationPane, "Tree", -2680,11); //dass der Baum hinter dem Grass ist
-        decorations[26] = new Decoration(decorationPane, "Grass2", -2650,203);
-        decorations[27] = new Decoration(decorationPane, "Grass3", -2600,203);
-        decorations[28] = new Decoration(decorationPane, "Grass3", -2550,203);
-        decorations[29] = new Decoration(decorationPane, "Stone1", -2850,203);
-        decorations[31] = new Decoration(decorationPane, "Bush", -2680,204);
+    public void handleSecondLevel(){
+        MenuController.mediaPlayer.stop();
+        if (spieler == null) {
+            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        }
+        spieler.setAufBoden(false);
+        spieler.getSpielerfig().setY(0);
+        spieler.setStartPosY(0);
+        lvl1.setOpacity(0);
+        lvl2.setOpacity(0);
+        lvl3.setOpacity(0);
+        lvl4.setOpacity(0);
+        lvl5.setOpacity(0);
+        lvl6.setOpacity(0);
+        canvas.setVisible(true);
+        playerPane.setVisible(true);
+        spieler.start();
 
-        decorations[32] = new Decoration(decorationPane, "Grass3", -3800,502);
-        decorations[33] = new Decoration(decorationPane, "Grass3", -3750,502);
-        decorations[34] = new Decoration(decorationPane, "Grass3", -3700,502);
-        decorations[35] = new Decoration(decorationPane, "Grass3", -3650,502);
-        decorations[36] = new Decoration(decorationPane, "Grass3", -3600,502);
-        decorations[37] = new Decoration(decorationPane, "Bush", -3555,502);
+        grounds = new Ground[1];
 
-        decorations[38] = new Decoration(decorationPane, "FlowerRed", -3790,502);
-        decorations[39] = new Decoration(decorationPane, "FlowerWhite", -3725,502);
-        decorations[40] = new Decoration(decorationPane, "FlowerYellow", -3635,502);
-        decorations[41] = new Decoration(decorationPane, "Grass3", -3820,502);
+        decorations = new Decoration[1];
+    }
 
+    public void handleThirdLevel(){
+        MenuController.mediaPlayer.stop();
+        if (spieler == null) {
+            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        }
+        spieler.setAufBoden(false);
+        spieler.getSpielerfig().setY(0);
+        spieler.setStartPosY(0);
+        lvl1.setOpacity(0);
+        lvl2.setOpacity(0);
+        lvl3.setOpacity(0);
+        lvl4.setOpacity(0);
+        lvl5.setOpacity(0);
+        lvl6.setOpacity(0);
+        canvas.setVisible(true);
+        playerPane.setVisible(true);
+        spieler.start();
 
+        grounds = new Ground[1];
+
+        decorations = new Decoration[1];
+    }
+
+    public void handleFourthLevel(){
+        MenuController.mediaPlayer.stop();
+        if (spieler == null) {
+            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        }
+        spieler.setAufBoden(false);
+        spieler.getSpielerfig().setY(0);
+        spieler.setStartPosY(0);
+        lvl1.setOpacity(0);
+        lvl2.setOpacity(0);
+        lvl3.setOpacity(0);
+        lvl4.setOpacity(0);
+        lvl5.setOpacity(0);
+        lvl6.setOpacity(0);
+        canvas.setVisible(true);
+        playerPane.setVisible(true);
+        spieler.start();
+
+        grounds = new Ground[1];
+
+        decorations = new Decoration[1];
+    }
+
+    public void handleFifthLevel(){
+        MenuController.mediaPlayer.stop();
+        if (spieler == null) {
+            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        }
+        spieler.setAufBoden(false);
+        spieler.getSpielerfig().setY(0);
+        spieler.setStartPosY(0);
+        lvl1.setOpacity(0);
+        lvl2.setOpacity(0);
+        lvl3.setOpacity(0);
+        lvl4.setOpacity(0);
+        lvl5.setOpacity(0);
+        lvl6.setOpacity(0);
+        canvas.setVisible(true);
+        playerPane.setVisible(true);
+        spieler.start();
+
+        grounds = new Ground[1];
+
+        decorations = new Decoration[1];
+    }
+
+    public void handleSixthLevel(){
+        MenuController.mediaPlayer.stop();
+        if (spieler == null) {
+            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        }
+        spieler.setAufBoden(false);
+        spieler.getSpielerfig().setY(0);
+        spieler.setStartPosY(0);
+        lvl1.setOpacity(0);
+        lvl2.setOpacity(0);
+        lvl3.setOpacity(0);
+        lvl4.setOpacity(0);
+        lvl5.setOpacity(0);
+        lvl6.setOpacity(0);
+        canvas.setVisible(true);
+        playerPane.setVisible(true);
+        spieler.start();
+
+        grounds = new Ground[1];
+
+        decorations = new Decoration[1];
     }
 
     public void handleMainMenu(ActionEvent event) throws IOException {
@@ -156,6 +256,18 @@ public class HelloController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        spieler.getMediaPlayer().stop();
+        MenuController.mediaPlayer.play();
+    }
+
+    public void handleChangeLevel(ActionEvent event) throws IOException{
+        spieler.getMediaPlayer().stop();
+        root = FXMLLoader.load(HelloApplication.class.getResource("Game.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        MenuController.mediaPlayer.play();
     }
 
     public void handleContinue(){
@@ -170,6 +282,7 @@ public class HelloController {
         Settings.setVisible(false);
         Quit.setVisible(false);
         Ret.setVisible(true);
+        lvl.setVisible(false);
 
         sliderVol.setValue(spieler.getMediaPlayer().getVolume());
         sliderVol.setVisible(true);
@@ -202,6 +315,7 @@ public class HelloController {
             dreistellig();
         }
         spieler.getMediaPlayer().setVolume(sliderVol.getValue());
+        MenuController.mediaPlayer.setVolume(sliderVol.getValue());
     }
 
     public void handleCloseSettings(){
@@ -211,6 +325,7 @@ public class HelloController {
         Quit.setVisible(true);
         Ret.setVisible(false);
         sliderVol.setVisible(false);
+        lvl.setVisible(true);
 
         Num1.setVisible(false);
 
