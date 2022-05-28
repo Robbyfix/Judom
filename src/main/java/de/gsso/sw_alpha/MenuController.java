@@ -23,7 +23,7 @@ public class MenuController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    public static Media sound = new Media(new File("src/main/resources/BGM/theme.mp3").toURI().toString());
+    public static Media sound = new Media(new File("src/main/resources/BGM/menutheme.mp3").toURI().toString());
     public static MediaPlayer mediaPlayer = new MediaPlayer(sound);
 
     @FXML

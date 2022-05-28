@@ -26,7 +26,7 @@ public class Player extends AnimationTimer {
     private Richtung links = Richtung.NULL;
     private Richtung rechts = Richtung.NULL;
     private Richtung sprung = Richtung.NULL;
-    private Node obj; //Aktuelles Objekt im Canvas
+    private Node obj;
     private ImageView spielerfig = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/FigStandingRight.gif")));
     private final ImageView figkollup = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png")));
     private final ImageView figkolldown = new ImageView(new Image(Player.class.getClassLoader().getResourceAsStream("Img/Player/figcollver.png")));

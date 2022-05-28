@@ -256,6 +256,7 @@ public class HelloController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        spieler.getMediaPlayer().stop();
         MenuController.mediaPlayer.play();
     }
 
