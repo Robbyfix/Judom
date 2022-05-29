@@ -171,7 +171,7 @@ public class HelloController {
         decorations[39] = new Decoration(decorationPane, "FlowerWhite", -3725, 502);
         decorations[40] = new Decoration(decorationPane, "FlowerYellow", -3635, 502);
         decorations[41] = new Decoration(decorationPane, "Grass3", -3820, 502);
-        decorations[42] = new Decoration(decorationPane, "GoalFlag", -3840, 418);
+        decorations[42] = new Decoration(decorationPane, "GoalFlag", -3720, 400);
 
     }
 
