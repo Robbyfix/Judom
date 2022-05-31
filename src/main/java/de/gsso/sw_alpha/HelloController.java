@@ -29,6 +29,7 @@ public class HelloController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private boolean first;
 
     @FXML
     private Pane canvas = new Pane();
@@ -91,88 +92,91 @@ public class HelloController {
     private ImageView Num3;
 
     public void handleFirstLevel() {
-        MenuController.mediaPlayer.stop();
-        if (spieler == null) {
-            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
-            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
-            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        if(!first) {
+            MenuController.mediaPlayer.stop();
+            if (spieler == null) {
+                spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+                canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+                canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+            }
+            spieler.setAufBoden(false);
+            spieler.getSpielerfig().setY(0);
+            spieler.setStartPosY(0);
+            lvl1.setOpacity(0);
+            lvl2.setOpacity(0);
+            lvl3.setOpacity(0);
+            lvl4.setOpacity(0);
+            lvl5.setOpacity(0);
+            lvl6.setOpacity(0);
+            canvas.setVisible(true);
+            playerPane.setVisible(true);
+            spieler.start();
+
+            grounds = new Ground[8];
+
+            grounds[0] = new Ground(canvas, "5x8", 800, 800);
+            grounds[1] = new Ground(canvas, "5x12", 300, 550);
+            grounds[2] = new Ground(canvas, "3x10", -300, 600);
+            grounds[3] = new Ground(canvas, "3x10", -700, 770);
+            grounds[4] = new Ground(canvas, "8x9", -1400, 550);
+            grounds[5] = new Ground(canvas, "5x12", -2000, 350);
+            grounds[6] = new Ground(canvas, "8x12", -3000, 250);
+            grounds[7] = new Ground(canvas, "5x12", -3850, 550);
+
+            decorations = new Decoration[43];
+            decorations[0] = new Decoration(decorationPane, "TrunkLeft", 1000, 755);
+            decorations[1] = new Decoration(decorationPane, "TrunkCenter", 1048, 755);
+            decorations[2] = new Decoration(decorationPane, "TrunkRight", 1096, 755);
+            decorations[3] = new Decoration(decorationPane, "Bush", 850, 755);
+
+            decorations[4] = new Decoration(decorationPane, "Tree", 300, 310);
+            decorations[5] = new Decoration(decorationPane, "FlowerWhite", 490, 505);
+            decorations[6] = new Decoration(decorationPane, "Stone2", -190, 552);
+            decorations[7] = new Decoration(decorationPane, "Stone1", -255, 552);
+
+            decorations[8] = new Decoration(decorationPane, "Lonetrunk", -600, 722);
+            decorations[9] = new Decoration(decorationPane, "FlowerRed", -660, 722);
+
+            decorations[10] = new Decoration(decorationPane, "ChoppedTree", -1350, 502);
+            decorations[11] = new Decoration(decorationPane, "TrunkLeft", -1250, 502);
+            decorations[12] = new Decoration(decorationPane, "TrunkCenter", -1202, 502);
+            decorations[13] = new Decoration(decorationPane, "TrunkCenter2", -1154, 502);
+            decorations[14] = new Decoration(decorationPane, "TrunkRight", -1106, 502);
+            decorations[15] = new Decoration(decorationPane, "Bush", -935, 502);
+
+            decorations[16] = new Decoration(decorationPane, "Stone3", -1950, 302);
+            decorations[17] = new Decoration(decorationPane, "Stone2", -1800, 302);
+            decorations[18] = new Decoration(decorationPane, "Grass2", -1840, 303);
+
+            decorations[19] = new Decoration(decorationPane, "Tree", -3000, 11);
+            decorations[20] = new Decoration(decorationPane, "Grass3", -2950, 203);
+            decorations[21] = new Decoration(decorationPane, "Grass2", -2900, 203);
+            decorations[22] = new Decoration(decorationPane, "Grass3", -2850, 203);
+            decorations[23] = new Decoration(decorationPane, "Grass2", -2800, 203);
+            decorations[24] = new Decoration(decorationPane, "Grass3", -2750, 203);
+            decorations[25] = new Decoration(decorationPane, "Grass3", -2700, 203);
+            decorations[30] = new Decoration(decorationPane, "Tree", -2680, 11); //dass der Baum hinter dem Grass ist
+            decorations[26] = new Decoration(decorationPane, "Grass2", -2650, 203);
+            decorations[27] = new Decoration(decorationPane, "Grass3", -2600, 203);
+            decorations[28] = new Decoration(decorationPane, "Grass3", -2550, 203);
+            decorations[29] = new Decoration(decorationPane, "Stone1", -2850, 203);
+            decorations[31] = new Decoration(decorationPane, "Bush", -2680, 204);
+
+            decorations[32] = new Decoration(decorationPane, "Grass3", -3800, 502);
+            decorations[33] = new Decoration(decorationPane, "Grass3", -3750, 502);
+            decorations[34] = new Decoration(decorationPane, "Grass3", -3700, 502);
+            decorations[35] = new Decoration(decorationPane, "Grass3", -3650, 502);
+
+            decorations[36] = new Decoration(decorationPane, "Grass3", -3600, 502);
+            decorations[37] = new Decoration(decorationPane, "Bush", -3555, 502);
+            decorations[38] = new Decoration(decorationPane, "FlowerRed", -3790, 502);
+            decorations[39] = new Decoration(decorationPane, "FlowerWhite", -3725, 502);
+            decorations[40] = new Decoration(decorationPane, "FlowerYellow", -3635, 502);
+            decorations[41] = new Decoration(decorationPane, "Grass3", -3820, 502);
+            decorations[42] = new Decoration(decorationPane, "GoalFlag", -3720, 400);
+
+            first = true;
         }
-        spieler.setAufBoden(false);
-        spieler.getSpielerfig().setY(0);
-        spieler.setStartPosY(0);
-        lvl1.setOpacity(0);
-        lvl2.setOpacity(0);
-        lvl3.setOpacity(0);
-        lvl4.setOpacity(0);
-        lvl5.setOpacity(0);
-        lvl6.setOpacity(0);
-        canvas.setVisible(true);
-        playerPane.setVisible(true);
-        spieler.start();
-
-        grounds = new Ground[8];
-
-        grounds[0] = new Ground(canvas, "5x8", 800, 800);
-        grounds[1] = new Ground(canvas, "5x12", 300, 550);
-        grounds[2] = new Ground(canvas, "3x10", -300, 600);
-        grounds[3] = new Ground(canvas, "3x10", -700, 770);
-        grounds[4] = new Ground(canvas, "8x9", -1400, 550);
-        grounds[5] = new Ground(canvas, "5x12", -2000, 350);
-        grounds[6] = new Ground(canvas, "8x12", -3000, 250);
-        grounds[7] = new Ground(canvas, "5x12", -3850, 550);
-
-        decorations = new Decoration[43];
-        decorations[0] = new Decoration(decorationPane, "TrunkLeft", 1000, 755);
-        decorations[1] = new Decoration(decorationPane, "TrunkCenter", 1048, 755);
-        decorations[2] = new Decoration(decorationPane, "TrunkRight", 1096, 755);
-        decorations[3] = new Decoration(decorationPane, "Bush", 850, 755);
-
-        decorations[4] = new Decoration(decorationPane, "Tree", 300, 310);
-        decorations[5] = new Decoration(decorationPane, "FlowerWhite", 490, 505);
-        decorations[6] = new Decoration(decorationPane, "Stone2", -190, 552);
-        decorations[7] = new Decoration(decorationPane, "Stone1", -255, 552);
-
-        decorations[8] = new Decoration(decorationPane, "Lonetrunk", -600, 722);
-        decorations[9] = new Decoration(decorationPane, "FlowerRed", -660, 722);
-
-        decorations[10] = new Decoration(decorationPane, "ChoppedTree", -1350, 502);
-        decorations[11] = new Decoration(decorationPane, "TrunkLeft", -1250, 502);
-        decorations[12] = new Decoration(decorationPane, "TrunkCenter", -1202, 502);
-        decorations[13] = new Decoration(decorationPane, "TrunkCenter2", -1154, 502);
-        decorations[14] = new Decoration(decorationPane, "TrunkRight", -1106, 502);
-        decorations[15] = new Decoration(decorationPane, "Bush", -935, 502);
-
-        decorations[16] = new Decoration(decorationPane, "Stone3", -1950, 302);
-        decorations[17] = new Decoration(decorationPane, "Stone2", -1800, 302);
-        decorations[18] = new Decoration(decorationPane, "Grass2", -1840, 303);
-
-        decorations[19] = new Decoration(decorationPane, "Tree", -3000, 11);
-        decorations[20] = new Decoration(decorationPane, "Grass3", -2950, 203);
-        decorations[21] = new Decoration(decorationPane, "Grass2", -2900, 203);
-        decorations[22] = new Decoration(decorationPane, "Grass3", -2850, 203);
-        decorations[23] = new Decoration(decorationPane, "Grass2", -2800, 203);
-        decorations[24] = new Decoration(decorationPane, "Grass3", -2750, 203);
-        decorations[25] = new Decoration(decorationPane, "Grass3", -2700, 203);
-        decorations[30] = new Decoration(decorationPane, "Tree", -2680, 11); //dass der Baum hinter dem Grass ist
-        decorations[26] = new Decoration(decorationPane, "Grass2", -2650, 203);
-        decorations[27] = new Decoration(decorationPane, "Grass3", -2600, 203);
-        decorations[28] = new Decoration(decorationPane, "Grass3", -2550, 203);
-        decorations[29] = new Decoration(decorationPane, "Stone1", -2850, 203);
-        decorations[31] = new Decoration(decorationPane, "Bush", -2680, 204);
-
-        decorations[32] = new Decoration(decorationPane, "Grass3", -3800, 502);
-        decorations[33] = new Decoration(decorationPane, "Grass3", -3750, 502);
-        decorations[34] = new Decoration(decorationPane, "Grass3", -3700, 502);
-        decorations[35] = new Decoration(decorationPane, "Grass3", -3650, 502);
-
-        decorations[36] = new Decoration(decorationPane, "Grass3", -3600, 502);
-        decorations[37] = new Decoration(decorationPane, "Bush", -3555, 502);
-        decorations[38] = new Decoration(decorationPane, "FlowerRed", -3790, 502);
-        decorations[39] = new Decoration(decorationPane, "FlowerWhite", -3725, 502);
-        decorations[40] = new Decoration(decorationPane, "FlowerYellow", -3635, 502);
-        decorations[41] = new Decoration(decorationPane, "Grass3", -3820, 502);
-        decorations[42] = new Decoration(decorationPane, "GoalFlag", -3720, 400);
-
     }
 
     public void handleSecondLevel(){
