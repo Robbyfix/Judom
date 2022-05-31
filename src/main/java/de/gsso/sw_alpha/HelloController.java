@@ -179,129 +179,147 @@ public class HelloController {
         }
     }
 
-    public void handleSecondLevel(){
-        MenuController.mediaPlayer.stop();
-        if (spieler == null) {
-            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
-            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
-            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+    public void handleSecondLevel() {
+        if (!first) {
+            MenuController.mediaPlayer.stop();
+            if (spieler == null) {
+                spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+                canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+                canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+            }
+            spieler.setAufBoden(false);
+            spieler.getSpielerfig().setY(0);
+            spieler.setStartPosY(0);
+            lvl1.setOpacity(0);
+            lvl2.setOpacity(0);
+            lvl3.setOpacity(0);
+            lvl4.setOpacity(0);
+            lvl5.setOpacity(0);
+            lvl6.setOpacity(0);
+            canvas.setVisible(true);
+            playerPane.setVisible(true);
+            spieler.start();
+
+            grounds = new Ground[1];
+
+            decorations = new Decoration[1];
+
+            first = true;
         }
-        spieler.setAufBoden(false);
-        spieler.getSpielerfig().setY(0);
-        spieler.setStartPosY(0);
-        lvl1.setOpacity(0);
-        lvl2.setOpacity(0);
-        lvl3.setOpacity(0);
-        lvl4.setOpacity(0);
-        lvl5.setOpacity(0);
-        lvl6.setOpacity(0);
-        canvas.setVisible(true);
-        playerPane.setVisible(true);
-        spieler.start();
-
-        grounds = new Ground[1];
-
-        decorations = new Decoration[1];
     }
+    public void handleThirdLevel () {
+        if(!first) {
+            MenuController.mediaPlayer.stop();
+            if (spieler == null) {
+                spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+                canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+                canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+            }
+            spieler.setAufBoden(false);
+            spieler.getSpielerfig().setY(0);
+            spieler.setStartPosY(0);
+            lvl1.setOpacity(0);
+            lvl2.setOpacity(0);
+            lvl3.setOpacity(0);
+            lvl4.setOpacity(0);
+            lvl5.setOpacity(0);
+            lvl6.setOpacity(0);
+            canvas.setVisible(true);
+            playerPane.setVisible(true);
+            spieler.start();
 
-    public void handleThirdLevel(){
-        MenuController.mediaPlayer.stop();
-        if (spieler == null) {
-            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
-            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
-            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+            grounds = new Ground[1];
+
+            decorations = new Decoration[1];
+            first = true;
         }
-        spieler.setAufBoden(false);
-        spieler.getSpielerfig().setY(0);
-        spieler.setStartPosY(0);
-        lvl1.setOpacity(0);
-        lvl2.setOpacity(0);
-        lvl3.setOpacity(0);
-        lvl4.setOpacity(0);
-        lvl5.setOpacity(0);
-        lvl6.setOpacity(0);
-        canvas.setVisible(true);
-        playerPane.setVisible(true);
-        spieler.start();
-
-        grounds = new Ground[1];
-
-        decorations = new Decoration[1];
     }
 
     public void handleFourthLevel(){
-        MenuController.mediaPlayer.stop();
-        if (spieler == null) {
-            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
-            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
-            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        if(!first) {
+            MenuController.mediaPlayer.stop();
+            if (spieler == null) {
+                spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+                canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+                canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+            }
+            spieler.setAufBoden(false);
+            spieler.getSpielerfig().setY(0);
+            spieler.setStartPosY(0);
+            lvl1.setOpacity(0);
+            lvl2.setOpacity(0);
+            lvl3.setOpacity(0);
+            lvl4.setOpacity(0);
+            lvl5.setOpacity(0);
+            lvl6.setOpacity(0);
+            canvas.setVisible(true);
+            playerPane.setVisible(true);
+            spieler.start();
+
+            grounds = new Ground[1];
+
+            decorations = new Decoration[1];
+
+            first = true;
         }
-        spieler.setAufBoden(false);
-        spieler.getSpielerfig().setY(0);
-        spieler.setStartPosY(0);
-        lvl1.setOpacity(0);
-        lvl2.setOpacity(0);
-        lvl3.setOpacity(0);
-        lvl4.setOpacity(0);
-        lvl5.setOpacity(0);
-        lvl6.setOpacity(0);
-        canvas.setVisible(true);
-        playerPane.setVisible(true);
-        spieler.start();
-
-        grounds = new Ground[1];
-
-        decorations = new Decoration[1];
     }
 
     public void handleFifthLevel(){
-        MenuController.mediaPlayer.stop();
-        if (spieler == null) {
-            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
-            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
-            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        if(!first) {
+            MenuController.mediaPlayer.stop();
+            if (spieler == null) {
+                spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+                canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+                canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+            }
+            spieler.setAufBoden(false);
+            spieler.getSpielerfig().setY(0);
+            spieler.setStartPosY(0);
+            lvl1.setOpacity(0);
+            lvl2.setOpacity(0);
+            lvl3.setOpacity(0);
+            lvl4.setOpacity(0);
+            lvl5.setOpacity(0);
+            lvl6.setOpacity(0);
+            canvas.setVisible(true);
+            playerPane.setVisible(true);
+            spieler.start();
+
+            grounds = new Ground[1];
+
+            decorations = new Decoration[1];
+
+            first = true;
         }
-        spieler.setAufBoden(false);
-        spieler.getSpielerfig().setY(0);
-        spieler.setStartPosY(0);
-        lvl1.setOpacity(0);
-        lvl2.setOpacity(0);
-        lvl3.setOpacity(0);
-        lvl4.setOpacity(0);
-        lvl5.setOpacity(0);
-        lvl6.setOpacity(0);
-        canvas.setVisible(true);
-        playerPane.setVisible(true);
-        spieler.start();
-
-        grounds = new Ground[1];
-
-        decorations = new Decoration[1];
     }
 
     public void handleSixthLevel(){
-        MenuController.mediaPlayer.stop();
-        if (spieler == null) {
-            spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
-            canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
-            canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+        if(!first) {
+            MenuController.mediaPlayer.stop();
+            if (spieler == null) {
+                spieler = new Player(canvas, playerPane, QuickMenu, decorationPane);
+                canvas.getScene().getRoot().setOnKeyPressed(new KeyPressEvent(spieler));
+                canvas.getScene().getRoot().setOnKeyReleased(new KeyReleaseEvent(spieler));
+            }
+            spieler.setAufBoden(false);
+            spieler.getSpielerfig().setY(0);
+            spieler.setStartPosY(0);
+            lvl1.setOpacity(0);
+            lvl2.setOpacity(0);
+            lvl3.setOpacity(0);
+            lvl4.setOpacity(0);
+            lvl5.setOpacity(0);
+            lvl6.setOpacity(0);
+            canvas.setVisible(true);
+            playerPane.setVisible(true);
+            spieler.start();
+
+            grounds = new Ground[1];
+
+            decorations = new Decoration[1];
+
+            first = true;
         }
-        spieler.setAufBoden(false);
-        spieler.getSpielerfig().setY(0);
-        spieler.setStartPosY(0);
-        lvl1.setOpacity(0);
-        lvl2.setOpacity(0);
-        lvl3.setOpacity(0);
-        lvl4.setOpacity(0);
-        lvl5.setOpacity(0);
-        lvl6.setOpacity(0);
-        canvas.setVisible(true);
-        playerPane.setVisible(true);
-        spieler.start();
-
-        grounds = new Ground[1];
-
-        decorations = new Decoration[1];
     }
 
     public void handleMainMenu(ActionEvent event) throws IOException {
