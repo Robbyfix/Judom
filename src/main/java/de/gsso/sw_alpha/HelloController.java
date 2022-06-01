@@ -168,12 +168,13 @@ public class HelloController {
             decorations[35] = new Decoration(decorationPane, "Grass3", -3650, 502);
 
             decorations[36] = new Decoration(decorationPane, "Grass3", -3600, 502);
-            decorations[37] = new Decoration(decorationPane, "Bush", -3555, 502);
+            decorations[37] = new Decoration(decorationPane, "Bush", -3560, 502);
             decorations[38] = new Decoration(decorationPane, "FlowerRed", -3790, 502);
             decorations[39] = new Decoration(decorationPane, "FlowerWhite", -3725, 502);
             decorations[40] = new Decoration(decorationPane, "FlowerYellow", -3635, 502);
             decorations[41] = new Decoration(decorationPane, "Grass3", -3820, 502);
             decorations[42] = new Decoration(decorationPane, "GoalFlag", -3720, 400);
+
 
             first = true;
         }
@@ -200,9 +201,66 @@ public class HelloController {
             playerPane.setVisible(true);
             spieler.start();
 
-            grounds = new Ground[1];
+            grounds = new Ground[8];
+            grounds[0] = new Ground(canvas, "8x12", 550, 300);
+            grounds[1] = new Ground(canvas, "5x12", -100, 850);
+            grounds[2] = new Ground(canvas, "3x10", -700, 700);
+            grounds[3] = new Ground(canvas, "13x16", -1950, 550);
+            grounds[4] = new Ground(canvas, "5x12", -2770, 470);
+            grounds[5] = new Ground(canvas, "3x13", -3300, 600);
+            grounds[6] = new Ground(canvas, "5x12", -3850, 550);
 
-            decorations = new Decoration[1];
+            decorations = new Decoration[43];
+            decorations[0] = new Decoration(decorationPane, "Bush", 600, 255);
+            decorations[1] = new Decoration(decorationPane, "FlowerWhite", 720, 252);
+            decorations[2] = new Decoration(decorationPane, "Tree", 900, 61);
+            decorations[3] = new Decoration(decorationPane, "LoneTrunk", 840, 255);
+
+            decorations[4] = new Decoration(decorationPane, "ChoppedTree", -70, 803);
+            decorations[5] = new Decoration(decorationPane, "Stone2", 130,805);
+
+            decorations[6] = new Decoration(decorationPane, "Grass2",-700,652);
+            decorations[7] = new Decoration(decorationPane, "Grass2",-650,652);
+            decorations[8] = new Decoration(decorationPane, "Grass3",-600,652);
+            decorations[9] = new Decoration(decorationPane, "Grass2",-550,652);
+            decorations[10] = new Decoration(decorationPane, "Stone1",-640,652);
+
+
+            decorations[28] = new Decoration(decorationPane, "Tree",-1920,307);
+            decorations[29] = new Decoration(decorationPane, "Tree",-1720,307);
+            decorations[30] = new Decoration(decorationPane, "Tree",-1520,307);
+            decorations[31] = new Decoration(decorationPane, "Tree",-1320,307);
+            decorations[11] = new Decoration(decorationPane, "Grass2",-1950,502);
+            decorations[12] = new Decoration(decorationPane, "Grass2",-1900,502);
+            decorations[13] = new Decoration(decorationPane, "Grass2",-1850,502);
+            decorations[14] = new Decoration(decorationPane, "Grass3",-1800,502);
+            decorations[15] = new Decoration(decorationPane, "Grass2",-1750,502);
+            decorations[16] = new Decoration(decorationPane, "Grass2",-1700,502);
+            decorations[17] = new Decoration(decorationPane, "Grass2",-1650,502);
+            decorations[18] = new Decoration(decorationPane, "Grass3",-1600,502);
+            decorations[19] = new Decoration(decorationPane, "Grass2",-1550,502);
+            decorations[20] = new Decoration(decorationPane, "Grass2",-1500,502);
+            decorations[21] = new Decoration(decorationPane, "Grass2",-1450,502);
+            decorations[22] = new Decoration(decorationPane, "Grass2",-1400,502);
+            decorations[23] = new Decoration(decorationPane, "Grass2",-1350,502);
+            decorations[24] = new Decoration(decorationPane, "Grass3",-1300,502);
+            decorations[25] = new Decoration(decorationPane, "Grass2",-1250,502);
+            decorations[26] = new Decoration(decorationPane, "Grass2",-1200,502);
+            decorations[27] = new Decoration(decorationPane, "Grass2",-1150,502);
+
+            decorations[32] = new Decoration(decorationPane, "ChoppedTree", -2550, 422);
+            decorations[33] = new Decoration(decorationPane, "TrunkLeft", -2740, 422);
+            decorations[34] = new Decoration(decorationPane, "TrunkCenter", -2692, 422);
+            decorations[35] = new Decoration(decorationPane, "TrunkCenter2", -2644, 422);
+            decorations[36] = new Decoration(decorationPane, "TrunkRight", -2596, 422);
+
+            decorations[37] = new Decoration(decorationPane, "LoneTrunk", -3200, 555);
+            decorations[38] = new Decoration(decorationPane, "Stone2", -3260, 555);
+
+            decorations[39] = new Decoration(decorationPane, "Tree", -3880, 311);
+            decorations[40] = new Decoration(decorationPane, "GoalFlag", -3620, 406);
+            decorations[41] = new Decoration(decorationPane, "FlowerRed", -3700, 502);
+
 
             first = true;
         }
